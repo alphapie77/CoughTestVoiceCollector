@@ -1,20 +1,13 @@
 import React from 'react';
 import { Navbar as BootstrapNavbar, Nav, Container, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
-  const { isAuthenticated, user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
-
   return (
     <BootstrapNavbar expand="lg" className="navbar-custom" fixed="top">
       <Container>
         <LinkContainer to="/">
-          <BootstrapNavbar.Brand className="fw-bold">
+          <BootstrapNavbar.Brand className="fw-bold fs-3">
             🎤 CoughTest
           </BootstrapNavbar.Brand>
         </LinkContainer>
@@ -23,48 +16,28 @@ const Navbar = () => {
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to="/">
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link className="nav-link-custom">🏠 Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/record">
-              <Nav.Link>Record Cough</Nav.Link>
+              <Nav.Link className="nav-link-custom">🎙️ Record</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/recordings">
-              <Nav.Link>View Recordings</Nav.Link>
+              <Nav.Link className="nav-link-custom">📊 Browse</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/statistics">
-              <Nav.Link>Statistics</Nav.Link>
+              <Nav.Link className="nav-link-custom">📈 Statistics</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/about">
+              <Nav.Link className="nav-link-custom">ℹ️ About</Nav.Link>
             </LinkContainer>
           </Nav>
           
           <Nav>
-            {isAuthenticated ? (
-              <>
-                <LinkContainer to="/dashboard">
-                  <Nav.Link>
-                    👋 {user?.username || 'Dashboard'}
-                  </Nav.Link>
-                </LinkContainer>
-                <Button 
-                  variant="outline-danger" 
-                  size="sm" 
-                  onClick={handleLogout}
-                  className="ms-2"
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/register">
-                  <Button variant="primary" size="sm" className="ms-2">
-                    Sign Up
-                  </Button>
-                </LinkContainer>
-              </>
-            )}
+            <LinkContainer to="/record">
+              <Button variant="primary" className="btn-primary-custom">
+                🎤 Start Recording
+              </Button>
+            </LinkContainer>
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>

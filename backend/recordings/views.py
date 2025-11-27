@@ -224,6 +224,81 @@ def export_html(request):
     return response
 
 
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def export_zip(request):
+    """Export all recordings as ZIP file with CSV and audio files"""
+    response = HttpResponse(content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename="cough_recordings_complete.zip"'
+    
+    # Create ZIP file in memory
+    zip_buffer = io.BytesIO()
+    
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        # Create CSV content
+        csv_buffer = io.StringIO()
+        writer = csv.writer(csv_buffer)
+        
+        # CSV Headers
+        headers = [
+            'Recording ID', 'User Type', 'User Name', 'Audio File Name', 'File Size (MB)',
+            'File Format', 'Duration (seconds)', 'Recording Method', 'Created At',
+            'Uploaded At', 'Sample Rate', 'Bit Rate', 'Channels', 'IP Address', 'User Agent'
+        ]
+        writer.writerow(headers)
+        
+        # Add each recording to ZIP
+        for recording in CoughRecording.objects.all().select_related('user'):
+            user_type = 'Registered' if recording.user else 'Anonymous'
+            user_name = recording.user_display_name
+            
+            # Add audio file to ZIP
+            if recording.audio_file and os.path.exists(recording.audio_file.path):
+                zip_file.write(recording.audio_file.path, f"audio_files/{recording.file_name}")
+            
+            # Add row to CSV
+            row = [
+                str(recording.recording_id),
+                user_type,
+                user_name,
+                recording.file_name,
+                recording.file_size_mb,
+                recording.file_format,
+                recording.duration or '',
+                recording.get_recording_method_display(),
+                recording.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+                recording.uploaded_at.strftime('%Y-%m-%d %H:%M:%S'),
+                recording.sample_rate or '',
+                recording.bit_rate or '',
+                recording.channels or '',
+                recording.ip_address or '',
+                recording.user_agent or ''
+            ]
+            writer.writerow(row)
+        
+        # Add CSV to ZIP
+        zip_file.writestr('cough_recordings_data.csv', csv_buffer.getvalue())
+        
+        # Add README file
+        readme_content = """# CoughTest Data Export
+
+This ZIP contains:
+1. cough_recordings_data.csv - All metadata
+2. audio_files/ - All audio recordings
+
+To analyze:
+1. Open CSV in Excel/Google Sheets
+2. Audio files are in audio_files/ folder
+3. Match 'Audio File Name' column with files in audio_files/
+
+Generated from CoughTest Medical Research Platform
+"""
+        zip_file.writestr('README.txt', readme_content)
+    
+    response.write(zip_buffer.getvalue())
+    return response
+
+
 @api_view(['DELETE'])
 @permission_classes([permissions.IsAuthenticated])
 def delete_user_recording(request, recording_id):

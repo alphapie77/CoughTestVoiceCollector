@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert, ProgressBar } from 'react-bootstrap';
 import { recordingsAPI } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
+// No authentication needed for anonymous research
 
 const RecordCough = () => {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = false; // Always anonymous
   const [isRecording, setIsRecording] = useState(false);
   const [recordedBlob, setRecordedBlob] = useState(null);
   const [recordingTime, setRecordingTime] = useState(0);
@@ -136,10 +136,10 @@ const RecordCough = () => {
       return;
     }
 
-    if (!isAuthenticated && !anonymousName.trim()) {
+    if (!anonymousName.trim()) {
       setMessage({ 
         type: 'warning', 
-        text: 'Please enter an anonymous name or login to continue.' 
+        text: 'Please enter an anonymous name to continue.' 
       });
       return;
     }
@@ -162,7 +162,7 @@ const RecordCough = () => {
         formData.append('recording_method', 'upload');
       }
 
-      if (!isAuthenticated && anonymousName.trim()) {
+      if (anonymousName.trim()) {
         formData.append('anonymous_name', anonymousName.trim());
       }
 
@@ -330,9 +330,8 @@ const RecordCough = () => {
               )}
 
               {/* Anonymous Name Input */}
-              {!isAuthenticated && (
-                <Form.Group className="mb-4">
-                  <Form.Label>Anonymous Name (Optional)</Form.Label>
+              <Form.Group className="mb-4">
+                <Form.Label>Anonymous Name (Required)</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter a unique name for identification"
@@ -344,7 +343,6 @@ const RecordCough = () => {
                     This helps identify your contributions while maintaining anonymity
                   </Form.Text>
                 </Form.Group>
-              )}
 
               {/* Submit Button */}
               <div className="text-center">

@@ -206,10 +206,14 @@ const ViewRecordings = () => {
                         {new Date(recording.created_at).toLocaleDateString()}
                       </td>
                       <td>
-                        <audio controls style={{width: '200px'}}>
-                          <source src={recording.audio_file_url} />
-                          Your browser does not support audio playback.
-                        </audio>
+                        {recording.audio_file_url ? (
+                          <audio controls style={{width: '200px'}}>
+                            <source src={recording.audio_file_url} />
+                            Your browser does not support audio playback.
+                          </audio>
+                        ) : (
+                          <span className="text-muted">No audio</span>
+                        )}
                       </td>
                     </tr>
                   ))
