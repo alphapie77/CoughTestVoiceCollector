@@ -1,73 +1,56 @@
 # 🎤 CoughTest - Medical Research Platform
 
-A comprehensive fullstack application for collecting cough audio data for medical research purposes. Built with Django REST Framework backend and React frontend.
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-5.0.1-green.svg)](https://www.djangoproject.com/)
+[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-purple.svg)](https://getbootstrap.com/)
+[![License](https://img.shields.io/badge/License-Academic-yellow.svg)](LICENSE)
 
-## 🌟 Features
+A professional fullstack web application for collecting cough audio data for medical research and thesis purposes. Built with Django REST Framework backend and React frontend.
 
-### Core Functionality
-- **Audio Recording**: 10-second browser-based cough recording
-- **File Upload**: Support for WAV, MP3, WebM audio files
-- **User Management**: Both authenticated users and anonymous submissions
-- **Data Export**: CSV export with comprehensive metadata for thesis research
-- **Real-time Statistics**: Platform analytics and user dashboards
+## 🌟 Key Features
 
-### Technical Features
-- **Backend**: Django 5.0.1 + REST Framework
-- **Frontend**: React 18 + Bootstrap 5
-- **Database**: SQLite with comprehensive metadata storage
-- **Authentication**: JWT token-based authentication
-- **Audio Processing**: Metadata extraction using Mutagen
-- **Professional UI**: Bootstrap-based responsive design
+- **🎙️ Audio Recording**: 10-second browser-based cough recording
+- **📁 File Upload**: Support for WAV, MP3, WebM audio formats
+- **👤 User Management**: JWT authentication + anonymous submissions
+- **📊 Research Analytics**: Real-time statistics and data visualization
+- **📥 Bulk Import**: Command-line tool for existing datasets
+- **📤 CSV Export**: Thesis-ready data export with comprehensive metadata
+- **🎵 Audio Playback**: Built-in audio player for recorded samples
+- **📱 Responsive Design**: Professional Bootstrap UI for all devices
 
 ## 🚀 Quick Start
 
-### ⚡ Automated Setup (Recommended)
-```bash
-# Complete project setup
-setup.bat
+### Prerequisites
+- Python 3.9+
+- Node.js 18+
+- Git
 
-# Start development servers
-start_servers.bat
+### Installation
+
+**Windows:**
+```cmd
+git clone <repository-url>
+cd CoughTest
+scripts\setup.bat
+scripts\start_servers.bat
 ```
 
-### 🔧 Build Scripts
+**macOS/Linux:**
 ```bash
-# Initial setup (install dependencies, create admin user)
-setup.bat
-
-# Start development servers
-start_servers.bat
-
-# Build for production
-build_production.bat
-
-# Test application
-test_application.bat
+git clone <repository-url>
+cd CoughTest
+chmod +x scripts/*.sh
+./scripts/setup.sh
+./scripts/start_servers.sh
 ```
 
-### 🛠️ Manual Setup
-#### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser  # optional
-python manage.py runserver
-```
+### Access Points
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000/api
+- **Admin Panel**: http://localhost:8000/admin (admin/admin123)
 
-#### Frontend Setup
-```bash
-cd frontend
-npm install
-npm start
-```
-
-**Access URLs:**
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000/api
-- Admin Panel: http://localhost:8000/admin (admin/admin123)
-
-## 📊 Data Collection
+## 📊 Research Data Collection
 
 ### Metadata Collected
 - **Audio Technical**: Duration, sample rate, bit rate, channels, file size
@@ -76,106 +59,100 @@ npm start
 - **System Information**: IP address, user agent (for research purposes)
 
 ### CSV Export Format
-The system exports data in CSV format with the following columns:
-- Recording ID, User Type, User Name, File Name, File Size (MB)
-- File Format, Duration (seconds), Recording Method, Created At, Uploaded At
-- Sample Rate, Bit Rate, Channels, IP Address, User Agent
+```csv
+Recording ID, User Type, User Name, File Name, File Size (MB),
+File Format, Duration (seconds), Recording Method, Created At,
+Sample Rate, Bit Rate, Channels, IP Address, User Agent
+```
 
 ## 🏗️ Project Structure
 
 ```
 CoughTest/
-├── backend/                 # Django REST API
-│   ├── coughtest_backend/   # Main Django project
-│   ├── recordings/          # Recording management app
-│   ├── accounts/            # User authentication app
-│   ├── media/               # Uploaded audio files
+├── 📁 backend/              # Django REST API
+│   ├── accounts/            # User authentication
+│   ├── recordings/          # Audio recording management
+│   ├── coughtest_backend/   # Django project settings
 │   └── requirements.txt     # Python dependencies
-├── frontend/                # React application
-│   ├── src/
-│   │   ├── components/      # Reusable components
+├── 📁 frontend/             # React application
+│   ├── src/                 # Source code
+│   │   ├── components/      # Reusable UI components
 │   │   ├── pages/           # Page components
 │   │   ├── contexts/        # React contexts
-│   │   ├── services/        # API services
-│   │   └── utils/           # Utility functions
+│   │   └── services/        # API communication
 │   └── package.json         # Node.js dependencies
+├── 📁 scripts/              # Automation scripts
+│   ├── setup.bat/.sh        # Project setup
+│   ├── start_servers.bat/.sh # Development servers
+│   └── build_production.bat # Production build
+├── 📁 docs/                 # Documentation
 └── README.md               # This file
 ```
 
-## 🔧 API Endpoints
+## 🔧 Available Scripts
 
-### Authentication
-- `POST /api/auth/register/` - User registration
-- `POST /api/auth/login/` - User login
-- `POST /api/auth/logout/` - User logout
-- `GET /api/auth/profile/` - Get user profile
+| Script | Windows | macOS/Linux | Description |
+|--------|---------|-------------|-------------|
+| Setup | `scripts\setup.bat` | `./scripts/setup.sh` | Install dependencies, create admin user |
+| Start | `scripts\start_servers.bat` | `./scripts/start_servers.sh` | Run development servers |
+| Build | `scripts\build_production.bat` | Manual commands | Build for production |
+| Test | `scripts\test_application.bat` | Manual commands | Test application |
 
-### Recordings
-- `POST /api/recordings/upload/` - Upload cough recording
-- `GET /api/recordings/list/` - List all recordings (with filters)
-- `GET /api/recordings/detail/<id>/` - Get recording details
-- `GET /api/recordings/my-recordings/` - Get user's recordings
-- `GET /api/recordings/stats/` - Get platform statistics
-- `GET /api/recordings/export-csv/` - Export data to CSV (admin only)
-- `DELETE /api/recordings/delete/<id>/` - Delete user's recording
+## 📥 Bulk Data Import
 
-## 🎯 Usage Scenarios
+Import existing cough audio datasets:
+
+```bash
+cd backend
+python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Study2024"
+```
+
+**Supported formats**: WAV, MP3, WebM, M4A, OGG
+
+## 🌐 Cross-Platform Compatibility
+
+- **✅ Website**: Works on all modern browsers and devices
+- **✅ Development**: Windows, macOS, Linux support
+- **✅ Database**: SQLite (included) or PostgreSQL/MySQL
+- **✅ Deployment**: Cloud platforms, self-hosted, Docker
+
+## 📚 Documentation
+
+- **[Bulk Import Guide](docs/BULK_IMPORT_GUIDE.md)** - Import existing datasets
+- **[Deployment Guide](docs/DEPLOYMENT_GUIDE.md)** - Production deployment
+- **[Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md)** - OS compatibility
+- **[Windows Setup](docs/WINDOWS_SETUP_GUIDE.md)** - Windows-specific instructions
+- **[Test Results](docs/TEST_RESULTS.md)** - Application test status
+
+## 🎯 Use Cases
 
 ### For Researchers
-1. **Data Collection**: Collect cough audio samples with comprehensive metadata
-2. **Export Data**: Download CSV files with all recording information
-3. **Analytics**: View platform statistics and user engagement metrics
+- Collect cough audio samples with comprehensive metadata
+- Export data in CSV format for statistical analysis
+- View platform analytics and user engagement metrics
+- Import existing datasets for analysis
 
 ### For Contributors
-1. **Anonymous Participation**: Submit recordings without creating an account
-2. **User Accounts**: Track personal contributions and manage recordings
-3. **Multiple Methods**: Record directly in browser or upload existing files
+- Submit recordings anonymously or with user accounts
+- Record directly in browser or upload existing files
+- Track personal contributions via dashboard
+- Play back recorded audio samples
 
 ## 🔒 Privacy & Security
 
-- **Anonymous Options**: Users can contribute without personal information
-- **Secure Storage**: Audio files stored securely with unique identifiers
-- **JWT Authentication**: Secure token-based authentication system
-- **Data Protection**: IP addresses and user agents collected only for research metadata
-
-## 🛠️ Development
-
-### Backend Development
-```bash
-cd backend
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver
-```
-
-### Frontend Development
-```bash
-cd frontend
-npm start
-```
-
-### Creating Superuser
-```bash
-cd backend
-python manage.py createsuperuser
-```
-
-## 📈 Thesis Research Features
-
-- **Comprehensive Metadata**: All necessary data points for academic research
-- **CSV Export**: Ready-to-use format for statistical analysis
-- **User Classification**: Registered vs anonymous user tracking
-- **Technical Audio Data**: Sample rates, bit rates, and audio characteristics
-- **Temporal Analysis**: Creation and upload timestamps for time-series analysis
+- **Anonymous Options**: No personal information required
+- **Secure Storage**: Audio files with unique identifiers
+- **JWT Authentication**: Token-based security
+- **Research Metadata**: IP/user agent for academic purposes only
 
 ## 🤝 Contributing
 
-This platform is designed for medical research data collection. Contributors help advance respiratory health research by providing cough audio samples.
+This platform is designed for academic medical research. Contributors help advance respiratory health research by providing cough audio samples.
 
 ## 📄 License
 
-This project is created for academic research purposes.
+Academic Research License - Created for thesis and medical research purposes.
 
 ---
 
-**Built with ❤️ for medical research advancement**
+**Built for advancing medical research in respiratory health analysis** 🏥
