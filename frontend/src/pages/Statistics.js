@@ -49,7 +49,59 @@ const Statistics = () => {
     } catch (error) {
       setMessage({ 
         type: 'danger', 
-        text: 'Error downloading CSV. Admin access required.' 
+        text: 'Error downloading CSV.' 
+      });
+    }
+  };
+
+  const handleExportHTML = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/recordings/export-html/');
+      const blob = await response.blob();
+      
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `cough_recordings_${new Date().toISOString().split('T')[0]}.html`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      setMessage({ 
+        type: 'success', 
+        text: 'HTML file with audio players downloaded successfully!' 
+      });
+    } catch (error) {
+      setMessage({ 
+        type: 'danger', 
+        text: 'Error downloading HTML file.' 
+      });
+    }
+  };
+
+  const handleExportZIP = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/recordings/export-zip/');
+      const blob = await response.blob();
+      
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `cough_recordings_complete_${new Date().toISOString().split('T')[0]}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      setMessage({ 
+        type: 'success', 
+        text: 'ZIP file with CSV and audio files downloaded successfully!' 
+      });
+    } catch (error) {
+      setMessage({ 
+        type: 'danger', 
+        text: 'Error downloading ZIP file.' 
       });
     }
   };
@@ -81,14 +133,26 @@ const Statistics = () => {
                   </p>
                 </Col>
                 <Col md={4} className="text-end">
-                  {isAuthenticated && (
+                  <div className="d-flex gap-2 justify-content-end">
                     <Button 
                       variant="outline-primary"
                       onClick={handleExportCSV}
                     >
-                      📥 Export CSV
+                      📥 CSV
                     </Button>
-                  )}
+                    <Button 
+                      variant="outline-success"
+                      onClick={handleExportHTML}
+                    >
+                      🎵 HTML
+                    </Button>
+                    <Button 
+                      variant="outline-warning"
+                      onClick={handleExportZIP}
+                    >
+                      📦 ZIP (CSV + Audio)
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </Card.Body>

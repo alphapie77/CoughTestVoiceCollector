@@ -8,5 +8,7 @@ urlpatterns = [
     path('my-recordings/', views.UserRecordingsView.as_view(), name='user-recordings'),
     path('stats/', views.recording_stats, name='recording-stats'),
     path('export-csv/', views.export_csv, name='export-csv'),
+    path('export-html/', views.export_html, name='export-html'),
+    path('export-zip/', views.export_zip, name='export-zip'),
     path('delete/<uuid:recording_id>/', views.delete_user_recording, name='delete-recording'),
 ]

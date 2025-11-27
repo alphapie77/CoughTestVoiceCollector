@@ -8,8 +8,20 @@ from mutagen import File as MutagenFile
 
 def upload_to(instance, filename):
     """Generate upload path for audio files"""
+    from django.utils import timezone
     ext = filename.split('.')[-1]
-    filename = f"{uuid.uuid4()}.{ext}"
+    timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
+    
+    if instance.user:
+        username = instance.user.username
+    elif instance.anonymous_name:
+        username = instance.anonymous_name
+    else:
+        username = 'anonymous'
+    
+    # Clean username for filename
+    username = ''.join(c for c in username if c.isalnum() or c in '-_')
+    filename = f"{timestamp}_{username}.{ext}"
     return os.path.join('cough_recordings', filename)
 
 

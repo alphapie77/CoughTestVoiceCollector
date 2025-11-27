@@ -205,7 +205,7 @@ const Dashboard = () => {
                         </td>
                         <td>
                           <audio controls style={{width: '150px'}}>
-                            <source src={`http://localhost:8000/media/cough_recordings/${recording.file_name}`} />
+                            <source src={recording.audio_file_url} />
                           </audio>
                         </td>
                         <td>

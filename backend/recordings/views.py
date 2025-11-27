@@ -6,6 +6,9 @@ from django.db.models import Count, Sum, Avg
 from django.contrib.auth.models import User
 import csv
 import io
+import zipfile
+import os
+from django.conf import settings
 from .models import CoughRecording
 from .serializers import (
     CoughRecordingSerializer, 
@@ -97,7 +100,7 @@ def recording_stats(request):
 
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAdminUser])
+@permission_classes([permissions.AllowAny])
 def export_csv(request):
     """Export all recordings data to CSV for thesis research"""
     response = HttpResponse(content_type='text/csv')
@@ -110,7 +113,7 @@ def export_csv(request):
         'Recording ID', 'User Type', 'User Name', 'File Name', 'File Size (MB)',
         'File Format', 'Duration (seconds)', 'Recording Method', 'Created At',
         'Uploaded At', 'Sample Rate', 'Bit Rate', 'Channels', 'IP Address',
-        'User Agent'
+        'User Agent', 'Audio File URL'
     ]
     writer.writerow(headers)
     
@@ -118,6 +121,7 @@ def export_csv(request):
     for recording in CoughRecording.objects.all().select_related('user'):
         user_type = 'Registered' if recording.user else 'Anonymous'
         user_name = recording.user_display_name
+        audio_url = request.build_absolute_uri(recording.audio_file.url) if recording.audio_file else ''
         
         row = [
             str(recording.recording_id),
@@ -134,10 +138,89 @@ def export_csv(request):
             recording.bit_rate or '',
             recording.channels or '',
             recording.ip_address or '',
-            recording.user_agent or ''
+            recording.user_agent or '',
+            audio_url
         ]
         writer.writerow(row)
     
+    return response
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def export_html(request):
+    """Export all recordings data to HTML with embedded audio players"""
+    response = HttpResponse(content_type='text/html')
+    response['Content-Disposition'] = 'attachment; filename="cough_recordings_data.html"'
+    
+    html_content = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>CoughTest Recordings Data</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            audio { width: 200px; }
+            .metadata { font-size: 12px; color: #666; }
+        </style>
+    </head>
+    <body>
+        <h1>🎤 CoughTest Recordings Data</h1>
+        <p>Generated on: """ + request.build_absolute_uri().split('/')[2] + """</p>
+        <table>
+            <tr>
+                <th>Recording ID</th>
+                <th>User</th>
+                <th>File Name</th>
+                <th>Audio Player</th>
+                <th>Duration</th>
+                <th>Size (MB)</th>
+                <th>Format</th>
+                <th>Method</th>
+                <th>Created At</th>
+                <th>Metadata</th>
+            </tr>
+    """
+    
+    for recording in CoughRecording.objects.all().select_related('user'):
+        user_type = 'Registered' if recording.user else 'Anonymous'
+        user_name = recording.user_display_name
+        audio_url = request.build_absolute_uri(recording.audio_file.url) if recording.audio_file else ''
+        
+        metadata = f"Sample Rate: {recording.sample_rate or 'N/A'}<br>"
+        metadata += f"Bit Rate: {recording.bit_rate or 'N/A'}<br>"
+        metadata += f"Channels: {recording.channels or 'N/A'}"
+        
+        html_content += f"""
+            <tr>
+                <td>{recording.recording_id}</td>
+                <td>{user_name} ({user_type})</td>
+                <td>{recording.file_name}</td>
+                <td>
+                    <audio controls>
+                        <source src="{audio_url}" type="audio/{recording.file_format}">
+                        Your browser does not support audio playback.
+                    </audio>
+                </td>
+                <td>{recording.duration or 'N/A'}s</td>
+                <td>{recording.file_size_mb}</td>
+                <td>{recording.file_format.upper()}</td>
+                <td>{recording.get_recording_method_display()}</td>
+                <td>{recording.created_at.strftime('%Y-%m-%d %H:%M:%S')}</td>
+                <td class="metadata">{metadata}</td>
+            </tr>
+        """
+    
+    html_content += """
+        </table>
+    </body>
+    </html>
+    """
+    
+    response.write(html_content)
     return response
 
 

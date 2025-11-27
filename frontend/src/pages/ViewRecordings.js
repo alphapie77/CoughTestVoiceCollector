@@ -207,7 +207,7 @@ const ViewRecordings = () => {
                       </td>
                       <td>
                         <audio controls style={{width: '200px'}}>
-                          <source src={`http://localhost:8000/media/cough_recordings/${recording.file_name}`} />
+                          <source src={recording.audio_file_url} />
                           Your browser does not support audio playback.
                         </audio>
                       </td>

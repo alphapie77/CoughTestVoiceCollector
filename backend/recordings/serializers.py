@@ -56,14 +56,22 @@ class CoughRecordingListSerializer(serializers.ModelSerializer):
     """Simplified serializer for listing recordings"""
     user_display_name = serializers.ReadOnlyField()
     file_size_mb = serializers.ReadOnlyField()
+    audio_file_url = serializers.SerializerMethodField()
     
     class Meta:
         model = CoughRecording
         fields = [
-            'recording_id', 'user_display_name', 'file_name',
+            'recording_id', 'user_display_name', 'file_name', 'audio_file_url',
             'file_size_mb', 'file_format', 'duration', 'recording_method',
             'created_at'
         ]
+    
+    def get_audio_file_url(self, obj):
+        if obj.audio_file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.audio_file.url)
+        return None
 
 
 class CoughRecordingStatsSerializer(serializers.Serializer):
