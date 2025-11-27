@@ -73,21 +73,40 @@ class CoughRecording(models.Model):
     
     def save(self, *args, **kwargs):
         if self.audio_file:
-            # Extract file metadata
-            self.file_name = os.path.basename(self.audio_file.name)
+            # Generate timestamp+username filename
+            timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
+            if self.user:
+                username = self.user.username
+            elif self.anonymous_name:
+                username = self.anonymous_name
+            else:
+                username = 'anonymous'
+            
+            # Clean username for filename
+            username = ''.join(c for c in username if c.isalnum() or c in '-_')
+            original_ext = os.path.basename(self.audio_file.name).split('.')[-1].lower()
+            
+            # Set the formatted filename
+            self.file_name = f"{timestamp}_{username}.{original_ext}"
             self.file_size = self.audio_file.size
-            self.file_format = self.file_name.split('.')[-1].lower()
+            self.file_format = original_ext
             
             # Try to extract audio metadata using mutagen
             try:
+                # Reset file pointer to beginning
+                self.audio_file.file.seek(0)
                 audio_file = MutagenFile(self.audio_file.file)
-                if audio_file:
+                if audio_file and hasattr(audio_file, 'info'):
                     self.duration = getattr(audio_file.info, 'length', None)
                     self.sample_rate = getattr(audio_file.info, 'sample_rate', None)
                     self.bit_rate = getattr(audio_file.info, 'bitrate', None)
                     self.channels = getattr(audio_file.info, 'channels', None)
-            except:
-                pass  # If metadata extraction fails, continue without it
+                # Reset file pointer again
+                self.audio_file.file.seek(0)
+            except Exception as e:
+                # For browser recordings, set default duration (10 seconds)
+                if self.recording_method == 'browser':
+                    self.duration = 10.0
         
         super().save(*args, **kwargs)
     
