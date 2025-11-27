@@ -106,54 +106,46 @@ class UserRecordingsView(generics.ListAPIView):
 @permission_classes([permissions.AllowAny])
 def recording_stats(request):
     """Get comprehensive statistics about recordings with caching"""
-    # Try to get from cache first
-    cache_key = 'recording_stats'
-    stats_data = cache.get(cache_key)
+    logger.info("Generating fresh statistics")
     
-    if stats_data is None:
-        logger.info("Generating fresh statistics")
-        
-        total_recordings = CoughRecording.objects.count()
-        total_users = CoughRecording.objects.filter(user__isnull=False).values('user').distinct().count()
-        total_anonymous = CoughRecording.objects.filter(user__isnull=True).count()
-        
-        # Aggregate statistics
-        aggregates = CoughRecording.objects.aggregate(
-            total_duration=Sum('duration'),
-            total_size=Sum('file_size'),
-            avg_duration=Avg('duration')
-        )
-        
-        # Convert total size to MB
-        total_size_mb = (aggregates['total_size'] or 0) / (1024 * 1024)
-        
-        # Recordings by method
-        recordings_by_method = dict(
-            CoughRecording.objects.values('recording_method').annotate(
-                count=Count('id')
-            ).values_list('recording_method', 'count')
-        )
-        
-        # Recordings by format
-        recordings_by_format = dict(
-            CoughRecording.objects.values('file_format').annotate(
-                count=Count('id')
-            ).values_list('file_format', 'count')
-        )
-        
-        stats_data = {
-            'total_recordings': total_recordings,
-            'total_users': total_users,
-            'total_anonymous': total_anonymous,
-            'total_duration': aggregates['total_duration'] or 0,
-            'total_size_mb': round(total_size_mb, 2),
-            'avg_duration': round(aggregates['avg_duration'] or 0, 2),
-            'recordings_by_method': recordings_by_method,
-            'recordings_by_format': recordings_by_format,
-        }
-        
-        # Cache for 5 minutes
-        cache.set(cache_key, stats_data, 300)
+    total_recordings = CoughRecording.objects.count()
+    total_users = CoughRecording.objects.filter(user__isnull=False).values('user').distinct().count()
+    total_anonymous = CoughRecording.objects.filter(user__isnull=True).count()
+    
+    # Aggregate statistics
+    aggregates = CoughRecording.objects.aggregate(
+        total_duration=Sum('duration'),
+        total_size=Sum('file_size'),
+        avg_duration=Avg('duration')
+    )
+    
+    # Convert total size to MB
+    total_size_mb = (aggregates['total_size'] or 0) / (1024 * 1024)
+    
+    # Recordings by method
+    recordings_by_method = dict(
+        CoughRecording.objects.values('recording_method').annotate(
+            count=Count('id')
+        ).values_list('recording_method', 'count')
+    )
+    
+    # Recordings by format
+    recordings_by_format = dict(
+        CoughRecording.objects.values('file_format').annotate(
+            count=Count('id')
+        ).values_list('file_format', 'count')
+    )
+    
+    stats_data = {
+        'total_recordings': total_recordings,
+        'total_users': total_users,
+        'total_anonymous': total_anonymous,
+        'total_duration': aggregates['total_duration'] or 0,
+        'total_size_mb': round(total_size_mb, 2),
+        'avg_duration': round(aggregates['avg_duration'] or 0, 2),
+        'recordings_by_method': recordings_by_method,
+        'recordings_by_format': recordings_by_format,
+    }
     
     serializer = CoughRecordingStatsSerializer(stats_data)
     return Response(serializer.data)
