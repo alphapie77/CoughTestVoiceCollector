@@ -129,6 +129,15 @@ This comprehensive documentation suite covers all aspects of the CoughTest platf
 
 ### 7. Additional Documentation
 
+#### 📋 [Project Proposal](PROJECT_PROPOSAL.md)
+**Audience**: Academic Supervisors, Project Reviewers  
+**Purpose**: Comprehensive project proposal for academic approval  
+**Contents**:
+- Problem statement and proposed solution
+- Technical specifications and architecture
+- Research methodology and timeline
+- Risk assessment and success criteria
+
 #### 📖 [Documentation README](README.md)
 **Audience**: All Users  
 **Purpose**: Documentation navigation guide  
@@ -403,6 +412,6 @@ Innovation Features:
 
 **Documentation Suite Version**: 1.0  
 **Last Updated**: November 2024  
-**Total Documents**: 13 comprehensive guides  
+**Total Documents**: 15 comprehensive guides  
 **Total Pages**: 200+ pages of documentation  
 **Compliance**: IEEE Standards, Academic Guidelines, Industry Best Practices
