@@ -152,18 +152,19 @@ const ViewRecordings = () => {
                   <th>Format</th>
                   <th>Method</th>
                   <th>Date</th>
+                  <th>Play</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="7" className="text-center p-4">
+                    <td colSpan="8" className="text-center p-4">
                       <div className="spinner-border text-primary" />
                     </td>
                   </tr>
                 ) : recordings.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="text-center p-4">
+                    <td colSpan="8" className="text-center p-4">
                       <h5>No recordings found</h5>
                       <p className="text-muted mb-0">
                         Try adjusting your filters or check back later
@@ -203,6 +204,12 @@ const ViewRecordings = () => {
                       </td>
                       <td>
                         {new Date(recording.created_at).toLocaleDateString()}
+                      </td>
+                      <td>
+                        <audio controls style={{width: '200px'}}>
+                          <source src={`http://localhost:8000/media/cough_recordings/${recording.file_name}`} />
+                          Your browser does not support audio playback.
+                        </audio>
                       </td>
                     </tr>
                   ))

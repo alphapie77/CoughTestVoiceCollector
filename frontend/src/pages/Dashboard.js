@@ -179,6 +179,7 @@ const Dashboard = () => {
                       <th>Size</th>
                       <th>Method</th>
                       <th>Date</th>
+                      <th>Play</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -201,6 +202,11 @@ const Dashboard = () => {
                         </td>
                         <td>
                           {new Date(recording.created_at).toLocaleDateString()}
+                        </td>
+                        <td>
+                          <audio controls style={{width: '150px'}}>
+                            <source src={`http://localhost:8000/media/cough_recordings/${recording.file_name}`} />
+                          </audio>
                         </td>
                         <td>
                           <Button
