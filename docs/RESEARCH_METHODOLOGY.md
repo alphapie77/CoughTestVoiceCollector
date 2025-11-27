@@ -3,7 +3,7 @@
 
 ### Document Information
 - **Version**: 1.0
-- **Date**: November 2024
+- **Date**: November 2025
 - **Research Type**: Applied Computer Science Research
 - **Domain**: Medical Informatics & Health Technology
 

@@ -117,7 +117,7 @@ recording_method: "browser" | "upload" (required)
   "success": true,
   "data": {
     "recording_id": "550e8400-e29b-41d4-a716-446655440000",
-    "file_name": "20241128_103045_cough.webm",
+    "file_name": "20251128_103045_cough.webm",
     "file_size": 245760,
     "file_size_mb": 0.23,
     "duration": 10.5,
@@ -127,8 +127,8 @@ recording_method: "browser" | "upload" (required)
     "channels": 1,
     "recording_method": "browser",
     "user_display_name": "researcher01",
-    "created_at": "2024-11-28T10:30:45Z",
-    "uploaded_at": "2024-11-28T10:30:45Z"
+    "created_at": "2025-11-28T10:30:45Z",
+    "uploaded_at": "2025-11-28T10:30:45Z"
   },
   "message": "Recording uploaded successfully"
 }
@@ -160,14 +160,14 @@ ordering: "created_at" | "-created_at" | "duration" (sorting)
     "results": [
       {
         "recording_id": "550e8400-e29b-41d4-a716-446655440000",
-        "file_name": "20241128_103045_cough.webm",
+        "file_name": "20251128_103045_cough.webm",
         "file_size_mb": 0.23,
         "duration": 10.5,
         "file_format": "webm",
         "recording_method": "browser",
         "user_display_name": "researcher01",
-        "created_at": "2024-11-28T10:30:45Z",
-        "audio_file_url": "http://localhost:8000/media/cough_recordings/20241128_103045_cough.webm"
+        "created_at": "2025-11-28T10:30:45Z",
+        "audio_file_url": "http://localhost:8000/media/cough_recordings/20251128_103045_cough.webm"
       }
     ]
   }
@@ -187,7 +187,7 @@ ordering: "created_at" | "-created_at" | "duration" (sorting)
     "recording_id": "550e8400-e29b-41d4-a716-446655440000",
     "user_display_name": "researcher01",
     "anonymous_name": null,
-    "file_name": "20241128_103045_cough.webm",
+    "file_name": "20251128_103045_cough.webm",
     "file_size": 245760,
     "file_size_mb": 0.23,
     "file_format": "webm",
@@ -198,9 +198,9 @@ ordering: "created_at" | "-created_at" | "duration" (sorting)
     "recording_method": "browser",
     "ip_address": "192.168.1.100",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
-    "created_at": "2024-11-28T10:30:45Z",
-    "uploaded_at": "2024-11-28T10:30:45Z",
-    "audio_file_url": "http://localhost:8000/media/cough_recordings/20241128_103045_cough.webm"
+    "created_at": "2025-11-28T10:30:45Z",
+    "uploaded_at": "2025-11-28T10:30:45Z",
+    "audio_file_url": "http://localhost:8000/media/cough_recordings/20251128_103045_cough.webm"
   }
 }
 ```
@@ -224,9 +224,9 @@ Authorization: Bearer <access_token>
     "results": [
       {
         "recording_id": "550e8400-e29b-41d4-a716-446655440000",
-        "file_name": "20241128_103045_cough.webm",
+        "file_name": "20251128_103045_cough.webm",
         "duration": 10.5,
-        "created_at": "2024-11-28T10:30:45Z"
+        "created_at": "2025-11-28T10:30:45Z"
       }
     ]
   }
@@ -296,10 +296,10 @@ Authorization: Bearer <access_token>
 **Response** (200 OK):
 ```
 Content-Type: text/csv
-Content-Disposition: attachment; filename="data_20241128_103045.csv"
+Content-Disposition: attachment; filename="data_20251128_103045.csv"
 
 Recording ID,User Type,User Name,File Name,File Size (MB),File Format,Duration (seconds),Recording Method,Created At,Uploaded At,Sample Rate,Bit Rate,Channels,IP Address,User Agent,Audio File URL
-550e8400-e29b-41d4-a716-446655440000,Registered,researcher01,20241128_103045_cough.webm,0.23,webm,10.5,browser,2024-11-28 10:30:45,2024-11-28 10:30:45,44100,128000,1,192.168.1.100,Mozilla/5.0...,http://localhost:8000/media/cough_recordings/20241128_103045_cough.webm
+550e8400-e29b-41d4-a716-446655440000,Registered,researcher01,20251128_103045_cough.webm,0.23,webm,10.5,browser,2025-11-28 10:30:45,2025-11-28 10:30:45,44100,128000,1,192.168.1.100,Mozilla/5.0...,http://localhost:8000/media/cough_recordings/20251128_103045_cough.webm
 ```
 
 ### 4.2 HTML Export
@@ -310,7 +310,7 @@ Recording ID,User Type,User Name,File Name,File Size (MB),File Format,Duration (
 **Response** (200 OK):
 ```
 Content-Type: text/html
-Content-Disposition: attachment; filename="data_20241128_103045.html"
+Content-Disposition: attachment; filename="data_20251128_103045.html"
 
 <!DOCTYPE html>
 <html>
@@ -335,14 +335,14 @@ Content-Disposition: attachment; filename="data_20241128_103045.html"
 **Response** (200 OK):
 ```
 Content-Type: application/zip
-Content-Disposition: attachment; filename="data_20241128_103045.zip"
+Content-Disposition: attachment; filename="data_20251128_103045.zip"
 
 [Binary ZIP file containing:]
 ├── cough_recordings_data.csv
 ├── README.txt
 └── audio_files/
-    ├── 20241128_103045_cough.webm
-    ├── 20241128_103156_sample.wav
+    ├── 20251128_103045_cough.webm
+    ├── 20251128_103156_sample.wav
     └── ...
 ```
 
@@ -361,7 +361,7 @@ Content-Disposition: attachment; filename="data_20241128_103045.zip"
   "success": true,
   "data": {
     "status": "healthy",
-    "timestamp": "2024-11-28T10:30:45Z",
+    "timestamp": "2025-11-28T10:30:45Z",
     "version": "1.0.0",
     "database": "connected",
     "media_storage": "accessible"
@@ -385,7 +385,7 @@ Content-Disposition: attachment; filename="data_20241128_103045.zip"
       "allowed_formats": ["wav", "mp3", "webm", "ogg", "m4a"]
     }
   },
-  "timestamp": "2024-11-28T10:30:45Z"
+  "timestamp": "2025-11-28T10:30:45Z"
 }
 ```
 
@@ -553,6 +553,6 @@ Statistical Compatibility:
 ---
 
 **API Documentation Version**: 1.0  
-**Last Updated**: November 2024  
+**Last Updated**: November 2025  
 **Compliance**: OpenAPI 3.0 Specification  
 **Testing**: Comprehensive test suite included

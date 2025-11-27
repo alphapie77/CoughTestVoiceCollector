@@ -3,7 +3,7 @@
 
 ### Document Information
 - **Version**: 1.0
-- **Date**: November 2024
+- **Date**: November 2025
 - **Audience**: Researchers, Participants, System Administrators
 - **Platform**: Web-based application
 
@@ -259,7 +259,7 @@ Step 7: Confirmation and success message
 │  │ 🎵 Recording #001                               │   │
 │  │ User: researcher01 | Duration: 10.5s           │   │
 │  │ Format: WebM | Method: Browser                  │   │
-│  │ Created: 2024-11-28 10:30:45                   │   │
+│  │ Created: 2025-11-28 10:30:45                   │   │
 │  │ [▶️ Play] [📥 Download] [ℹ️ Details]             │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -267,7 +267,7 @@ Step 7: Confirmation and success message
 │  │ 🎵 Recording #002                               │   │
 │  │ User: Anonymous_001 | Duration: 9.8s           │   │
 │  │ Format: WAV | Method: Upload                    │   │
-│  │ Created: 2024-11-28 09:15:22                   │   │
+│  │ Created: 2025-11-28 09:15:22                   │   │
 │  │ [▶️ Play] [📥 Download] [ℹ️ Details]             │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -626,7 +626,7 @@ Data Analysis:
 ### 10.3 Academic Use
 ```yaml
 Citation Format:
-  "CoughTest Research Platform. (2024). 
+  "CoughTest Research Platform. (2025). 
    Medical Research Data Collection Platform. 
    Version 1.0. [Software]"
 
@@ -674,6 +674,6 @@ How to Provide Feedback:
 ---
 
 **User Manual Version**: 1.0  
-**Last Updated**: November 2024  
+**Last Updated**: November 2025  
 **Platform Version**: CoughTest 1.0  
 **Support**: Available through research team contact

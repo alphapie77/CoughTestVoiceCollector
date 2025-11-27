@@ -3,7 +3,7 @@
 
 ### Document Information
 - **Version**: 1.0
-- **Date**: November 2024
+- **Date**: November 2025
 - **Architecture**: Full-Stack Web Application
 - **Purpose**: Research data collection system design
 
@@ -229,10 +229,10 @@ System:
     "recording_id": "uuid",
     "file_name": "cough_sample.webm",
     "duration": 10.5,
-    "created_at": "2024-11-28T10:30:00Z"
+    "created_at": "2025-11-28T10:30:00Z"
   },
   "message": "Recording uploaded successfully",
-  "timestamp": "2024-11-28T10:30:00Z"
+  "timestamp": "2025-11-28T10:30:00Z"
 }
 ```
 
@@ -288,8 +288,8 @@ Network Security:
 ```
 media/
 └── cough_recordings/
-    ├── 20241128_103045_sample1.webm
-    ├── 20241128_103156_sample2.webm
+    ├── 20251128_103045_sample1.webm
+    ├── 20251128_103156_sample2.webm
     ├── uuid-generated-filename.webm
     └── ...
 ```

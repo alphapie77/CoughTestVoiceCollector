@@ -15,7 +15,7 @@ python manage.py import_cough_data "C:\path\to\your\audio\files" --user admin
 
 ### Custom Anonymous Names
 ```bash
-python manage.py import_cough_data "C:\path\to\your\audio\files" --anonymous-prefix "Study2024"
+python manage.py import_cough_data "C:\path\to\your\audio\files" --anonymous-prefix "Study2025"
 ```
 
 ## Command Options
@@ -39,7 +39,7 @@ python manage.py import_cough_data "C:\path\to\your\audio\files" --anonymous-pre
 ### 1. Research Dataset Import
 ```bash
 # Import 1000 cough samples as anonymous submissions
-python manage.py import_cough_data "D:\research\cough_dataset" --anonymous-prefix "Dataset2024"
+python manage.py import_cough_data "D:\research\cough_dataset" --anonymous-prefix "Dataset2025"
 ```
 
 ### 2. User-Specific Import
