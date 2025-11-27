@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Table, Form, Button, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Card, Table, Form, Button, Pagination, Modal } from 'react-bootstrap';
 import { recordingsAPI } from '../services/api';
 
 const ViewRecordings = () => {
@@ -12,10 +12,17 @@ const ViewRecordings = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '' });
 
   useEffect(() => {
     fetchRecordings();
   }, [currentPage, filters]);
+
+  const showModalDialog = (type, title, message) => {
+    setModalConfig({ type, title, message });
+    setShowModal(true);
+  };
 
   const fetchRecordings = async () => {
     setLoading(true);
@@ -34,7 +41,8 @@ const ViewRecordings = () => {
         setTotalPages(Math.ceil(response.data.count / 20));
       }
     } catch (error) {
-      console.error('Error fetching recordings:', error);
+      showModalDialog('error', '❌ Error Loading Recordings', 
+        'Unable to fetch recordings. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -266,6 +274,28 @@ const ViewRecordings = () => {
           </Col>
         </Row>
       )}
+
+      {/* Professional Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton className="bg-danger text-white">
+          <Modal.Title>{modalConfig.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <div className="text-center">
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
+              ❌
+            </div>
+            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
+              {modalConfig.message}
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => setShowModal(false)}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Alert, Modal } from 'react-bootstrap';
 import { recordingsAPI } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
 
 const Statistics = () => {
-  const { isAuthenticated } = useAuth();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '' });
 
   useEffect(() => {
     fetchStats();
   }, []);
+
+  const showModalDialog = (type, title, message) => {
+    setModalConfig({ type, title, message });
+    setShowModal(true);
+  };
 
   const fetchStats = async () => {
     try {
       const response = await recordingsAPI.stats();
       setStats(response.data);
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Error fetching statistics' 
-      });
+      showModalDialog('error', '❌ Error Loading Statistics', 
+        'Unable to fetch statistics. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -36,21 +39,18 @@ const Statistics = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `cough_recordings_${new Date().toISOString().split('T')[0]}.csv`;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').split('.')[0];
+      link.download = `data_${timestamp}.csv`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      setMessage({ 
-        type: 'success', 
-        text: 'CSV file downloaded successfully!' 
-      });
+      showModalDialog('success', '✅ CSV Export Complete', 
+        `CSV file has been downloaded successfully!\n\nFile contains ${stats?.total_recordings || 0} recordings with comprehensive metadata for research analysis.`);
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Error downloading CSV.' 
-      });
+      showModalDialog('error', '❌ Export Failed', 
+        'Error downloading CSV file. Please try again.');
     }
   };
 
@@ -62,21 +62,18 @@ const Statistics = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `cough_recordings_${new Date().toISOString().split('T')[0]}.html`;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').split('.')[0];
+      link.download = `data_${timestamp}.html`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      setMessage({ 
-        type: 'success', 
-        text: 'HTML file with audio players downloaded successfully!' 
-      });
+      showModalDialog('success', '✅ HTML Export Complete', 
+        `HTML file with embedded audio players has been downloaded!\n\nYou can now open this file in any browser to listen to all ${stats?.total_recordings || 0} recordings with full metadata.`);
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Error downloading HTML file.' 
-      });
+      showModalDialog('error', '❌ Export Failed', 
+        'Error downloading HTML file. Please try again.');
     }
   };
 
@@ -88,21 +85,18 @@ const Statistics = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `cough_recordings_complete_${new Date().toISOString().split('T')[0]}.zip`;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').split('.')[0];
+      link.download = `data_${timestamp}.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      setMessage({ 
-        type: 'success', 
-        text: 'ZIP file with CSV and audio files downloaded successfully!' 
-      });
+      showModalDialog('success', '✅ ZIP Export Complete', 
+        `Complete ZIP archive has been downloaded!\n\nIncludes:\n• CSV file with all metadata\n• All ${stats?.total_recordings || 0} audio files\n• Total size: ${stats?.total_size_mb?.toFixed(1) || 0} MB\n\nPerfect for offline research analysis.`);
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Error downloading ZIP file.' 
-      });
+      showModalDialog('error', '❌ Export Failed', 
+        'Error downloading ZIP file. Please try again.');
     }
   };
 
@@ -300,6 +294,31 @@ const Statistics = () => {
           </Card>
         </Col>
       </Row>
+
+      {/* Professional Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton className={`bg-${modalConfig.type === 'success' ? 'success' : 'danger'} text-white`}>
+          <Modal.Title>{modalConfig.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <div className="text-center">
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
+              {modalConfig.type === 'success' ? '✅' : '❌'}
+            </div>
+            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
+              {modalConfig.message}
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button 
+            variant={modalConfig.type === 'success' ? 'success' : 'primary'} 
+            onClick={() => setShowModal(false)}
+          >
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

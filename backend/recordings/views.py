@@ -103,8 +103,10 @@ def recording_stats(request):
 @permission_classes([permissions.AllowAny])
 def export_csv(request):
     """Export all recordings data to CSV for thesis research"""
+    from django.utils import timezone
+    timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="cough_recordings_data.csv"'
+    response['Content-Disposition'] = f'attachment; filename="data_{timestamp}.csv"'
     
     writer = csv.writer(response)
     
@@ -150,8 +152,10 @@ def export_csv(request):
 @permission_classes([permissions.AllowAny])
 def export_html(request):
     """Export all recordings data to HTML with embedded audio players"""
+    from django.utils import timezone
+    timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
     response = HttpResponse(content_type='text/html')
-    response['Content-Disposition'] = 'attachment; filename="cough_recordings_data.html"'
+    response['Content-Disposition'] = f'attachment; filename="data_{timestamp}.html"'
     
     html_content = """
     <!DOCTYPE html>
@@ -228,8 +232,10 @@ def export_html(request):
 @permission_classes([permissions.AllowAny])
 def export_zip(request):
     """Export all recordings as ZIP file with CSV and audio files"""
+    from django.utils import timezone
+    timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
     response = HttpResponse(content_type='application/zip')
-    response['Content-Disposition'] = 'attachment; filename="cough_recordings_complete.zip"'
+    response['Content-Disposition'] = f'attachment; filename="data_{timestamp}.zip"'
     
     # Create ZIP file in memory
     zip_buffer = io.BytesIO()

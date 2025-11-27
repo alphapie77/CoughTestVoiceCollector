@@ -91,24 +91,44 @@ class CoughRecording(models.Model):
             self.file_size = self.audio_file.size
             self.file_format = original_ext
             
-            # Try to extract audio metadata using mutagen
+            # Try to extract audio metadata
             try:
-                # Reset file pointer to beginning
+                # First try with mutagen for basic metadata
                 self.audio_file.file.seek(0)
                 audio_file = MutagenFile(self.audio_file.file)
                 if audio_file and hasattr(audio_file, 'info'):
-                    self.duration = getattr(audio_file.info, 'length', None)
                     self.sample_rate = getattr(audio_file.info, 'sample_rate', None)
                     self.bit_rate = getattr(audio_file.info, 'bitrate', None)
                     self.channels = getattr(audio_file.info, 'channels', None)
-                # Reset file pointer again
+                    # Try to get duration from mutagen first
+                    duration_from_mutagen = getattr(audio_file.info, 'length', None)
+                    if duration_from_mutagen:
+                        self.duration = duration_from_mutagen
                 self.audio_file.file.seek(0)
             except Exception as e:
-                # For browser recordings, set default duration (10 seconds)
+                pass
+                
+            # Fallback: if still no duration, use defaults
+            if not self.duration:
                 if self.recording_method == 'browser':
-                    self.duration = 10.0
+                    self.duration = 10.0  # Default for browser recordings
         
+        # Save first to get the file path, then update duration if needed
+        is_new = self.pk is None
         super().save(*args, **kwargs)
+        
+        # If this is a new record and we still don't have duration, try pydub
+        if is_new and not self.duration and self.audio_file:
+            try:
+                from pydub import AudioSegment
+                audio = AudioSegment.from_file(self.audio_file.path)
+                self.duration = len(audio) / 1000.0  # Convert milliseconds to seconds
+                # Update the record with the correct duration
+                CoughRecording.objects.filter(pk=self.pk).update(duration=self.duration)
+            except Exception:
+                # If all else fails, set default for browser recordings
+                if self.recording_method == 'browser':
+                    CoughRecording.objects.filter(pk=self.pk).update(duration=10.0)
     
     @property
     def user_display_name(self):

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Form, Alert, ProgressBar } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form, Alert, ProgressBar, Modal } from 'react-bootstrap';
 import { recordingsAPI } from '../services/api';
 // No authentication needed for anonymous research
 
@@ -13,6 +13,8 @@ const RecordCough = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   const [uploading, setUploading] = useState(false);
   const [recordingMethod, setRecordingMethod] = useState('browser');
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '', onConfirm: null });
 
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -75,10 +77,8 @@ const RecordCough = () => {
       }, 1000);
 
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Error accessing microphone. Please check permissions.' 
-      });
+      showModalDialog('error', '🎤 Microphone Access Denied', 
+        'Unable to access your microphone. Please check your browser permissions and try again.');
     }
   };
 
@@ -105,44 +105,49 @@ const RecordCough = () => {
       // Check file type
       const allowedTypes = ['audio/wav', 'audio/mp3', 'audio/mpeg', 'audio/webm'];
       if (!allowedTypes.includes(file.type)) {
-        setMessage({ 
-          type: 'danger', 
-          text: 'Please upload a valid audio file (WAV, MP3, or WebM).' 
-        });
+        showModalDialog('error', '📁 Invalid File Type', 
+          'Please upload a valid audio file (WAV, MP3, or WebM format).');
         return;
       }
 
       // Check file size (max 50MB)
       if (file.size > 50 * 1024 * 1024) {
-        setMessage({ 
-          type: 'danger', 
-          text: 'File size must be less than 50MB.' 
-        });
+        showModalDialog('error', '📁 File Too Large', 
+          'File size must be less than 50MB. Please choose a smaller file.');
         return;
       }
 
       setUploadFile(file);
       setRecordedBlob(null);
       setMessage({ type: '', text: '' });
+      showModalDialog('success', '📁 File Selected', 
+        `Successfully selected: ${file.name}\nSize: ${(file.size / (1024 * 1024)).toFixed(2)} MB`);
     }
+  };
+
+  const showModalDialog = (type, title, message, onConfirm = null) => {
+    setModalConfig({ type, title, message, onConfirm });
+    setShowModal(true);
   };
 
   const handleSubmit = async () => {
     if (!recordedBlob && !uploadFile) {
-      setMessage({ 
-        type: 'warning', 
-        text: 'Please record audio or upload a file first.' 
-      });
+      showModalDialog('warning', '⚠️ Missing Audio', 'Please record audio or upload a file first.');
       return;
     }
 
     if (!anonymousName.trim()) {
-      setMessage({ 
-        type: 'warning', 
-        text: 'Please enter an anonymous name to continue.' 
-      });
+      showModalDialog('warning', '⚠️ Name Required', 'Please enter an anonymous name to continue with your submission.');
       return;
     }
+
+    showModalDialog('confirm', '📤 Confirm Submission', 
+      `Are you sure you want to submit your ${recordedBlob ? 'recorded' : 'uploaded'} audio as "${anonymousName}"?`,
+      () => performSubmit()
+    );
+  };
+
+  const performSubmit = async () => {
 
     setUploading(true);
     setMessage({ type: '', text: '' });
@@ -151,7 +156,6 @@ const RecordCough = () => {
       const formData = new FormData();
       
       if (recordedBlob) {
-        // Convert webm to wav for better compatibility
         const audioFile = new File([recordedBlob], 'cough_recording.webm', {
           type: 'audio/webm'
         });
@@ -168,20 +172,16 @@ const RecordCough = () => {
 
       const response = await recordingsAPI.upload(formData);
       
-      setMessage({ 
-        type: 'success', 
-        text: `Recording uploaded successfully! Recording ID: ${response.data.recording_id}` 
-      });
+      showModalDialog('success', '✅ Upload Successful', 
+        `Your recording has been uploaded successfully!\n\nRecording ID: ${response.data.recording_id}\n\nThank you for contributing to our research.`);
       
       // Reset form
       resetRecording();
       setAnonymousName('');
       
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: error.response?.data?.detail || 'Upload failed. Please try again.' 
-      });
+      showModalDialog('error', '❌ Upload Failed', 
+        error.response?.data?.detail || 'Upload failed. Please check your connection and try again.');
     } finally {
       setUploading(false);
     }
@@ -372,6 +372,50 @@ const RecordCough = () => {
           </Card>
         </Col>
       </Row>
+
+      {/* Professional Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton className={`bg-${modalConfig.type === 'success' ? 'success' : modalConfig.type === 'error' ? 'danger' : modalConfig.type === 'warning' ? 'warning' : 'primary'} text-white`}>
+          <Modal.Title>{modalConfig.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <div className="text-center">
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
+              {modalConfig.type === 'success' ? '✅' : 
+               modalConfig.type === 'error' ? '❌' : 
+               modalConfig.type === 'warning' ? '⚠️' : '📤'}
+            </div>
+            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
+              {modalConfig.message}
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          {modalConfig.type === 'confirm' ? (
+            <>
+              <Button variant="secondary" onClick={() => setShowModal(false)}>
+                Cancel
+              </Button>
+              <Button 
+                variant="primary" 
+                onClick={() => {
+                  setShowModal(false);
+                  if (modalConfig.onConfirm) modalConfig.onConfirm();
+                }}
+              >
+                Confirm
+              </Button>
+            </>
+          ) : (
+            <Button 
+              variant={modalConfig.type === 'success' ? 'success' : 'primary'} 
+              onClick={() => setShowModal(false)}
+            >
+              OK
+            </Button>
+          )}
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
