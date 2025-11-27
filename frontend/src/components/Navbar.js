@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar as BootstrapNavbar, Nav, Container, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,19 +34,19 @@ const Navbar = () => {
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
             <LinkContainer to="/">
-              <Nav.Link className="nav-link-advanced">Home</Nav.Link>
+              <Nav.Link className={`nav-link-advanced ${location.pathname === '/' ? 'active' : ''}`}>Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/record">
-              <Nav.Link className="nav-link-advanced">Record</Nav.Link>
+              <Nav.Link className={`nav-link-advanced ${location.pathname === '/record' ? 'active' : ''}`}>Record</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/recordings">
-              <Nav.Link className="nav-link-advanced">Browse</Nav.Link>
+              <Nav.Link className={`nav-link-advanced ${location.pathname === '/recordings' ? 'active' : ''}`}>Browse</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/statistics">
-              <Nav.Link className="nav-link-advanced">Analytics</Nav.Link>
+              <Nav.Link className={`nav-link-advanced ${location.pathname === '/statistics' ? 'active' : ''}`}>Analytics</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/about">
-              <Nav.Link className="nav-link-advanced">About</Nav.Link>
+              <Nav.Link className={`nav-link-advanced ${location.pathname === '/about' ? 'active' : ''}`}>About</Nav.Link>
             </LinkContainer>
           </Nav>
           
