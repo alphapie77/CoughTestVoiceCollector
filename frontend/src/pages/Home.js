@@ -24,39 +24,75 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero-section">
+      {/* Advanced Hero Section */}
+      <section className="hero-advanced">
+        <div className="hero-background">
+          <div className="hero-particles"></div>
+          <div className="hero-gradient"></div>
+        </div>
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={10}>
-              <div className="hero-content">
-                <h1 className="hero-title">
-                  🎤 CoughTest Research Platform
+              <div className="hero-content-advanced">
+                <div className="hero-badge">
+                  <span className="badge-icon">🔬</span>
+                  <span>Research Data Collection</span>
+                </div>
+                <h1 className="hero-title-advanced">
+                  <span className="title-gradient">RespiTrack</span>
+                  <span className="title-subtitle">Respiratory Health Research Platform</span>
                 </h1>
-                <p className="hero-subtitle">
-                  Contributing to Medical Research Through Audio Data Collection
+                <p className="hero-description-advanced">
+                  Contribute to groundbreaking research by sharing your cough audio data. 
+                  Help researchers develop better diagnostic tools for respiratory diseases through 
+                  anonymous, secure data collection for academic and clinical studies.
                 </p>
-                <p className="hero-description">
-                  Help advance respiratory health research by contributing your cough sounds. 
-                  Your anonymous participation helps build a comprehensive database for medical analysis.
-                </p>
-                <div className="hero-buttons">
+                <div className="hero-stats-mini">
+                  <div className="stat-mini">
+                    <span className="stat-number">{stats?.total_recordings || 0}</span>
+                    <span className="stat-label">Recordings</span>
+                  </div>
+                  <div className="stat-mini">
+                    <span className="stat-number">{stats?.total_duration ? Math.round(stats.total_duration / 60) : 0}</span>
+                    <span className="stat-label">Minutes</span>
+                  </div>
+                  <div className="stat-mini">
+                    <span className="stat-number">{(stats?.total_users || 0) + (stats?.total_anonymous || 0)}</span>
+                    <span className="stat-label">Contributors</span>
+                  </div>
+                </div>
+                <div className="hero-buttons-advanced">
                   <Button 
                     as={Link} 
                     to="/record" 
-                    size="lg" 
-                    className="btn-primary-custom me-3"
+                    className="btn-hero-primary"
                   >
-                    🎙️ Record Your Cough
+                    <span className="btn-icon">🎙️</span>
+                    <span>Contribute Data</span>
+                    <span className="btn-arrow">→</span>
                   </Button>
                   <Button 
                     as={Link} 
                     to="/about" 
-                    variant="outline-light" 
-                    size="lg"
+                    className="btn-hero-secondary"
                   >
-                    📖 Learn More
+                    <span className="btn-icon">📊</span>
+                    <span>Research Impact</span>
                   </Button>
+                </div>
+                <div className="hero-features">
+                  <div className="feature-item">
+                    <span className="feature-icon">🔒</span>
+                    <span>Anonymous & Secure</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">🔬</span>
+                    <span>Scientific Research</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">🎓</span>
+                    <span>Academic Purpose</span>
+                  </div>
                 </div>
               </div>
             </Col>

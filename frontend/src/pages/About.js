@@ -10,10 +10,10 @@ const About = () => {
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={8}>
-              <h1 className="display-4 mb-4">🔬 About CoughTest</h1>
+              <h1 className="display-4 mb-4">🔬 RespiTrack Research</h1>
               <p className="lead">
-                A medical research platform dedicated to advancing respiratory health 
-                through anonymous audio data collection and analysis.
+                A dedicated research platform for collecting anonymous respiratory 
+                audio data to advance diagnostics and academic research.
               </p>
             </Col>
           </Row>
@@ -25,30 +25,32 @@ const About = () => {
         <Container>
           <Row className="align-items-center">
             <Col lg={6}>
-              <h2 className="section-title">🎯 Our Mission</h2>
+              <h2 className="section-title">🎯 Research Mission</h2>
               <p className="section-text">
-                CoughTest aims to create the world's largest anonymous database of cough sounds 
-                for medical research. By collecting diverse audio samples, we help researchers 
-                develop better diagnostic tools and understand respiratory health patterns.
+                RespiTrack is building a comprehensive anonymous database of respiratory sounds 
+                for research and academic studies. Our platform enables researchers worldwide 
+                to access high-quality audio data for developing diagnostic algorithms and 
+                understanding respiratory disease patterns.
               </p>
               <p className="section-text">
-                Every contribution, no matter how small, helps advance medical science and 
-                potentially saves lives through improved healthcare technology.
+                This research contributes to thesis projects, peer-reviewed publications, and 
+                clinical studies that advance respiratory health and improve patient outcomes 
+                through data-driven insights.
               </p>
             </Col>
             <Col lg={6}>
               <div className="mission-stats">
                 <div className="stat-item">
                   <div className="stat-number">🎵</div>
-                  <div className="stat-text">High-quality audio samples</div>
+                  <div className="stat-text">Research-grade audio data</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">🔒</div>
-                  <div className="stat-text">Complete anonymity guaranteed</div>
+                  <div className="stat-number">🎓</div>
+                  <div className="stat-text">Academic research support</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">🌍</div>
-                  <div className="stat-text">Global research collaboration</div>
+                  <div className="stat-number">📊</div>
+                  <div className="stat-text">Data-driven medical insights</div>
                 </div>
               </div>
             </Col>
@@ -61,9 +63,9 @@ const About = () => {
         <Container>
           <Row className="justify-content-center mb-5">
             <Col lg={8} className="text-center">
-              <h2 className="section-title">🏥 How Your Contribution Helps</h2>
+              <h2 className="section-title">📊 Research Applications</h2>
               <p className="section-subtitle">
-                Your anonymous cough recording contributes to multiple areas of medical research
+                Your data contribution supports various medical research initiatives and academic studies
               </p>
             </Col>
           </Row>
@@ -73,10 +75,10 @@ const About = () => {
               <Card className="help-card h-100">
                 <Card.Body className="text-center p-4">
                   <div className="help-icon">🤖</div>
-                  <Card.Title>AI Diagnostics</Card.Title>
+                  <Card.Title>Diagnostic Research</Card.Title>
                   <Card.Text>
-                    Training machine learning models to detect respiratory conditions 
-                    from cough patterns and audio characteristics.
+                    Supporting research into automated diagnostic tools and machine learning 
+                    algorithms for respiratory condition detection and analysis.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -85,10 +87,10 @@ const About = () => {
               <Card className="help-card h-100">
                 <Card.Body className="text-center p-4">
                   <div className="help-icon">📊</div>
-                  <Card.Title>Pattern Analysis</Card.Title>
+                  <Card.Title>Clinical Studies</Card.Title>
                   <Card.Text>
-                    Identifying common patterns in cough sounds that correlate 
-                    with different respiratory health conditions.
+                    Enabling clinical research into respiratory sound patterns and 
+                    their correlation with various health conditions and diseases.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -97,10 +99,10 @@ const About = () => {
               <Card className="help-card h-100">
                 <Card.Body className="text-center p-4">
                   <div className="help-icon">🔬</div>
-                  <Card.Title>Medical Research</Card.Title>
+                  <Card.Title>Academic Research</Card.Title>
                   <Card.Text>
-                    Supporting academic research and thesis projects focused on 
-                    respiratory health and audio-based diagnostics.
+                    Providing data for thesis projects, dissertations, and peer-reviewed 
+                    research publications in respiratory health and medical acoustics.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -154,9 +156,10 @@ const About = () => {
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={8}>
-              <h2 className="mb-4">Ready to Make a Difference?</h2>
+              <h2 className="mb-4">Support Research</h2>
               <p className="lead mb-4">
-                Your contribution takes less than a minute but can help advance medical research for years to come.
+                Contribute to groundbreaking research with a simple 10-second recording. 
+                Your anonymous data helps researchers develop better solutions.
               </p>
               <Button 
                 as={Link} 
