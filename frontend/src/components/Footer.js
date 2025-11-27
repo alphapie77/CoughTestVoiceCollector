@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="footer-brand">
               <h5>🫁 RespiTrack Research</h5>
               <p className="footer-description">
-                Advancing respiratory health research through anonymous audio data collection 
+                Advancing audio analysis research through anonymous data collection 
                 for academic studies and research purposes.
               </p>
             </div>
@@ -31,7 +31,7 @@ const Footer = () => {
             <h6 className="footer-title">Data & Privacy</h6>
             <ul className="footer-links">
               <li><span>🔒 Anonymous Collection</span></li>
-              <li><span>🏥 Research Use Only</span></li>
+              <li><span>🔬 Research Use Only</span></li>
               <li><span>🎓 Academic Use</span></li>
               <li><span>📊 Open Research Data</span></li>
             </ul>

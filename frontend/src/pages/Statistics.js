@@ -123,7 +123,7 @@ const Statistics = () => {
               <div className="analytics-icon">📊</div>
               <h1 className="analytics-title">Research Analytics</h1>
               <p className="analytics-subtitle">
-                Real-time insights from our respiratory health research database
+                Real-time insights from our research database
               </p>
             </div>
             <div className="analytics-actions">
@@ -270,7 +270,7 @@ const Statistics = () => {
             <div className="impact-header">
               <h3 className="impact-title">🔬 Research Impact</h3>
               <p className="impact-description">
-                Your contributions are advancing respiratory health research and helping develop better diagnostic tools.
+                Your contributions are advancing research and helping develop better analysis tools.
               </p>
             </div>
             <div className="impact-grid">

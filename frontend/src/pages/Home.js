@@ -39,7 +39,7 @@ const Home = () => {
                 </h1>
                 <p className="hero-subtitle-focused">
                   Your 10-second anonymous cough recording helps researchers develop 
-                  AI analysis tools for scientific studies and data research.
+                  AI analysis tools for academic studies and data research.
                 </p>
                 <div className="hero-cta-focused">
                   <Button 
@@ -53,13 +53,13 @@ const Home = () => {
                   <div className="cta-benefits">
                     <span>🔒 100% Anonymous</span>
                     <span>⚡ Quick & Easy</span>
-                    <span>📊 Scientific Impact</span>
+                    <span>📊 Research Impact</span>
                   </div>
                 </div>
                 <div className="hero-proof">
                   <p className="proof-text">
                     Join <strong>{(stats?.total_users || 0) + (stats?.total_anonymous || 0)} contributors</strong> who have already 
-                    submitted <strong>{stats?.total_recordings || 0} recordings</strong> for scientific research
+                    submitted <strong>{stats?.total_recordings || 0} recordings</strong> for research purposes
                   </p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ const Home = () => {
             <Col lg={8} className="text-center">
               <h2 className="section-title">Research Impact</h2>
               <p className="section-subtitle">
-                Real-time statistics from our growing medical research database
+                Real-time statistics from our growing research database
               </p>
             </Col>
           </Row>
@@ -134,7 +134,7 @@ const Home = () => {
             <Col lg={8} className="text-center">
               <h2 className="section-title">How It Works</h2>
               <p className="section-subtitle">
-                Three simple steps to contribute to groundbreaking medical research
+                Three simple steps to contribute to groundbreaking research
               </p>
             </Col>
           </Row>
@@ -173,8 +173,8 @@ const Home = () => {
                   <div className="step-icon">🚀</div>
                   <h4 className="step-title">Submit & Impact</h4>
                   <p className="step-text">
-                    Your data joins our research database, helping scientists 
-                    develop better diagnostic tools.
+                    Your data joins our research database, helping researchers 
+                    develop better analysis tools.
                   </p>
                 </div>
               </div>
@@ -201,9 +201,9 @@ const Home = () => {
         <Container>
           <Row className="justify-content-center mb-5">
             <Col lg={8} className="text-center">
-              <h2 className="section-title">Your Impact on Medical Research</h2>
+              <h2 className="section-title">Your Impact on Research</h2>
               <p className="section-subtitle">
-                See how your contribution helps advance respiratory health research worldwide
+                See how your contribution helps advance audio analysis research worldwide
               </p>
             </Col>
           </Row>
@@ -217,8 +217,8 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="impact-content">
-                  <h4>AI Diagnostic Development</h4>
-                  <p>Your recordings train machine learning models that can detect respiratory conditions from audio patterns, enabling early diagnosis and better patient outcomes.</p>
+                  <h4>AI Analysis Development</h4>
+                  <p>Your recordings train machine learning models that can analyze audio patterns, enabling better data analysis and research insights.</p>
                 </div>
               </div>
             </Col>
@@ -230,8 +230,8 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="impact-content">
-                  <h4>Clinical Research Support</h4>
-                  <p>Researchers use this data for peer-reviewed studies, thesis projects, and clinical trials that advance our understanding of respiratory diseases.</p>
+                  <h4>Academic Research Support</h4>
+                  <p>Researchers use this data for peer-reviewed studies, thesis projects, and academic research that advance our understanding of audio analysis.</p>
                 </div>
               </div>
             </Col>
@@ -248,8 +248,8 @@ const Home = () => {
                 <div className="cta-content">
                   <h3 className="cta-title">Ready to Make a Difference?</h3>
                   <p className="cta-description">
-                    Join {(stats?.total_users || 0) + (stats?.total_anonymous || 0)} contributors who have already helped advance medical research. 
-                    Your 10-second recording could help save lives.
+                    Join {(stats?.total_users || 0) + (stats?.total_anonymous || 0)} contributors who have already helped advance research. 
+                    Your 10-second recording contributes to valuable data analysis.
                   </p>
                   <div className="cta-action">
                     <Button 
@@ -266,7 +266,7 @@ const Home = () => {
                   <div className="cta-assurance">
                     <span className="assurance-item">🔒 100% Anonymous</span>
                     <span className="assurance-item">⚡ Takes 30 Seconds</span>
-                    <span className="assurance-item">📊 Scientific Impact</span>
+                    <span className="assurance-item">📊 Research Impact</span>
                   </div>
                 </div>
               </div>

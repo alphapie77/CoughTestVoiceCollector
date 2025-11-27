@@ -12,8 +12,8 @@ const About = () => {
             <Col lg={8}>
               <h1 className="display-4 mb-4">🔬 RespiTrack Research</h1>
               <p className="lead">
-                A dedicated research platform for collecting anonymous respiratory 
-                audio data to advance diagnostics and academic research.
+                A dedicated research platform for collecting anonymous audio 
+                data to advance analysis and academic research.
               </p>
             </Col>
           </Row>
@@ -27,14 +27,14 @@ const About = () => {
             <Col lg={6}>
               <h2 className="section-title">🎯 Research Mission</h2>
               <p className="section-text">
-                RespiTrack is building a comprehensive anonymous database of respiratory sounds 
+                RespiTrack is building a comprehensive anonymous database of audio sounds 
                 for research and academic studies. Our platform enables researchers worldwide 
-                to access high-quality audio data for developing diagnostic algorithms and 
-                understanding respiratory disease patterns.
+                to access high-quality audio data for developing analysis algorithms and 
+                understanding audio patterns.
               </p>
               <p className="section-text">
                 This research contributes to thesis projects, peer-reviewed publications, and 
-                clinical studies that advance respiratory health and improve patient outcomes 
+                academic studies that advance audio analysis and improve research outcomes 
                 through data-driven insights.
               </p>
             </Col>
@@ -50,7 +50,7 @@ const About = () => {
                 </div>
                 <div className="stat-item">
                   <div className="stat-number">📊</div>
-                  <div className="stat-text">Data-driven medical insights</div>
+                  <div className="stat-text">Data-driven research insights</div>
                 </div>
               </div>
             </Col>
@@ -65,7 +65,7 @@ const About = () => {
             <Col lg={8} className="text-center">
               <h2 className="section-title">📊 Research Applications</h2>
               <p className="section-subtitle">
-                Your data contribution supports various medical research initiatives and academic studies
+                Your data contribution supports various research initiatives and academic studies
               </p>
             </Col>
           </Row>
@@ -75,10 +75,10 @@ const About = () => {
               <Card className="help-card h-100">
                 <Card.Body className="text-center p-4">
                   <div className="help-icon">🤖</div>
-                  <Card.Title>Diagnostic Research</Card.Title>
+                  <Card.Title>Analysis Research</Card.Title>
                   <Card.Text>
-                    Supporting research into automated diagnostic tools and machine learning 
-                    algorithms for respiratory condition detection and analysis.
+                    Supporting research into automated analysis tools and machine learning 
+                    algorithms for audio pattern detection and analysis.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -87,10 +87,10 @@ const About = () => {
               <Card className="help-card h-100">
                 <Card.Body className="text-center p-4">
                   <div className="help-icon">📊</div>
-                  <Card.Title>Clinical Studies</Card.Title>
+                  <Card.Title>Data Studies</Card.Title>
                   <Card.Text>
-                    Enabling clinical research into respiratory sound patterns and 
-                    their correlation with various health conditions and diseases.
+                    Enabling research into audio sound patterns and 
+                    their correlation with various data characteristics and features.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -102,7 +102,7 @@ const About = () => {
                   <Card.Title>Academic Research</Card.Title>
                   <Card.Text>
                     Providing data for thesis projects, dissertations, and peer-reviewed 
-                    research publications in respiratory health and medical acoustics.
+                    research publications in audio analysis and computational acoustics.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -133,7 +133,7 @@ const About = () => {
                       <h5>❌ What We DON'T Collect:</h5>
                       <ul>
                         <li>Personal identification information</li>
-                        <li>Medical history or health data</li>
+                        <li>Personal history or health data</li>
                         <li>Location or demographic data</li>
                         <li>Any personally identifiable content</li>
                       </ul>
@@ -141,7 +141,7 @@ const About = () => {
                   </Row>
                   <div className="text-center mt-4">
                     <p className="mb-0">
-                      <strong>All data is used exclusively for medical research purposes.</strong>
+                      <strong>All data is used exclusively for research purposes.</strong>
                     </p>
                   </div>
                 </Card.Body>

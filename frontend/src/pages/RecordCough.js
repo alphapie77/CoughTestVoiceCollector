@@ -197,9 +197,9 @@ const RecordCough = () => {
             <Card.Body>
               <div className="record-header">
                 <div className="record-icon-large">🎤</div>
-                <h2 className="record-title">Contribute to Medical Research</h2>
+                <h2 className="record-title">Contribute to Research</h2>
                 <p className="record-subtitle">
-                  Your anonymous cough recording helps researchers develop AI diagnostic tools
+                  Your anonymous cough recording helps researchers develop AI analysis tools
                 </p>
                 <div className="record-progress-indicator">
                   <div className="progress-step active">

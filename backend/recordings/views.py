@@ -297,7 +297,7 @@ To analyze:
 2. Audio files are in audio_files/ folder
 3. Match 'Audio File Name' column with files in audio_files/
 
-Generated from CoughTest Medical Research Platform
+Generated from CoughTest Research Platform
 """
         zip_file.writestr('README.txt', readme_content)
     
