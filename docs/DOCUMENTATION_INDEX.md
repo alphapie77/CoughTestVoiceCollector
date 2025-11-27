@@ -127,6 +127,16 @@ This comprehensive documentation suite covers all aspects of the CoughTest platf
 - Security assessment results
 - User acceptance testing
 
+### 7. Additional Documentation
+
+#### 📖 [Documentation README](README.md)
+**Audience**: All Users  
+**Purpose**: Documentation navigation guide  
+
+#### 💻 [PowerShell Commands](POWERSHELL_COMMANDS.md)
+**Audience**: Windows Users  
+**Purpose**: Windows PowerShell troubleshooting
+
 ---
 
 ## 📖 Reading Guide by Role
@@ -393,6 +403,6 @@ Innovation Features:
 
 **Documentation Suite Version**: 1.0  
 **Last Updated**: November 2024  
-**Total Documents**: 10 comprehensive guides  
+**Total Documents**: 13 comprehensive guides  
 **Total Pages**: 200+ pages of documentation  
 **Compliance**: IEEE Standards, Academic Guidelines, Industry Best Practices
