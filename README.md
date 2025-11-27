@@ -21,7 +21,32 @@ A comprehensive fullstack application for collecting cough audio data for medica
 
 ## 🚀 Quick Start
 
-### Backend Setup
+### ⚡ Automated Setup (Recommended)
+```bash
+# Complete project setup
+setup.bat
+
+# Start development servers
+start_servers.bat
+```
+
+### 🔧 Build Scripts
+```bash
+# Initial setup (install dependencies, create admin user)
+setup.bat
+
+# Start development servers
+start_servers.bat
+
+# Build for production
+build_production.bat
+
+# Test application
+test_application.bat
+```
+
+### 🛠️ Manual Setup
+#### Backend Setup
 ```bash
 cd backend
 pip install -r requirements.txt
@@ -30,7 +55,7 @@ python manage.py createsuperuser  # optional
 python manage.py runserver
 ```
 
-### Frontend Setup
+#### Frontend Setup
 ```bash
 cd frontend
 npm install
@@ -40,7 +65,7 @@ npm start
 **Access URLs:**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000/api
-- Admin Panel: http://localhost:8000/admin
+- Admin Panel: http://localhost:8000/admin (admin/admin123)
 
 ## 📊 Data Collection
 
