@@ -115,42 +115,37 @@ const Statistics = () => {
 
   return (
     <Container className="py-5" style={{ marginTop: '80px' }}>
-      <Row className="mb-4">
+      {/* Analytics Header */}
+      <Row className="mb-5">
         <Col>
-          <Card className="card-custom">
-            <Card.Body className="p-4">
-              <Row className="align-items-center">
-                <Col md={8}>
-                  <h2>📊 Platform Statistics</h2>
-                  <p className="text-muted mb-0">
-                    Comprehensive analytics of the CoughTest research database
-                  </p>
-                </Col>
-                <Col md={4} className="text-end">
-                  <div className="d-flex gap-2 justify-content-end">
-                    <Button 
-                      variant="outline-primary"
-                      onClick={handleExportCSV}
-                    >
-                      📥 CSV
-                    </Button>
-                    <Button 
-                      variant="outline-success"
-                      onClick={handleExportHTML}
-                    >
-                      🎵 HTML
-                    </Button>
-                    <Button 
-                      variant="outline-warning"
-                      onClick={handleExportZIP}
-                    >
-                      📦 ZIP (CSV + Audio)
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
+          <div className="analytics-header">
+            <div className="analytics-hero">
+              <div className="analytics-icon">📊</div>
+              <h1 className="analytics-title">Research Analytics</h1>
+              <p className="analytics-subtitle">
+                Real-time insights from our respiratory health research database
+              </p>
+            </div>
+            <div className="analytics-actions">
+              <div className="export-section">
+                <h6 className="export-title">📤 Export Data</h6>
+                <div className="export-buttons">
+                  <button className="export-btn csv" onClick={handleExportCSV}>
+                    <span className="export-icon">📊</span>
+                    <span className="export-text">CSV</span>
+                  </button>
+                  <button className="export-btn html" onClick={handleExportHTML}>
+                    <span className="export-icon">🎧</span>
+                    <span className="export-text">HTML</span>
+                  </button>
+                  <button className="export-btn zip" onClick={handleExportZIP}>
+                    <span className="export-icon">📦</span>
+                    <span className="export-text">ZIP</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </Col>
       </Row>
 
@@ -160,138 +155,145 @@ const Statistics = () => {
         </Alert>
       )}
 
-      {/* Main Statistics */}
-      <Row className="g-4 mb-4">
-        <Col md={3}>
-          <div className="stats-card">
-            <div className="stats-number">{stats?.total_recordings || 0}</div>
-            <div className="stats-label">Total Recordings</div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div className="stats-card">
-            <div className="stats-number">{stats?.total_users || 0}</div>
-            <div className="stats-label">Registered Users</div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div className="stats-card">
-            <div className="stats-number">{stats?.total_anonymous || 0}</div>
-            <div className="stats-label">Anonymous Users</div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div className="stats-card">
-            <div className="stats-number">{stats?.total_size_mb?.toFixed(1) || 0}</div>
-            <div className="stats-label">Total Size (MB)</div>
-          </div>
-        </Col>
-      </Row>
-
-      {/* Duration Statistics */}
-      <Row className="g-4 mb-4">
-        <Col md={6}>
-          <div className="stats-card">
-            <div className="stats-number">
-              {stats?.total_duration ? `${(stats.total_duration / 60).toFixed(1)}` : '0'}
+      {/* Key Metrics */}
+      <Row className="g-4 mb-5">
+        <Col lg={3} md={6}>
+          <div className="metric-card primary">
+            <div className="metric-icon">🎵</div>
+            <div className="metric-content">
+              <div className="metric-number">{stats?.total_recordings || 0}</div>
+              <div className="metric-label">Total Recordings</div>
+              <div className="metric-trend">+{stats?.total_recordings || 0} samples</div>
             </div>
-            <div className="stats-label">Total Duration (Minutes)</div>
+          </div>
+        </Col>
+        <Col lg={3} md={6}>
+          <div className="metric-card success">
+            <div className="metric-icon">👥</div>
+            <div className="metric-content">
+              <div className="metric-number">{(stats?.total_users || 0) + (stats?.total_anonymous || 0)}</div>
+              <div className="metric-label">Contributors</div>
+              <div className="metric-trend">{stats?.total_users || 0} registered, {stats?.total_anonymous || 0} anonymous</div>
+            </div>
+          </div>
+        </Col>
+        <Col lg={3} md={6}>
+          <div className="metric-card warning">
+            <div className="metric-icon">⏱️</div>
+            <div className="metric-content">
+              <div className="metric-number">{stats?.total_duration ? `${(stats.total_duration / 60).toFixed(1)}` : '0'}</div>
+              <div className="metric-label">Minutes of Audio</div>
+              <div className="metric-trend">Avg: {stats?.avg_duration?.toFixed(1) || 0}s per recording</div>
+            </div>
+          </div>
+        </Col>
+        <Col lg={3} md={6}>
+          <div className="metric-card info">
+            <div className="metric-icon">💾</div>
+            <div className="metric-content">
+              <div className="metric-number">{stats?.total_size_mb?.toFixed(1) || 0}</div>
+              <div className="metric-label">MB of Data</div>
+              <div className="metric-trend">Research database size</div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      {/* Data Breakdown */}
+      <Row className="g-4 mb-5">
+        <Col md={6}>
+          <div className="breakdown-card">
+            <div className="breakdown-header">
+              <h4 className="breakdown-title">🎙️ Recording Methods</h4>
+              <p className="breakdown-subtitle">How data was collected</p>
+            </div>
+            <div className="breakdown-content">
+              {stats?.recordings_by_method && Object.entries(stats.recordings_by_method).map(([method, count]) => {
+                const percentage = ((count / (stats?.total_recordings || 1)) * 100).toFixed(1);
+                return (
+                  <div key={method} className="breakdown-item">
+                    <div className="breakdown-info">
+                      <div className="breakdown-method">
+                        <span className="method-icon">{method === 'browser' ? '🎙️' : '📁'}</span>
+                        <span className="method-name">{method === 'browser' ? 'Browser Recording' : 'File Upload'}</span>
+                      </div>
+                      <div className="breakdown-stats">
+                        <span className="count">{count}</span>
+                        <span className="percentage">({percentage}%)</span>
+                      </div>
+                    </div>
+                    <div className="breakdown-bar">
+                      <div className="bar-fill" style={{width: `${percentage}%`}}></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Col>
         <Col md={6}>
-          <div className="stats-card">
-            <div className="stats-number">{stats?.avg_duration?.toFixed(1) || 0}</div>
-            <div className="stats-label">Average Duration (Seconds)</div>
-          </div>
-        </Col>
-      </Row>
-
-      {/* Recording Methods */}
-      <Row className="mb-4">
-        <Col>
-          <Card className="card-custom">
-            <Card.Header className="bg-primary text-white">
-              <h5 className="mb-0">🎙️ Recording Methods</h5>
-            </Card.Header>
-            <Card.Body>
-              <Row className="g-4">
-                {stats?.recordings_by_method && Object.entries(stats.recordings_by_method).map(([method, count]) => (
-                  <Col md={6} key={method}>
-                    <div className="text-center">
-                      <div className="display-6 text-primary mb-2">
-                        {method === 'browser' ? '🎙️' : '📁'}
+          <div className="breakdown-card">
+            <div className="breakdown-header">
+              <h4 className="breakdown-title">📁 File Formats</h4>
+              <p className="breakdown-subtitle">Audio format distribution</p>
+            </div>
+            <div className="breakdown-content">
+              {stats?.recordings_by_format && Object.entries(stats.recordings_by_format).map(([format, count]) => {
+                const percentage = ((count / (stats?.total_recordings || 1)) * 100).toFixed(1);
+                return (
+                  <div key={format} className="breakdown-item">
+                    <div className="breakdown-info">
+                      <div className="breakdown-method">
+                        <span className="method-icon">🎵</span>
+                        <span className="method-name">{format.toUpperCase()} Files</span>
                       </div>
-                      <h4>{count}</h4>
-                      <p className="text-muted mb-0">
-                        {method === 'browser' ? 'Browser Recordings' : 'File Uploads'}
-                      </p>
+                      <div className="breakdown-stats">
+                        <span className="count">{count}</span>
+                        <span className="percentage">({percentage}%)</span>
+                      </div>
                     </div>
-                  </Col>
-                ))}
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-
-      {/* File Formats */}
-      <Row className="mb-4">
-        <Col>
-          <Card className="card-custom">
-            <Card.Header className="bg-success text-white">
-              <h5 className="mb-0">📁 File Formats</h5>
-            </Card.Header>
-            <Card.Body>
-              <Row className="g-4">
-                {stats?.recordings_by_format && Object.entries(stats.recordings_by_format).map(([format, count]) => (
-                  <Col md={4} key={format}>
-                    <div className="text-center">
-                      <div className="display-6 text-success mb-2">🎵</div>
-                      <h4>{count}</h4>
-                      <p className="text-muted mb-0">
-                        {format.toUpperCase()} Files
-                      </p>
+                    <div className="breakdown-bar">
+                      <div className="bar-fill format" style={{width: `${percentage}%`}}></div>
                     </div>
-                  </Col>
-                ))}
-              </Row>
-            </Card.Body>
-          </Card>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </Col>
       </Row>
 
       {/* Research Impact */}
       <Row>
         <Col>
-          <Card className="card-custom">
-            <Card.Body className="p-5 text-center">
-              <h3 className="mb-3">🔬 Research Impact</h3>
-              <p className="text-muted mb-4">
-                Your contributions are helping advance medical research in respiratory health analysis. 
-                This data will be used for developing better diagnostic tools and understanding cough patterns.
+          <div className="impact-section">
+            <div className="impact-header">
+              <h3 className="impact-title">🔬 Research Impact</h3>
+              <p className="impact-description">
+                Your contributions are advancing respiratory health research and helping develop better diagnostic tools.
               </p>
-              <div className="row g-3">
-                <div className="col-md-4">
-                  <div className="border rounded p-3">
-                    <h5 className="text-primary">Data Quality</h5>
-                    <p className="small mb-0">High-quality audio samples with comprehensive metadata</p>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="border rounded p-3">
-                    <h5 className="text-success">Privacy Protected</h5>
-                    <p className="small mb-0">Anonymous and secure data collection methods</p>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="border rounded p-3">
-                    <h5 className="text-info">Research Ready</h5>
-                    <p className="small mb-0">Structured data format suitable for analysis</p>
-                  </div>
-                </div>
+            </div>
+            <div className="impact-grid">
+              <div className="impact-card quality">
+                <div className="impact-icon">🎯</div>
+                <h5 className="impact-card-title">Data Quality</h5>
+                <p className="impact-card-text">High-quality audio samples with comprehensive metadata for accurate analysis</p>
+                <div className="impact-metric">{stats?.total_recordings || 0} samples</div>
               </div>
-            </Card.Body>
-          </Card>
+              <div className="impact-card privacy">
+                <div className="impact-icon">🔒</div>
+                <h5 className="impact-card-title">Privacy Protected</h5>
+                <p className="impact-card-text">Anonymous and secure data collection ensuring participant confidentiality</p>
+                <div className="impact-metric">{stats?.total_anonymous || 0} anonymous</div>
+              </div>
+              <div className="impact-card research">
+                <div className="impact-icon">📊</div>
+                <h5 className="impact-card-title">Research Ready</h5>
+                <p className="impact-card-text">Structured data format optimized for machine learning and statistical analysis</p>
+                <div className="impact-metric">{stats?.total_size_mb?.toFixed(1) || 0} MB</div>
+              </div>
+            </div>
+          </div>
         </Col>
       </Row>
 

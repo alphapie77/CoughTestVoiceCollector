@@ -14,6 +14,7 @@ const ViewRecordings = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '' });
+  const [audioDurations, setAudioDurations] = useState({});
 
   useEffect(() => {
     fetchRecordings();
@@ -182,7 +183,12 @@ const ViewRecordings = () => {
                   <div className="recording-specs">
                     <div className="spec-item">
                       <span className="spec-icon">⏱️</span>
-                      <span className="spec-value">{recording.duration ? `${recording.duration.toFixed(1)}s` : 'N/A'}</span>
+                      <span className="spec-value">
+                        {audioDurations[recording.recording_id] 
+                          ? `${audioDurations[recording.recording_id].toFixed(1)}s` 
+                          : recording.duration ? `${recording.duration.toFixed(1)}s` : 'N/A'
+                        }
+                      </span>
                     </div>
                     <div className="spec-item">
                       <span className="spec-icon">💾</span>
@@ -197,7 +203,19 @@ const ViewRecordings = () => {
                   {recording.audio_file_url && (
                     <div className="recording-audio">
                       <div className="audio-label">🎧 Audio Playback</div>
-                      <audio controls className="modern-audio-player">
+                      <audio 
+                        controls 
+                        className="modern-audio-player"
+                        onLoadedMetadata={(e) => {
+                          const actualDuration = e.target.duration;
+                          if (actualDuration && !isNaN(actualDuration)) {
+                            setAudioDurations(prev => ({
+                              ...prev,
+                              [recording.recording_id]: actualDuration
+                            }));
+                          }
+                        }}
+                      >
                         <source src={recording.audio_file_url} />
                         Your browser does not support audio playback.
                       </audio>
