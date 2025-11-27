@@ -33,66 +33,34 @@ const Home = () => {
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={10}>
-              <div className="hero-content-advanced">
-                <div className="hero-badge">
-                  <span className="badge-icon">🔬</span>
-                  <span>Research Data Collection</span>
-                </div>
-                <h1 className="hero-title-advanced">
-                  <span className="title-gradient">RespiTrack</span>
-                  <span className="title-subtitle">Respiratory Health Research Platform</span>
+              <div className="hero-content-focused">
+                <h1 className="hero-title-focused">
+                  Contribute to Scientific Research
                 </h1>
-                <p className="hero-description-advanced">
-                  Contribute to groundbreaking research by sharing your cough audio data. 
-                  Help researchers develop better diagnostic tools for respiratory diseases through 
-                  anonymous, secure data collection for academic and clinical studies.
+                <p className="hero-subtitle-focused">
+                  Your 10-second anonymous cough recording helps researchers develop 
+                  AI analysis tools for scientific studies and data research.
                 </p>
-                <div className="hero-stats-mini">
-                  <div className="stat-mini">
-                    <span className="stat-number">{stats?.total_recordings || 0}</span>
-                    <span className="stat-label">Recordings</span>
-                  </div>
-                  <div className="stat-mini">
-                    <span className="stat-number">{stats?.total_duration ? Math.round(stats.total_duration / 60) : 0}</span>
-                    <span className="stat-label">Minutes</span>
-                  </div>
-                  <div className="stat-mini">
-                    <span className="stat-number">{(stats?.total_users || 0) + (stats?.total_anonymous || 0)}</span>
-                    <span className="stat-label">Contributors</span>
-                  </div>
-                </div>
-                <div className="hero-buttons-advanced">
+                <div className="hero-cta-focused">
                   <Button 
                     as={Link} 
                     to="/record" 
-                    className="btn-hero-primary"
+                    className="btn-cta-focused"
+                    size="lg"
                   >
-                    <span className="btn-icon">🎙️</span>
-                    <span>Contribute Data</span>
-                    <span className="btn-arrow">→</span>
+                    🎙️ Record Now - Takes 30 Seconds
                   </Button>
-                  <Button 
-                    as={Link} 
-                    to="/about" 
-                    className="btn-hero-secondary"
-                  >
-                    <span className="btn-icon">📊</span>
-                    <span>Research Impact</span>
-                  </Button>
+                  <div className="cta-benefits">
+                    <span>🔒 100% Anonymous</span>
+                    <span>⚡ Quick & Easy</span>
+                    <span>📊 Scientific Impact</span>
+                  </div>
                 </div>
-                <div className="hero-features">
-                  <div className="feature-item">
-                    <span className="feature-icon">🔒</span>
-                    <span>Anonymous & Secure</span>
-                  </div>
-                  <div className="feature-item">
-                    <span className="feature-icon">🔬</span>
-                    <span>Scientific Research</span>
-                  </div>
-                  <div className="feature-item">
-                    <span className="feature-icon">🎓</span>
-                    <span>Academic Purpose</span>
-                  </div>
+                <div className="hero-proof">
+                  <p className="proof-text">
+                    Join <strong>{(stats?.total_users || 0) + (stats?.total_anonymous || 0)} contributors</strong> who have already 
+                    submitted <strong>{stats?.total_recordings || 0} recordings</strong> for scientific research
+                  </p>
                 </div>
               </div>
             </Col>
@@ -159,97 +127,149 @@ const Home = () => {
         </Container>
       </section>
 
-      {/* Features Section */}
-      <section className="features-section py-5 bg-light">
+      {/* How It Works Section */}
+      <section className="how-it-works-section py-5">
         <Container>
           <Row className="justify-content-center mb-5">
             <Col lg={8} className="text-center">
               <h2 className="section-title">How It Works</h2>
               <p className="section-subtitle">
-                Simple, secure, and anonymous contribution to medical research
+                Three simple steps to contribute to groundbreaking medical research
               </p>
             </Col>
           </Row>
 
           <Row className="g-4">
             <Col lg={4} md={6}>
-              <Card className="feature-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="feature-icon">🎙️</div>
-                  <Card.Title className="feature-title">Record or Upload</Card.Title>
-                  <Card.Text className="feature-text">
-                    Record your cough directly in the browser for 10 seconds or upload 
-                    an existing audio file (WAV, MP3, WebM formats supported).
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="step-card">
+                <div className="step-number">1</div>
+                <div className="step-content">
+                  <div className="step-icon">🎙️</div>
+                  <h4 className="step-title">Record Your Cough</h4>
+                  <p className="step-text">
+                    Click record and cough naturally for 10 seconds. Or upload 
+                    an existing audio file if you prefer.
+                  </p>
+                </div>
+              </div>
             </Col>
             <Col lg={4} md={6}>
-              <Card className="feature-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="feature-icon">🔒</div>
-                  <Card.Title className="feature-title">Anonymous & Secure</Card.Title>
-                  <Card.Text className="feature-text">
-                    Your privacy is protected. All submissions are anonymous with 
-                    secure storage and no personal information required.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="step-card">
+                <div className="step-number">2</div>
+                <div className="step-content">
+                  <div className="step-icon">✏️</div>
+                  <h4 className="step-title">Add Anonymous Name</h4>
+                  <p className="step-text">
+                    Choose any name for identification. No personal information 
+                    is collected or stored.
+                  </p>
+                </div>
+              </div>
             </Col>
             <Col lg={4} md={6}>
-              <Card className="feature-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="feature-icon">🔬</div>
-                  <Card.Title className="feature-title">Research Impact</Card.Title>
-                  <Card.Text className="feature-text">
-                    Contribute to medical research and help develop better 
-                    diagnostic tools for respiratory health analysis.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="step-card">
+                <div className="step-number">3</div>
+                <div className="step-content">
+                  <div className="step-icon">🚀</div>
+                  <h4 className="step-title">Submit & Impact</h4>
+                  <p className="step-text">
+                    Your data joins our research database, helping scientists 
+                    develop better diagnostic tools.
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          
+          <Row className="justify-content-center mt-5">
+            <Col lg={6} className="text-center">
+              <Button 
+                as={Link} 
+                to="/record" 
+                size="lg"
+                className="btn-primary-custom"
+              >
+                🎤 Start Contributing Now
+              </Button>
             </Col>
           </Row>
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="cta-section py-5">
+      {/* Research Impact Section */}
+      <section className="research-impact-section py-5 bg-light">
+        <Container>
+          <Row className="justify-content-center mb-5">
+            <Col lg={8} className="text-center">
+              <h2 className="section-title">Your Impact on Medical Research</h2>
+              <p className="section-subtitle">
+                See how your contribution helps advance respiratory health research worldwide
+              </p>
+            </Col>
+          </Row>
+          
+          <Row className="g-4">
+            <Col lg={6}>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">🤖</span>
+                  </div>
+                </div>
+                <div className="impact-content">
+                  <h4>AI Diagnostic Development</h4>
+                  <p>Your recordings train machine learning models that can detect respiratory conditions from audio patterns, enabling early diagnosis and better patient outcomes.</p>
+                </div>
+              </div>
+            </Col>
+            <Col lg={6}>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">🏥</span>
+                  </div>
+                </div>
+                <div className="impact-content">
+                  <h4>Clinical Research Support</h4>
+                  <p>Researchers use this data for peer-reviewed studies, thesis projects, and clinical trials that advance our understanding of respiratory diseases.</p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      
+      {/* Final CTA Section */}
+      <section className="final-cta-section py-5">
         <Container>
           <Row className="justify-content-center">
-            <Col lg={8}>
-              <Card className="cta-card">
-                <Card.Body className="text-center p-5">
-                  <h3 className="cta-title">Ready to Contribute?</h3>
-                  <p className="cta-text">
-                    Join our research community and help advance medical science. 
-                    Your contribution takes less than a minute and helps researchers worldwide.
+            <Col lg={10}>
+              <div className="final-cta-card">
+                <div className="cta-content">
+                  <h3 className="cta-title">Ready to Make a Difference?</h3>
+                  <p className="cta-description">
+                    Join {(stats?.total_users || 0) + (stats?.total_anonymous || 0)} contributors who have already helped advance medical research. 
+                    Your 10-second recording could help save lives.
                   </p>
-                  <div className="cta-badges mb-4">
-                    <Badge bg="success" className="me-2">✅ Anonymous</Badge>
-                    <Badge bg="info" className="me-2">🔒 Secure</Badge>
-                    <Badge bg="warning" className="me-2">⚡ Quick</Badge>
-                    <Badge bg="primary">🔬 Impactful</Badge>
-                  </div>
-                  <div className="cta-buttons">
+                  <div className="cta-action">
                     <Button 
                       as={Link} 
                       to="/record" 
-                      className="btn-primary-custom me-3"
+                      className="btn-cta-primary"
                       size="lg"
                     >
-                      🎤 Start Recording Now
-                    </Button>
-                    <Button 
-                      as={Link} 
-                      to="/recordings" 
-                      variant="outline-primary"
-                      size="lg"
-                    >
-                      📊 Browse Recordings
+                      <span className="cta-btn-icon">🎙️</span>
+                      <span>Contribute Your Voice</span>
+                      <span className="cta-btn-arrow">→</span>
                     </Button>
                   </div>
-                </Card.Body>
-              </Card>
+                  <div className="cta-assurance">
+                    <span className="assurance-item">🔒 100% Anonymous</span>
+                    <span className="assurance-item">⚡ Takes 30 Seconds</span>
+                    <span className="assurance-item">📊 Scientific Impact</span>
+                  </div>
+                </div>
+              </div>
             </Col>
           </Row>
         </Container>

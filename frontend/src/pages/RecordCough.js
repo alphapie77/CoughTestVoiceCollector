@@ -195,11 +195,26 @@ const RecordCough = () => {
         <Col lg={8}>
           <Card className="recording-container">
             <Card.Body>
-              <div className="text-center mb-4">
-                <h2>🎤 Record Your Cough</h2>
-                <p className="text-muted">
-                  Record for exactly 10 seconds or upload an existing audio file
+              <div className="record-header">
+                <div className="record-icon-large">🎤</div>
+                <h2 className="record-title">Contribute to Medical Research</h2>
+                <p className="record-subtitle">
+                  Your anonymous cough recording helps researchers develop AI diagnostic tools
                 </p>
+                <div className="record-progress-indicator">
+                  <div className="progress-step active">
+                    <span className="step-number">1</span>
+                    <span className="step-label">Record Audio</span>
+                  </div>
+                  <div className="progress-step">
+                    <span className="step-number">2</span>
+                    <span className="step-label">Add Name</span>
+                  </div>
+                  <div className="progress-step">
+                    <span className="step-number">3</span>
+                    <span className="step-label">Submit</span>
+                  </div>
+                </div>
               </div>
 
               {message.text && (
@@ -209,29 +224,37 @@ const RecordCough = () => {
               )}
 
               {/* Recording Method Selection */}
-              <Form.Group className="mb-4">
-                <Form.Label>Choose Recording Method:</Form.Label>
-                <div className="d-flex gap-3">
-                  <Form.Check
-                    type="radio"
-                    id="browser-record"
-                    label="🎙️ Record in Browser"
-                    name="recordingMethod"
-                    value="browser"
-                    checked={recordingMethod === 'browser'}
-                    onChange={(e) => setRecordingMethod(e.target.value)}
-                  />
-                  <Form.Check
-                    type="radio"
-                    id="file-upload"
-                    label="📁 Upload File"
-                    name="recordingMethod"
-                    value="upload"
-                    checked={recordingMethod === 'upload'}
-                    onChange={(e) => setRecordingMethod(e.target.value)}
-                  />
+              <div className="method-selection mb-4">
+                <h5 className="method-title">Choose Your Method</h5>
+                <div className="method-options">
+                  <div 
+                    className={`method-card ${recordingMethod === 'browser' ? 'active' : ''}`}
+                    onClick={() => setRecordingMethod('browser')}
+                  >
+                    <div className="method-icon">🎙️</div>
+                    <div className="method-content">
+                      <h6>Record in Browser</h6>
+                      <p>Quick 10-second recording using your microphone</p>
+                    </div>
+                    <div className="method-check">
+                      {recordingMethod === 'browser' && <span>✓</span>}
+                    </div>
+                  </div>
+                  <div 
+                    className={`method-card ${recordingMethod === 'upload' ? 'active' : ''}`}
+                    onClick={() => setRecordingMethod('upload')}
+                  >
+                    <div className="method-icon">📁</div>
+                    <div className="method-content">
+                      <h6>Upload Audio File</h6>
+                      <p>Upload an existing WAV, MP3, or WebM file</p>
+                    </div>
+                    <div className="method-check">
+                      {recordingMethod === 'upload' && <span>✓</span>}
+                    </div>
+                  </div>
                 </div>
-              </Form.Group>
+              </div>
 
               {recordingMethod === 'browser' ? (
                 /* Browser Recording Section */
