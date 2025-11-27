@@ -69,232 +69,208 @@ const ViewRecordings = () => {
     <Container className="py-5" style={{ marginTop: '80px' }}>
       <Row className="mb-4">
         <Col>
-          <Card className="card-custom">
-            <Card.Body className="p-4">
-              <h2>📊 All Recordings</h2>
-              <p className="text-muted mb-0">
-                Browse all cough recordings contributed to the research database
-              </p>
-            </Card.Body>
-          </Card>
+          <div className="browse-header">
+            <h2>🎵 Browse Recordings</h2>
+            <p className="mb-0">
+              Explore all cough recordings contributed to our research database
+            </p>
+          </div>
         </Col>
       </Row>
 
       {/* Filters */}
       <Row className="mb-4">
         <Col>
-          <Card className="card-custom">
-            <Card.Body>
-              <h5 className="mb-3">🔍 Filters</h5>
-              <Row className="g-3">
-                <Col md={4}>
-                  <Form.Group>
-                    <Form.Label>Search</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="search"
-                      value={filters.search}
-                      onChange={handleFilterChange}
-                      placeholder="Search by username or filename"
-                      className="form-control-custom"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={3}>
-                  <Form.Group>
-                    <Form.Label>Recording Method</Form.Label>
-                    <Form.Select
-                      name="recording_method"
-                      value={filters.recording_method}
-                      onChange={handleFilterChange}
-                      className="form-control-custom"
-                    >
-                      <option value="">All Methods</option>
-                      <option value="browser">Browser Recording</option>
-                      <option value="upload">File Upload</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col md={3}>
-                  <Form.Group>
-                    <Form.Label>File Format</Form.Label>
-                    <Form.Select
-                      name="file_format"
-                      value={filters.file_format}
-                      onChange={handleFilterChange}
-                      className="form-control-custom"
-                    >
-                      <option value="">All Formats</option>
-                      <option value="webm">WebM</option>
-                      <option value="wav">WAV</option>
-                      <option value="mp3">MP3</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col md={2} className="d-flex align-items-end">
-                  <Button
-                    variant="outline-secondary"
-                    onClick={clearFilters}
-                    className="w-100"
+          <div className="browse-filters">
+            <h5 className="filter-title">🔍 Filter Recordings</h5>
+            <Row className="g-3">
+              <Col md={4}>
+                <Form.Group>
+                  <Form.Label>Search</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="search"
+                    value={filters.search}
+                    onChange={handleFilterChange}
+                    placeholder="Search by username or filename"
+                    className="form-control-custom"
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={3}>
+                <Form.Group>
+                  <Form.Label>Recording Method</Form.Label>
+                  <Form.Select
+                    name="recording_method"
+                    value={filters.recording_method}
+                    onChange={handleFilterChange}
+                    className="form-control-custom"
                   >
-                    Clear
-                  </Button>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
+                    <option value="">All Methods</option>
+                    <option value="browser">Browser Recording</option>
+                    <option value="upload">File Upload</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col md={3}>
+                <Form.Group>
+                  <Form.Label>File Format</Form.Label>
+                  <Form.Select
+                    name="file_format"
+                    value={filters.file_format}
+                    onChange={handleFilterChange}
+                    className="form-control-custom"
+                  >
+                    <option value="">All Formats</option>
+                    <option value="webm">WebM</option>
+                    <option value="wav">WAV</option>
+                    <option value="mp3">MP3</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col md={2} className="d-flex align-items-end">
+                <Button
+                  variant="outline-secondary"
+                  onClick={clearFilters}
+                  className="w-100"
+                >
+                  Clear
+                </Button>
+              </Col>
+            </Row>
+          </div>
         </Col>
       </Row>
 
-      {/* Recordings Table */}
+      {/* Recordings Grid */}
       <Row>
         <Col>
-          <Card className="table-custom">
-            <Table responsive className="mb-0">
-              <thead>
-                <tr>
-                  <th>User</th>
-                  <th>File Name</th>
-                  <th>Duration</th>
-                  <th>Size</th>
-                  <th>Format</th>
-                  <th>Method</th>
-                  <th>Date</th>
-                  <th>Play</th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading ? (
-                  <tr>
-                    <td colSpan="8" className="text-center p-4">
-                      <div className="spinner-border text-primary" />
-                    </td>
-                  </tr>
-                ) : recordings.length === 0 ? (
-                  <tr>
-                    <td colSpan="8" className="text-center p-4">
-                      <h5>No recordings found</h5>
-                      <p className="text-muted mb-0">
-                        Try adjusting your filters or check back later
-                      </p>
-                    </td>
-                  </tr>
-                ) : (
-                  recordings.map((recording) => (
-                    <tr key={recording.recording_id}>
-                      <td>
-                        <strong>{recording.user_display_name}</strong>
-                      </td>
-                      <td>{recording.file_name}</td>
-                      <td>
-                        {recording.duration 
-                          ? `${recording.duration.toFixed(1)}s` 
-                          : 'N/A'
-                        }
-                      </td>
-                      <td>{recording.file_size_mb} MB</td>
-                      <td>
-                        <span className="badge bg-secondary">
-                          {recording.file_format.toUpperCase()}
-                        </span>
-                      </td>
-                      <td>
-                        <span className={`badge ${
-                          recording.recording_method === 'browser' 
-                            ? 'bg-success' 
-                            : 'bg-info'
-                        }`}>
-                          {recording.recording_method === 'browser' 
-                            ? '🎙️ Browser' 
-                            : '📁 Upload'
-                          }
-                        </span>
-                      </td>
-                      <td>
-                        {new Date(recording.created_at).toLocaleDateString()}
-                      </td>
-                      <td>
-                        {recording.audio_file_url ? (
-                          <audio controls style={{width: '200px'}}>
-                            <source src={recording.audio_file_url} />
-                            Your browser does not support audio playback.
-                          </audio>
-                        ) : (
-                          <span className="text-muted">No audio</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </Table>
-          </Card>
+          {loading ? (
+            <div className="text-center p-5">
+              <div className="spinner-border text-primary" style={{width: '3rem', height: '3rem'}} />
+              <p className="mt-3">Loading recordings...</p>
+            </div>
+          ) : recordings.length === 0 ? (
+            <div className="text-center p-5">
+              <div style={{fontSize: '4rem', marginBottom: '1rem'}}>🎵</div>
+              <h5>No recordings found</h5>
+              <p className="text-muted mb-0">
+                Try adjusting your filters or check back later
+              </p>
+            </div>
+          ) : (
+            <div className="recordings-grid">
+              {recordings.map((recording) => (
+                <div key={recording.recording_id} className="recording-card">
+                  <div className="recording-header">
+                    <div className="recording-user">{recording.user_display_name}</div>
+                    <div className={`recording-method-badge ${
+                      recording.recording_method === 'browser' ? 'method-browser' : 'method-upload'
+                    }`}>
+                      {recording.recording_method === 'browser' ? '🎙️ Browser' : '📁 Upload'}
+                    </div>
+                  </div>
+                  
+                  <div className="recording-details">
+                    <div><strong>Duration:</strong> {recording.duration ? `${recording.duration.toFixed(1)}s` : 'N/A'}</div>
+                    <div><strong>Size:</strong> {recording.file_size_mb} MB</div>
+                    <div><strong>Format:</strong> {recording.file_format.toUpperCase()}</div>
+                    <div><strong>Date:</strong> {new Date(recording.created_at).toLocaleDateString()}</div>
+                  </div>
+                  
+                  <div><strong>File:</strong> {recording.file_name}</div>
+                  
+                  {recording.audio_file_url && (
+                    <div className="recording-audio">
+                      <audio controls className="modern-audio-player">
+                        <source src={recording.audio_file_url} />
+                        Your browser does not support audio playback.
+                      </audio>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </Col>
       </Row>
 
-      {/* Pagination */}
+      {/* Modern Pagination */}
       {totalPages > 1 && (
         <Row className="mt-4">
-          <Col className="d-flex justify-content-center">
-            <Pagination>
-              <Pagination.First 
+          <Col>
+            <div className="pagination-modern">
+              <button 
+                className="page-btn"
                 onClick={() => setCurrentPage(1)}
                 disabled={currentPage === 1}
-              />
-              <Pagination.Prev 
+              >
+                First
+              </button>
+              <button 
+                className="page-btn"
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
-              />
+              >
+                Previous
+              </button>
               
               {[...Array(Math.min(5, totalPages))].map((_, index) => {
                 const pageNumber = Math.max(1, currentPage - 2) + index;
                 if (pageNumber <= totalPages) {
                   return (
-                    <Pagination.Item
+                    <button
                       key={pageNumber}
-                      active={pageNumber === currentPage}
+                      className={`page-btn ${pageNumber === currentPage ? 'active' : ''}`}
                       onClick={() => setCurrentPage(pageNumber)}
                     >
                       {pageNumber}
-                    </Pagination.Item>
+                    </button>
                   );
                 }
                 return null;
               })}
               
-              <Pagination.Next 
+              <button 
+                className="page-btn"
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-              />
-              <Pagination.Last 
+              >
+                Next
+              </button>
+              <button 
+                className="page-btn"
                 onClick={() => setCurrentPage(totalPages)}
                 disabled={currentPage === totalPages}
-              />
-            </Pagination>
+              >
+                Last
+              </button>
+            </div>
           </Col>
         </Row>
       )}
 
-      {/* Professional Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton className="bg-danger text-white">
-          <Modal.Title>{modalConfig.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="p-4">
-          <div className="text-center">
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-              ❌
+      {/* Modern Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modern-modal">
+        <div className="modal-content-modern">
+          <Modal.Body className="p-0">
+            <div className="modal-header-modern">
+              <div className="modal-icon-modern error">
+                ✕
+              </div>
+              <h4 className="modal-title-modern">{modalConfig.title}</h4>
+              <button className="modal-close-modern" onClick={() => setShowModal(false)}>×</button>
             </div>
-            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
-              {modalConfig.message}
-            </p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => setShowModal(false)}>
-            OK
-          </Button>
-        </Modal.Footer>
+            <div className="modal-body-modern">
+              <p className="modal-message-modern">{modalConfig.message}</p>
+            </div>
+            <div className="modal-footer-modern">
+              <button className="btn-modern btn-primary-modern" onClick={() => setShowModal(false)}>
+                Got it
+              </button>
+            </div>
+          </Modal.Body>
+        </div>
       </Modal>
     </Container>
   );

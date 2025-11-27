@@ -373,48 +373,49 @@ const RecordCough = () => {
         </Col>
       </Row>
 
-      {/* Professional Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton className={`bg-${modalConfig.type === 'success' ? 'success' : modalConfig.type === 'error' ? 'danger' : modalConfig.type === 'warning' ? 'warning' : 'primary'} text-white`}>
-          <Modal.Title>{modalConfig.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="p-4">
-          <div className="text-center">
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-              {modalConfig.type === 'success' ? '✅' : 
-               modalConfig.type === 'error' ? '❌' : 
-               modalConfig.type === 'warning' ? '⚠️' : '📤'}
+      {/* Modern Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modern-modal">
+        <div className="modal-content-modern">
+          <Modal.Body className="p-0">
+            <div className="modal-header-modern">
+              <div className={`modal-icon-modern ${modalConfig.type}`}>
+                {modalConfig.type === 'success' ? '✓' : 
+                 modalConfig.type === 'error' ? '✕' : 
+                 modalConfig.type === 'warning' ? '!' : '?'}
+              </div>
+              <h4 className="modal-title-modern">{modalConfig.title}</h4>
+              <button className="modal-close-modern" onClick={() => setShowModal(false)}>×</button>
             </div>
-            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
-              {modalConfig.message}
-            </p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          {modalConfig.type === 'confirm' ? (
-            <>
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
-                Cancel
-              </Button>
-              <Button 
-                variant="primary" 
-                onClick={() => {
-                  setShowModal(false);
-                  if (modalConfig.onConfirm) modalConfig.onConfirm();
-                }}
-              >
-                Confirm
-              </Button>
-            </>
-          ) : (
-            <Button 
-              variant={modalConfig.type === 'success' ? 'success' : 'primary'} 
-              onClick={() => setShowModal(false)}
-            >
-              OK
-            </Button>
-          )}
-        </Modal.Footer>
+            <div className="modal-body-modern">
+              <p className="modal-message-modern">{modalConfig.message}</p>
+            </div>
+            <div className="modal-footer-modern">
+              {modalConfig.type === 'confirm' ? (
+                <>
+                  <button className="btn-modern btn-secondary-modern" onClick={() => setShowModal(false)}>
+                    Cancel
+                  </button>
+                  <button 
+                    className="btn-modern btn-primary-modern"
+                    onClick={() => {
+                      setShowModal(false);
+                      if (modalConfig.onConfirm) modalConfig.onConfirm();
+                    }}
+                  >
+                    Confirm
+                  </button>
+                </>
+              ) : (
+                <button 
+                  className={`btn-modern ${modalConfig.type === 'success' ? 'btn-success-modern' : 'btn-primary-modern'}`}
+                  onClick={() => setShowModal(false)}
+                >
+                  Got it
+                </button>
+              )}
+            </div>
+          </Modal.Body>
+        </div>
       </Modal>
     </Container>
   );

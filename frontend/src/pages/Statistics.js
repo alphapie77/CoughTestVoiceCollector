@@ -295,29 +295,30 @@ const Statistics = () => {
         </Col>
       </Row>
 
-      {/* Professional Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton className={`bg-${modalConfig.type === 'success' ? 'success' : 'danger'} text-white`}>
-          <Modal.Title>{modalConfig.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="p-4">
-          <div className="text-center">
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-              {modalConfig.type === 'success' ? '✅' : '❌'}
+      {/* Modern Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modern-modal">
+        <div className="modal-content-modern">
+          <Modal.Body className="p-0">
+            <div className="modal-header-modern">
+              <div className={`modal-icon-modern ${modalConfig.type}`}>
+                {modalConfig.type === 'success' ? '✓' : '✕'}
+              </div>
+              <h4 className="modal-title-modern">{modalConfig.title}</h4>
+              <button className="modal-close-modern" onClick={() => setShowModal(false)}>×</button>
             </div>
-            <p style={{ whiteSpace: 'pre-line', fontSize: '1.1rem' }}>
-              {modalConfig.message}
-            </p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button 
-            variant={modalConfig.type === 'success' ? 'success' : 'primary'} 
-            onClick={() => setShowModal(false)}
-          >
-            OK
-          </Button>
-        </Modal.Footer>
+            <div className="modal-body-modern">
+              <p className="modal-message-modern">{modalConfig.message}</p>
+            </div>
+            <div className="modal-footer-modern">
+              <button 
+                className={`btn-modern ${modalConfig.type === 'success' ? 'btn-success-modern' : 'btn-primary-modern'}`}
+                onClick={() => setShowModal(false)}
+              >
+                Got it
+              </button>
+            </div>
+          </Modal.Body>
+        </div>
       </Modal>
     </Container>
   );
