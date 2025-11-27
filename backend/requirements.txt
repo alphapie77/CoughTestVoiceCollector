@@ -1,9 +1,26 @@
+# Core Django and REST Framework
 Django==5.0.1
 djangorestframework==3.14.0
-django-cors-headers==4.3.1
-Pillow
-python-decouple==3.8
 djangorestframework-simplejwt==5.3.0
+
+# Database and ORM
 django-filter==23.5
-pydub==0.25.1
+
+# CORS handling
+django-cors-headers==4.3.1
+
+# Audio processing
 mutagen==1.47.0
+pydub==0.25.1
+
+# File handling and validation
+Pillow==10.2.0
+
+# Development and debugging
+django-extensions==3.2.3
+
+# Production server (optional)
+gunicorn==21.2.0
+
+# Environment variables
+python-decouple==3.8

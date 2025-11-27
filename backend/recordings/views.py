@@ -4,10 +4,12 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from django.db.models import Count, Sum, Avg
 from django.contrib.auth.models import User
+from django.core.cache import cache
 import csv
 import io
 import zipfile
 import os
+import logging
 from django.conf import settings
 from .models import CoughRecording
 from .serializers import (
@@ -15,6 +17,11 @@ from .serializers import (
     CoughRecordingListSerializer,
     CoughRecordingStatsSerializer
 )
+from core.validators import validate_audio_file, validate_anonymous_name, validate_recording_method
+from core.exceptions import ValidationError, FileProcessingError
+from core.utils import get_client_info, log_user_action, AudioMetadataExtractor
+
+logger = logging.getLogger(__name__)
 
 
 class CoughRecordingCreateView(generics.CreateAPIView):
@@ -22,6 +29,49 @@ class CoughRecordingCreateView(generics.CreateAPIView):
     queryset = CoughRecording.objects.all()
     serializer_class = CoughRecordingSerializer
     permission_classes = [permissions.AllowAny]
+    
+    def perform_create(self, serializer):
+        """Enhanced create with validation and logging"""
+        try:
+            # Validate inputs
+            audio_file = self.request.FILES.get('audio_file')
+            anonymous_name = self.request.data.get('anonymous_name')
+            recording_method = self.request.data.get('recording_method')
+            
+            if audio_file:
+                validate_audio_file(audio_file)
+            
+            if anonymous_name:
+                validate_anonymous_name(anonymous_name)
+            
+            if recording_method:
+                validate_recording_method(recording_method)
+            
+            # Get client info
+            client_info = get_client_info(self.request)
+            
+            # Save with additional metadata
+            instance = serializer.save(
+                ip_address=client_info['ip_address'],
+                user_agent=client_info['user_agent']
+            )
+            
+            # Log the action
+            log_user_action(
+                user=self.request.user if self.request.user.is_authenticated else None,
+                action='recording_created',
+                details={
+                    'recording_id': str(instance.recording_id),
+                    'method': recording_method,
+                    'file_size': audio_file.size if audio_file else None
+                }
+            )
+            
+            logger.info(f"Recording created: {instance.recording_id}")
+            
+        except Exception as e:
+            logger.error(f"Error creating recording: {e}")
+            raise ValidationError(str(e))
 
 
 class CoughRecordingListView(generics.ListAPIView):
@@ -55,45 +105,55 @@ class UserRecordingsView(generics.ListAPIView):
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
 def recording_stats(request):
-    """Get comprehensive statistics about recordings"""
-    total_recordings = CoughRecording.objects.count()
-    total_users = CoughRecording.objects.filter(user__isnull=False).values('user').distinct().count()
-    total_anonymous = CoughRecording.objects.filter(user__isnull=True).count()
+    """Get comprehensive statistics about recordings with caching"""
+    # Try to get from cache first
+    cache_key = 'recording_stats'
+    stats_data = cache.get(cache_key)
     
-    # Aggregate statistics
-    aggregates = CoughRecording.objects.aggregate(
-        total_duration=Sum('duration'),
-        total_size=Sum('file_size'),
-        avg_duration=Avg('duration')
-    )
-    
-    # Convert total size to MB
-    total_size_mb = (aggregates['total_size'] or 0) / (1024 * 1024)
-    
-    # Recordings by method
-    recordings_by_method = dict(
-        CoughRecording.objects.values('recording_method').annotate(
-            count=Count('id')
-        ).values_list('recording_method', 'count')
-    )
-    
-    # Recordings by format
-    recordings_by_format = dict(
-        CoughRecording.objects.values('file_format').annotate(
-            count=Count('id')
-        ).values_list('file_format', 'count')
-    )
-    
-    stats_data = {
-        'total_recordings': total_recordings,
-        'total_users': total_users,
-        'total_anonymous': total_anonymous,
-        'total_duration': aggregates['total_duration'] or 0,
-        'total_size_mb': round(total_size_mb, 2),
-        'avg_duration': round(aggregates['avg_duration'] or 0, 2),
-        'recordings_by_method': recordings_by_method,
-        'recordings_by_format': recordings_by_format,
-    }
+    if stats_data is None:
+        logger.info("Generating fresh statistics")
+        
+        total_recordings = CoughRecording.objects.count()
+        total_users = CoughRecording.objects.filter(user__isnull=False).values('user').distinct().count()
+        total_anonymous = CoughRecording.objects.filter(user__isnull=True).count()
+        
+        # Aggregate statistics
+        aggregates = CoughRecording.objects.aggregate(
+            total_duration=Sum('duration'),
+            total_size=Sum('file_size'),
+            avg_duration=Avg('duration')
+        )
+        
+        # Convert total size to MB
+        total_size_mb = (aggregates['total_size'] or 0) / (1024 * 1024)
+        
+        # Recordings by method
+        recordings_by_method = dict(
+            CoughRecording.objects.values('recording_method').annotate(
+                count=Count('id')
+            ).values_list('recording_method', 'count')
+        )
+        
+        # Recordings by format
+        recordings_by_format = dict(
+            CoughRecording.objects.values('file_format').annotate(
+                count=Count('id')
+            ).values_list('file_format', 'count')
+        )
+        
+        stats_data = {
+            'total_recordings': total_recordings,
+            'total_users': total_users,
+            'total_anonymous': total_anonymous,
+            'total_duration': aggregates['total_duration'] or 0,
+            'total_size_mb': round(total_size_mb, 2),
+            'avg_duration': round(aggregates['avg_duration'] or 0, 2),
+            'recordings_by_method': recordings_by_method,
+            'recordings_by_format': recordings_by_format,
+        }
+        
+        # Cache for 5 minutes
+        cache.set(cache_key, stats_data, 300)
     
     serializer = CoughRecordingStatsSerializer(stats_data)
     return Response(serializer.data)
@@ -211,7 +271,7 @@ def export_html(request):
                 </td>
                 <td>{recording.duration or 'N/A'}s</td>
                 <td>{recording.file_size_mb}</td>
-                <td>{recording.file_format.upper()}</td>
+                <td>{recording.file_format}</td>
                 <td>{recording.get_recording_method_display()}</td>
                 <td>{recording.created_at.strftime('%Y-%m-%d %H:%M:%S')}</td>
                 <td class="metadata">{metadata}</td>

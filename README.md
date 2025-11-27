@@ -149,6 +149,17 @@ python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Stu
 
 This platform is designed for academic medical research. Contributors help advance respiratory health research by providing cough audio samples.
 
+## 📊 Research Data
+
+This repository contains real research data collected for thesis purposes:
+
+- **Database**: `backend/db.sqlite3` - Contains all recording metadata and user data
+- **Audio Files**: `backend/media/cough_recordings/` - Actual cough audio samples
+- **Research Purpose**: Data included for reproducibility and academic validation
+- **Export Tools**: Built-in CSV/HTML/ZIP export for thesis analysis
+
+⚠️ **Important**: This data is preserved for research integrity and thesis validation.
+
 ## 📄 License
 
 Academic Research License - Created for thesis and medical research purposes.
