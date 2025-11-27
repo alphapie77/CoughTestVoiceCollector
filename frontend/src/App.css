@@ -916,8 +916,8 @@
 
 .recordings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -927,65 +927,144 @@
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.recording-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
 .recording-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
 .recording-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.recording-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .recording-user {
-  font-weight: 600;
+  font-weight: 700;
   color: #2c3e50;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+}
+
+.recording-date {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  font-weight: 500;
 }
 
 .recording-method-badge {
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
 }
 
 .method-browser {
   background: linear-gradient(135deg, #10dc60, #16a085);
   color: white;
+  box-shadow: 0 4px 15px rgba(16, 220, 96, 0.3);
 }
 
 .method-upload {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.recording-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+.recording-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.filename-label {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.filename-text {
+  font-weight: 600;
+  color: #2c3e50;
   font-size: 0.9rem;
-  color: #7f8c8d;
+  word-break: break-all;
+}
+
+.recording-specs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 15px;
+  padding: 1.2rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.spec-icon {
+  font-size: 1.3rem;
+}
+
+.spec-value {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
 }
 
 .recording-audio {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+.audio-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .modern-audio-player {
   width: 100%;
   border-radius: 12px;
   outline: none;
+  height: 40px;
 }
 
 .pagination-modern {
@@ -1183,6 +1262,28 @@
   
   .recordings-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .recording-card {
+    padding: 1.5rem;
+  }
+  
+  .recording-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .recording-specs {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .spec-item {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
   
   .modal-header-modern {

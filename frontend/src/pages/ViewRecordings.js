@@ -163,7 +163,10 @@ const ViewRecordings = () => {
               {recordings.map((recording) => (
                 <div key={recording.recording_id} className="recording-card">
                   <div className="recording-header">
-                    <div className="recording-user">{recording.user_display_name}</div>
+                    <div className="recording-user-info">
+                      <div className="recording-user">{recording.user_display_name}</div>
+                      <div className="recording-date">{new Date(recording.created_at).toLocaleDateString()}</div>
+                    </div>
                     <div className={`recording-method-badge ${
                       recording.recording_method === 'browser' ? 'method-browser' : 'method-upload'
                     }`}>
@@ -171,17 +174,29 @@ const ViewRecordings = () => {
                     </div>
                   </div>
                   
-                  <div className="recording-details">
-                    <div><strong>Duration:</strong> {recording.duration ? `${recording.duration.toFixed(1)}s` : 'N/A'}</div>
-                    <div><strong>Size:</strong> {recording.file_size_mb} MB</div>
-                    <div><strong>Format:</strong> {recording.file_format.toUpperCase()}</div>
-                    <div><strong>Date:</strong> {new Date(recording.created_at).toLocaleDateString()}</div>
+                  <div className="recording-filename">
+                    <span className="filename-label">📄</span>
+                    <span className="filename-text">{recording.file_name}</span>
                   </div>
                   
-                  <div><strong>File:</strong> {recording.file_name}</div>
+                  <div className="recording-specs">
+                    <div className="spec-item">
+                      <span className="spec-icon">⏱️</span>
+                      <span className="spec-value">{recording.duration ? `${recording.duration.toFixed(1)}s` : 'N/A'}</span>
+                    </div>
+                    <div className="spec-item">
+                      <span className="spec-icon">💾</span>
+                      <span className="spec-value">{recording.file_size_mb} MB</span>
+                    </div>
+                    <div className="spec-item">
+                      <span className="spec-icon">🎵</span>
+                      <span className="spec-value">{recording.file_format.toUpperCase()}</span>
+                    </div>
+                  </div>
                   
                   {recording.audio_file_url && (
                     <div className="recording-audio">
+                      <div className="audio-label">🎧 Audio Playback</div>
                       <audio controls className="modern-audio-player">
                         <source src={recording.audio_file_url} />
                         Your browser does not support audio playback.
