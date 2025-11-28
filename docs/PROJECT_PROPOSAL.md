@@ -1,15 +1,5 @@
 # Project Proposal: CoughTest - Cough Audio Research Data Collection Platform
 
-## Student Information
-- **Student Name**: [Your Name]
-- **Student ID**: [Your ID]
-- **Program**: [Your Program]
-- **Supervisor**: [Supervisor Name]
-- **Semester**: [Current Semester]
-- **Date**: November 2025
-
----
-
 ## 1. Project Title
 **CoughTest: A Web-Based Platform for Academic Cough Audio Data Collection**
 
@@ -365,10 +355,3 @@ The proposed CoughTest platform represents a comprehensive project that combines
 This project will demonstrate advanced software engineering skills while contributing to academic research capabilities. The systematic approach, comprehensive documentation, and research focus make it suitable for academic evaluation and potential real-world application.
 
 I believe this project aligns well with academic objectives while providing valuable experience in professional software development and research methodology.
-
----
-
-**Submitted by**: [Your Name]  
-**Date**: [Submission Date]  
-**Supervisor Approval**: ________________  
-**Date**: ________________
