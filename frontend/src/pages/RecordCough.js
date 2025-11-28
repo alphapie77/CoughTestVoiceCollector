@@ -100,28 +100,47 @@ const RecordCough = () => {
   };
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Check file type
-      const allowedTypes = ['audio/wav', 'audio/mp3', 'audio/mpeg', 'audio/webm'];
-      if (!allowedTypes.includes(file.type)) {
-        showModalDialog('error', '📁 Invalid File Type', 
-          'Please upload a valid audio file (WAV, MP3, or WebM format).');
+    const files = Array.from(event.target.files);
+    if (files.length > 0) {
+      const allowedTypes = ['audio/wav', 'audio/mp3', 'audio/mpeg', 'audio/webm', 'audio/ogg', 'audio/m4a'];
+      const invalidFiles = [];
+      const oversizedFiles = [];
+      const validFiles = [];
+
+      files.forEach(file => {
+        if (!allowedTypes.includes(file.type)) {
+          invalidFiles.push(file.name);
+        } else if (file.size > 50 * 1024 * 1024) {
+          oversizedFiles.push(file.name);
+        } else {
+          validFiles.push(file);
+        }
+      });
+
+      if (invalidFiles.length > 0) {
+        showModalDialog('error', '📁 Invalid File Types', 
+          `Invalid files: ${invalidFiles.join(', ')}\nPlease upload valid audio files (WAV, MP3, WebM, OGG, M4A).`);
         return;
       }
 
-      // Check file size (max 50MB)
-      if (file.size > 50 * 1024 * 1024) {
-        showModalDialog('error', '📁 File Too Large', 
-          'File size must be less than 50MB. Please choose a smaller file.');
+      if (oversizedFiles.length > 0) {
+        showModalDialog('error', '📁 Files Too Large', 
+          `Files exceed 50MB limit: ${oversizedFiles.join(', ')}\nPlease choose smaller files.`);
         return;
       }
 
-      setUploadFile(file);
+      if (validFiles.length === 1) {
+        setUploadFile(validFiles[0]);
+      } else {
+        setUploadFile(validFiles);
+      }
+      
       setRecordedBlob(null);
       setMessage({ type: '', text: '' });
-      showModalDialog('success', '📁 File Selected', 
-        `Successfully selected: ${file.name}\nSize: ${(file.size / (1024 * 1024)).toFixed(2)} MB`);
+      
+      const totalSize = validFiles.reduce((sum, file) => sum + file.size, 0);
+      showModalDialog('success', '📁 Files Selected', 
+        `Selected ${validFiles.length} file(s)\nTotal size: ${(totalSize / (1024 * 1024)).toFixed(2)} MB`);
     }
   };
 
@@ -162,7 +181,15 @@ const RecordCough = () => {
         formData.append('audio_file', audioFile);
         formData.append('recording_method', 'browser');
       } else if (uploadFile) {
-        formData.append('audio_file', uploadFile);
+        if (Array.isArray(uploadFile)) {
+          // Multiple files - use bulk upload
+          uploadFile.forEach(file => {
+            formData.append('audio_files', file);
+          });
+        } else {
+          // Single file
+          formData.append('audio_file', uploadFile);
+        }
         formData.append('recording_method', 'upload');
       }
 
@@ -170,10 +197,32 @@ const RecordCough = () => {
         formData.append('anonymous_name', anonymousName.trim());
       }
 
-      const response = await recordingsAPI.upload(formData);
+      const response = Array.isArray(uploadFile) && uploadFile.length > 1 
+        ? await fetch('http://localhost:8000/api/recordings/bulk-upload/', {
+            method: 'POST',
+            body: formData
+          }).then(res => res.json())
+        : await recordingsAPI.upload(formData);
       
-      showModalDialog('success', '✅ Upload Successful', 
-        `Your recording has been uploaded successfully!\n\nRecording ID: ${response.data.recording_id}\n\nThank you for contributing to our research.`);
+      if (Array.isArray(uploadFile) && uploadFile.length > 1) {
+        // Bulk upload response
+        const { summary, warnings } = response;
+        let message = `Successfully uploaded ${summary.successful_uploads}/${summary.total_files} files!`;
+        
+        if (warnings && warnings.length > 0) {
+          message += `\n\n⚠️ ${warnings.length} file(s) have duration concerns for research quality.`;
+        }
+        
+        if (summary.errors > 0) {
+          message += `\n\n❌ ${summary.errors} file(s) failed to upload.`;
+        }
+        
+        showModalDialog('success', '✅ Bulk Upload Complete', message);
+      } else {
+        // Single file response
+        showModalDialog('success', '✅ Upload Successful', 
+          `Your recording has been uploaded successfully!\n\nRecording ID: ${response.data?.recording_id || 'Generated'}\n\nThank you for contributing to our research.`);
+      }
       
       // Reset form
       resetRecording();
@@ -323,13 +372,15 @@ const RecordCough = () => {
                     <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📁</div>
                     <h5>Click to Upload Audio File</h5>
                     <p className="text-muted mb-0">
-                      Supports WAV, MP3, WebM files (max 50MB)
+                      Supports WAV, MP3, WebM, OGG, M4A files (max 50MB each)<br/>
+                      Select multiple files for bulk upload
                     </p>
                   </div>
                   <Form.Control
                     id="audioFile"
                     type="file"
                     accept="audio/*"
+                    multiple
                     onChange={handleFileUpload}
                     style={{ display: 'none' }}
                   />
@@ -337,15 +388,30 @@ const RecordCough = () => {
                   {uploadFile && (
                     <div className="mt-3 text-center">
                       <Alert variant="info">
-                        <strong>Selected:</strong> {uploadFile.name} 
-                        ({(uploadFile.size / (1024 * 1024)).toFixed(2)} MB)
+                        {Array.isArray(uploadFile) ? (
+                          <>
+                            <strong>Selected {uploadFile.length} files:</strong>
+                            <ul className="mb-0 mt-2" style={{textAlign: 'left'}}>
+                              {uploadFile.map((file, index) => (
+                                <li key={index}>
+                                  {file.name} ({(file.size / (1024 * 1024)).toFixed(2)} MB)
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        ) : (
+                          <>
+                            <strong>Selected:</strong> {uploadFile.name} 
+                            ({(uploadFile.size / (1024 * 1024)).toFixed(2)} MB)
+                          </>
+                        )}
                       </Alert>
                       <Button 
                         variant="outline-secondary" 
                         size="sm" 
                         onClick={() => setUploadFile(null)}
                       >
-                        🗑️ Remove File
+                        🗑️ Remove Files
                       </Button>
                     </div>
                   )}

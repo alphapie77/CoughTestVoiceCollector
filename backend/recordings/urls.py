@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('upload/', views.CoughRecordingCreateView.as_view(), name='recording-create'),
+    path('bulk-upload/', views.bulk_upload_recordings, name='bulk-upload'),
     path('list/', views.CoughRecordingListView.as_view(), name='recording-list'),
     path('detail/<uuid:recording_id>/', views.CoughRecordingDetailView.as_view(), name='recording-detail'),
     path('my-recordings/', views.UserRecordingsView.as_view(), name='user-recordings'),

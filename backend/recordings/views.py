@@ -20,6 +20,7 @@ from .serializers import (
 from core.validators import validate_audio_file, validate_anonymous_name, validate_recording_method
 from core.exceptions import ValidationError, FileProcessingError
 from core.utils import get_client_info, log_user_action, AudioMetadataExtractor
+from core.audio_processor import AudioProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -355,6 +356,101 @@ Generated from CoughTest Research Platform
     
     response.write(zip_buffer.getvalue())
     return response
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def bulk_upload_recordings(request):
+    """Handle multiple audio file uploads with professional warnings"""
+    files = request.FILES.getlist('audio_files')
+    anonymous_name = request.data.get('anonymous_name')
+    recording_method = request.data.get('recording_method', 'upload')
+    
+    if not files:
+        return Response({
+            'success': False,
+            'error': 'No files provided'
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    results = []
+    warnings = []
+    errors = []
+    
+    for i, audio_file in enumerate(files):
+        try:
+            # Validate file
+            validate_audio_file(audio_file)
+            
+            # Process audio file
+            processed_file, was_truncated, original_duration = AudioProcessor.process_audio_file(audio_file)
+            
+            # Get client info
+            client_info = get_client_info(request)
+            
+            # Create numbered anonymous name for bulk uploads
+            file_anonymous_name = anonymous_name
+            if len(files) > 1:
+                file_anonymous_name = f"{anonymous_name}_{i + 1}"
+            
+            # Create recording directly
+            instance = CoughRecording.objects.create(
+                audio_file=processed_file,
+                anonymous_name=file_anonymous_name,
+                recording_method=recording_method,
+                ip_address=client_info['ip_address'],
+                user_agent=client_info['user_agent'],
+                user=request.user if request.user.is_authenticated else None
+            )
+            
+            result = {
+                'file_index': i,
+                'file_name': audio_file.name,
+                'recording_id': str(instance.recording_id),
+                'status': 'success'
+            }
+            
+            # Add warnings for duration issues
+            if was_truncated:
+                warnings.append({
+                    'file_index': i,
+                    'file_name': audio_file.name,
+                    'type': 'duration_warning',
+                    'message': f'Audio duration ({original_duration:.1f}s) exceeds research standard (10s). Consider re-recording for optimal research quality.',
+                    'original_duration': original_duration,
+                    'recommended_duration': 10.0
+                })
+                result['warning'] = 'Duration exceeds research standard'
+            
+            results.append(result)
+                
+        except Exception as e:
+            errors.append({
+                'file_index': i,
+                'file_name': audio_file.name,
+                'error': str(e)
+            })
+    
+    # Prepare response
+    response_data = {
+        'success': len(results) > 0,
+        'summary': {
+            'total_files': len(files),
+            'successful_uploads': len(results),
+            'warnings': len(warnings),
+            'errors': len(errors)
+        },
+        'results': results
+    }
+    
+    if warnings:
+        response_data['warnings'] = warnings
+        response_data['warning_message'] = f'{len(warnings)} file(s) have duration concerns. Research quality may be affected.'
+    
+    if errors:
+        response_data['errors'] = errors
+        response_data['error_message'] = f'{len(errors)} file(s) failed to upload.'
+    
+    return Response(response_data, status=status.HTTP_200_OK if len(results) > 0 else status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
