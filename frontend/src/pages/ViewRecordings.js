@@ -13,16 +13,38 @@ const ViewRecordings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '' });
+  const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '', onConfirm: null });
   const [audioDurations, setAudioDurations] = useState({});
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     fetchRecordings();
   }, [currentPage, filters]);
 
-  const showModalDialog = (type, title, message) => {
-    setModalConfig({ type, title, message });
+  const showModalDialog = (type, title, message, onConfirm = null) => {
+    setModalConfig({ type, title, message, onConfirm });
     setShowModal(true);
+  };
+
+  const handleDeleteRecording = (recordingId, fileName) => {
+    showModalDialog('confirm', '🗑️ Delete Recording', 
+      `Are you sure you want to delete "${fileName}"? This action cannot be undone.`,
+      () => performDelete(recordingId)
+    );
+  };
+
+  const performDelete = async (recordingId) => {
+    setDeletingId(recordingId);
+    try {
+      await recordingsAPI.delete(recordingId);
+      showModalDialog('success', '✅ Recording Deleted', 'The recording has been successfully deleted.');
+      fetchRecordings(); // Refresh the list
+    } catch (error) {
+      showModalDialog('error', '❌ Delete Failed', 
+        error.response?.data?.error || 'Failed to delete recording. Please try again.');
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   const fetchRecordings = async () => {
@@ -202,7 +224,24 @@ const ViewRecordings = () => {
                   
                   {recording.audio_file_url && (
                     <div className="recording-audio">
-                      <div className="audio-label">🎧 Audio Playback</div>
+                      <div className="audio-header">
+                        <div className="audio-label">🎧 Audio Playback</div>
+                        <button
+                          className="delete-btn-inline"
+                          onClick={() => handleDeleteRecording(recording.recording_id, recording.file_name)}
+                          disabled={deletingId === recording.recording_id}
+                          title="Delete recording"
+                          aria-label="Delete recording"
+                        >
+                          {deletingId === recording.recording_id ? (
+                            <div className="spinner-border spinner-border-sm" style={{width: '12px', height: '12px'}} />
+                          ) : (
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14zM10 11v6M14 11v6" />
+                            </svg>
+                          )}
+                        </button>
+                      </div>
                       <audio 
                         controls 
                         className="modern-audio-player"
@@ -221,6 +260,7 @@ const ViewRecordings = () => {
                       </audio>
                     </div>
                   )}
+
                 </div>
               ))}
             </div>
@@ -298,9 +338,29 @@ const ViewRecordings = () => {
               <p className="modal-message-modern">{modalConfig.message}</p>
             </div>
             <div className="modal-footer-modern">
-              <button className="btn-modern btn-primary-modern" onClick={() => setShowModal(false)}>
-                Got it
-              </button>
+              {modalConfig.type === 'confirm' ? (
+                <>
+                  <button className="btn-modern btn-secondary-modern" onClick={() => setShowModal(false)}>
+                    Cancel
+                  </button>
+                  <button 
+                    className="btn-modern btn-danger-modern"
+                    onClick={() => {
+                      setShowModal(false);
+                      if (modalConfig.onConfirm) modalConfig.onConfirm();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </>
+              ) : (
+                <button 
+                  className={`btn-modern ${modalConfig.type === 'success' ? 'btn-success-modern' : 'btn-primary-modern'}`}
+                  onClick={() => setShowModal(false)}
+                >
+                  Got it
+                </button>
+              )}
             </div>
           </Modal.Body>
         </div>

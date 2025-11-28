@@ -1081,14 +1081,45 @@
   margin-top: 1.5rem;
 }
 
+.audio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
 .audio-label {
   font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 0.8rem;
   font-size: 0.95rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.delete-btn-inline {
+  width: 28px;
+  height: 28px;
+  background: rgba(52, 58, 64, 0.1);
+  border: 1px solid rgba(52, 58, 64, 0.2);
+  border-radius: 6px;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn-inline:hover {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #dc3545;
+}
+
+.delete-btn-inline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .modern-audio-player {
@@ -1096,6 +1127,75 @@
   border-radius: 12px;
   outline: none;
   height: 40px;
+}
+
+.recording-card {
+  position: relative;
+}
+
+.delete-btn-card {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  background: rgba(52, 58, 64, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recording-card:hover .delete-btn-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delete-btn-card:hover {
+  background: rgba(220, 53, 69, 0.9);
+  border-color: rgba(220, 53, 69, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+.delete-btn-card:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+.delete-btn-card:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: translateY(0);
+  background: rgba(108, 117, 125, 0.6);
+}
+
+.delete-btn-card:disabled:hover {
+  background: rgba(108, 117, 125, 0.6);
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger-modern {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.btn-danger-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
 }
 
 .pagination-modern {

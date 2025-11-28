@@ -454,18 +454,18 @@ def bulk_upload_recordings(request):
 
 
 @api_view(['DELETE'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.AllowAny])
 def delete_user_recording(request, recording_id):
-    """Allow users to delete their own recordings"""
+    """Allow deletion of recordings (for research purposes)"""
     try:
-        recording = CoughRecording.objects.get(
-            recording_id=recording_id,
-            user=request.user
-        )
+        recording = CoughRecording.objects.get(recording_id=recording_id)
         recording.delete()
-        return Response({'message': 'Recording deleted successfully'})
+        return Response({
+            'success': True,
+            'message': 'Recording deleted successfully'
+        })
     except CoughRecording.DoesNotExist:
         return Response(
-            {'error': 'Recording not found or not owned by user'}, 
+            {'success': False, 'error': 'Recording not found'}, 
             status=status.HTTP_404_NOT_FOUND
         )
