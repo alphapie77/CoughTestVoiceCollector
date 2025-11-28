@@ -1,4 +1,4 @@
-# Project Proposal: CoughTest - Medical Research Data Collection Platform
+# Project Proposal: CoughTest - Cough Audio Research Data Collection Platform
 
 ## Student Information
 - **Student Name**: [Your Name]
@@ -11,12 +11,12 @@
 ---
 
 ## 1. Project Title
-**CoughTest: A Web-Based Platform for Medical Research Cough Audio Data Collection**
+**CoughTest: A Web-Based Platform for Academic Cough Audio Data Collection**
 
 ## 2. Project Overview
 
 ### 2.1 Problem Statement
-Current medical research in respiratory health analysis lacks standardized, accessible platforms for systematic cough audio data collection. Researchers face challenges in:
+Current academic research in cough audio analysis lacks standardized, accessible platforms for systematic cough audio data collection. Researchers face challenges in:
 - Collecting consistent, high-quality audio samples
 - Managing comprehensive metadata for research validation
 - Ensuring data integrity and reproducibility
@@ -24,14 +24,14 @@ Current medical research in respiratory health analysis lacks standardized, acce
 - Exporting data in formats suitable for statistical analysis
 
 ### 2.2 Proposed Solution
-I propose to develop **CoughTest**, a comprehensive web-based platform that enables systematic collection of cough audio data for medical research purposes. The platform will serve both as a functional research tool and a demonstration of modern full-stack software engineering principles.
+I propose to develop **CoughTest**, a comprehensive web-based platform that enables systematic collection of cough audio data for academic research purposes. The platform will serve both as a functional research tool and a demonstration of modern full-stack software engineering principles.
 
 ---
 
 ## 3. Project Objectives
 
 ### 3.1 Primary Objective
-Develop a professional web application that facilitates standardized cough audio data collection for medical research while demonstrating advanced software engineering practices.
+Develop a professional web application that facilitates standardized cough audio data collection for academic research while demonstrating advanced software engineering practices.
 
 ### 3.2 Secondary Objectives
 1. **Research Facilitation**: Create tools for systematic data collection with comprehensive metadata
@@ -59,9 +59,9 @@ File Upload System:
   - Progress indication and error handling
 
 User Management:
-  - JWT-based authentication system
+  - Optional JWT-based authentication system
   - Anonymous submission capabilities
-  - User dashboard and contribution tracking
+  - User dashboard and contribution tracking (for registered users)
   - Secure session management
 ```
 
@@ -111,7 +111,7 @@ Backend:
   - Python 3.9+ with Django 5.0.1
   - Django REST Framework for API
   - SQLite (development) / PostgreSQL (production)
-  - JWT authentication
+  - Optional JWT authentication
 
 Frontend:
   - React 19.2.0 with modern JavaScript
@@ -148,7 +148,7 @@ Audio Specifications:
 
 Metadata Collection:
   - Technical: Sample rate, bit rate, channels, file size
-  - User: Username/anonymous ID, submission method
+  - User: Username/anonymous ID, optional identifier, submission method
   - System: Timestamp, IP (anonymized), user agent
   - Quality: Duration validation, format verification
 ```
@@ -297,7 +297,7 @@ Quality:
 ### 10.2 Research Success Metrics
 ```yaml
 Data Collection:
-  - Successful audio recording and upload functionality
+  - Successful cough audio recording and upload functionality
   - Accurate metadata extraction and storage
   - Valid export formats for statistical analysis
   - Research compliance verification
@@ -315,12 +315,12 @@ Academic Value:
 
 ### 11.1 Academic Contributions
 - **Software Engineering**: Demonstration of professional full-stack development
-- **Research Methodology**: Systematic approach to medical data collection
+- **Research Methodology**: Systematic approach to cough audio data collection
 - **Quality Assurance**: IEEE-compliant documentation and testing procedures
-- **Technical Innovation**: Modern web technologies applied to medical research
+- **Technical Innovation**: Modern web technologies applied to academic research
 
 ### 11.2 Practical Applications
-- **Medical Research**: Functional platform for respiratory health studies
+- **Academic Research**: Functional platform for cough audio studies
 - **Educational Resource**: Example of professional software development
 - **Research Tool**: Reusable framework for similar data collection needs
 - **Portfolio Project**: Demonstration of technical and research capabilities
@@ -358,11 +358,11 @@ Research Support:
 
 The proposed CoughTest platform represents a comprehensive project that combines:
 - **Technical Excellence**: Modern full-stack web development
-- **Research Value**: Systematic medical data collection
+- **Research Value**: Systematic cough audio data collection
 - **Academic Rigor**: IEEE-compliant documentation and methodology
-- **Practical Impact**: Functional tool for medical research
+- **Practical Impact**: Functional tool for academic research
 
-This project will demonstrate advanced software engineering skills while contributing to medical research capabilities. The systematic approach, comprehensive documentation, and research focus make it suitable for academic evaluation and potential real-world application.
+This project will demonstrate advanced software engineering skills while contributing to academic research capabilities. The systematic approach, comprehensive documentation, and research focus make it suitable for academic evaluation and potential real-world application.
 
 I believe this project aligns well with academic objectives while providing valuable experience in professional software development and research methodology.
 

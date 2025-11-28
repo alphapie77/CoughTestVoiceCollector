@@ -1,5 +1,5 @@
 # User Manual
-## CoughTest - Medical Research Data Collection Platform
+## CoughTest - Cough Audio Research Data Collection Platform
 
 ### Document Information
 - **Version**: 1.0
@@ -62,7 +62,7 @@ Operating Systems:
 ## 2. User Registration and Login
 
 ### 2.1 Creating an Account (Optional)
-**Note**: Registration is optional. You can contribute anonymously.
+**Note**: Registration is optional. You can contribute anonymously without creating an account.
 
 1. **Click "Register"** in the navigation menu
 2. **Fill in the registration form**:
@@ -92,12 +92,12 @@ Registered Users Can:
   - Track their contributions
   - View personal recording history
   - Delete their own recordings
-  - Access advanced statistics
+  - Access personal dashboard
 
 Anonymous Users Can:
-  - Submit recordings with identifier
-  - Contribute to research
-  - Upload files
+  - Submit cough recordings with optional identifier
+  - Contribute to research without registration
+  - Upload audio files
   - View public statistics
 ```
 
@@ -128,7 +128,7 @@ Environment:
 Recording Technique:
   - Natural cough (don't force it)
   - Single cough or cough sequence
-  - Speak clearly if adding voice notes
+  - Clear cough sounds preferred
   - Maintain consistent volume
 
 Quality Tips:
@@ -540,20 +540,20 @@ For Mobile Users:
 ### 9.1 Data Privacy
 ```yaml
 What We Collect:
-  - Audio recordings (cough samples)
+  - Cough audio recordings
   - Technical metadata (file specs, timestamps)
   - System information (browser, IP address)
   - Optional user information (if registered)
 
 What We Don't Collect:
   - Personal health information
-  - Identifying voice characteristics
+  - Medical history or diagnosis
   - Location data (beyond IP geolocation)
   - Sensitive personal data
 
 Data Usage:
-  - Research purposes only
-  - Academic analysis and validation
+  - Academic and scientific research only
+  - Cough sound analysis and validation
   - Platform improvement
   - Statistical reporting (anonymized)
 ```
@@ -633,8 +633,8 @@ Citation Format:
 Research Applications:
   - Acoustic analysis of cough sounds
   - Machine learning model training
-  - Medical diagnostic research
-  - Public health studies
+  - Audio pattern recognition research
+  - Academic studies on cough characteristics
 ```
 
 ---

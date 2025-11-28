@@ -1,22 +1,22 @@
 # Research Methodology Documentation
-## CoughTest - Medical Research Data Collection Platform
+## CoughTest - Cough Audio Research Data Collection Platform
 
 ### Document Information
 - **Version**: 1.0
 - **Date**: November 2025
 - **Research Type**: Applied Computer Science Research
-- **Domain**: Medical Informatics & Health Technology
+- **Domain**: Cough Audio Analysis & Data Science
 
 ---
 
 ## 1. Research Overview
 
 ### 1.1 Research Problem Statement
-The collection and analysis of cough audio data for medical research requires a standardized, scalable platform that can:
-- Collect high-quality audio samples with comprehensive metadata
+The collection and analysis of cough audio data for academic research requires a standardized, scalable platform that can:
+- Collect high-quality cough audio samples with comprehensive metadata
 - Ensure data integrity and reproducibility for academic validation
 - Provide efficient data export capabilities for statistical analysis
-- Support both registered and anonymous participant contributions
+- Support both registered users and anonymous participant contributions
 
 ### 1.2 Research Objectives
 **Primary Objective**: Develop a web-based platform for systematic cough audio data collection
@@ -29,10 +29,10 @@ The collection and analysis of cough audio data for medical research requires a 
 5. Ensure platform scalability for large-scale studies
 
 ### 1.3 Research Questions
-1. How can web technologies be leveraged to create a standardized cough data collection platform?
-2. What metadata parameters are essential for medical audio research validation?
+1. How can web technologies be leveraged to create a standardized cough audio data collection platform?
+2. What metadata parameters are essential for cough audio research validation?
 3. How can data integrity be maintained throughout the collection and export process?
-4. What are the optimal audio recording specifications for research purposes?
+4. What are the optimal cough recording specifications for research purposes?
 
 ---
 
@@ -90,10 +90,11 @@ Quality Metrics:
 
 ### 3.2 Metadata Collection Schema
 ```yaml
-Participant Information:
-  - User ID (registered) or Anonymous ID
+User Information:
+  - User ID (registered users) or Anonymous ID
   - Submission timestamp
-  - Geographic location (optional, anonymized)
+  - Authentication status (registered/anonymous)
+  - Optional user-provided identifier
 
 Technical Metadata:
   - Audio file specifications (sample rate, bit rate, channels)
@@ -146,7 +147,8 @@ Data Organization:
 ```yaml
 Privacy Protection:
   - Anonymous submission options
-  - IP address anonymization
+  - Optional user authentication with JWT tokens
+  - IP address logging for research purposes
   - No personal health information collection
   - GDPR compliance considerations
 
@@ -165,11 +167,11 @@ Research Data:
   - Backup and recovery procedures
   - Long-term accessibility planning
 
-Participant Data:
+User Data:
+  - User accounts with authentication
+  - Anonymous submission options
   - Minimal personal information collection
-  - Anonymization procedures
   - Right to data deletion (where applicable)
-  - Consent management system
 ```
 
 ---
@@ -276,8 +278,8 @@ Validation Requirements:
 
 ### 7.1 Research Ethics
 ```yaml
-Participant Rights:
-  - Informed consent procedures
+User Rights:
+  - User registration and authentication
   - Anonymous participation options
   - Right to data withdrawal
   - Transparent data usage policies

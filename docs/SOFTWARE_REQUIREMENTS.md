@@ -1,18 +1,18 @@
 # Software Requirements Specification (SRS)
-## CoughTest - Medical Research Data Collection Platform
+## CoughTest - Cough Audio Research Data Collection Platform
 
 ### Document Information
 - **Version**: 1.0
 - **Date**: November 2025
 - **Project**: CoughTest Research Platform
-- **Purpose**: Medical research data collection for thesis
+- **Purpose**: Cough audio research data collection for academic studies
 
 ---
 
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document specifies the software requirements for CoughTest, a web-based platform designed to collect cough audio samples for medical research and thesis purposes.
+This document specifies the software requirements for CoughTest, a web-based platform designed to collect cough audio samples for academic research and data analysis purposes.
 
 ### 1.2 Scope
 The system enables researchers to:
@@ -67,9 +67,9 @@ CoughTest is a standalone web application consisting of:
 **FR-006**: The system shall extract audio metadata automatically
 
 ### 3.3 User Management
-**FR-007**: The system shall support user registration and authentication
-**FR-008**: The system shall allow anonymous submissions with identifier
-**FR-009**: The system shall implement JWT-based session management
+**FR-007**: The system shall support optional user registration and authentication
+**FR-008**: The system shall allow anonymous submissions with optional identifier
+**FR-009**: The system shall implement JWT-based session management for registered users
 
 ### 3.4 Data Collection
 **FR-010**: The system shall capture comprehensive metadata:
@@ -153,7 +153,8 @@ CoughTest is a standalone web application consisting of:
 
 ### 7.1 Academic Standards
 - Data collection follows ethical research guidelines
-- Participant privacy protection with anonymous options
+- User privacy protection with anonymous options
+- Optional user authentication system with JWT tokens
 - Comprehensive audit trails for research validation
 
 ### 7.2 Data Export Requirements

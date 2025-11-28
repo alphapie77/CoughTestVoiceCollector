@@ -1,4 +1,4 @@
-# 🎤 CoughTest - Medical Research Data Collection Platform
+# 🎤 CoughTest - Audio Research Data Collection Platform
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0.1-green.svg)](https://www.djangoproject.com/)
@@ -8,14 +8,14 @@
 [![Documentation](https://img.shields.io/badge/Docs-Complete-brightgreen.svg)](docs/DOCUMENTATION_INDEX.md)
 [![License](https://img.shields.io/badge/License-Academic-yellow.svg)](LICENSE)
 
-> **A comprehensive web-based platform for systematic cough audio data collection, designed for medical research and academic validation. This platform serves as both a functional research tool and a demonstration of full-stack software engineering principles.**
+> **A comprehensive web-based platform for systematic cough audio data collection, designed for academic research and data analysis. This platform serves as both a functional research tool and a demonstration of full-stack software engineering principles.**
 
-**🎓 Academic Project** | **🏥 Medical Research** | **💻 Software Engineering** | **📊 Data Science**
+**🎓 Academic Project** | **📊 Audio Research** | **💻 Software Engineering** | **🔬 Data Science**
 
 ## 🌟 Research Platform Features
 
 ### 🔬 **Research-Focused Capabilities**
-- **🎙️ Standardized Audio Collection**: 10-second browser-based cough recording with quality validation
+- **🎙️ Standardized Cough Collection**: 10-second browser-based cough recording with quality validation
 - **📊 Comprehensive Metadata**: Technical specifications, user context, and system information
 - **📤 Multi-Format Export**: CSV (statistical analysis), HTML (review), ZIP (complete dataset)
 - **📈 Real-Time Analytics**: Platform statistics and data quality metrics
@@ -23,11 +23,11 @@
 
 ### 💻 **Technical Implementation**
 - **🏗️ Full-Stack Architecture**: Django REST API + React SPA
-- **🔐 Secure Authentication**: JWT-based with anonymous submission support
+- **🔐 Optional Authentication**: JWT-based user accounts with anonymous submission support
 - **📁 Multi-Format Support**: WAV, MP3, WebM, OGG, M4A audio files
 - **📱 Cross-Platform**: Responsive design for desktop and mobile
 - **⚡ Performance Optimized**: Caching, pagination, and efficient data handling
-- **🎵 Vibe Coding**: Developed with modern coding practices and creative problem-solving
+- **🎵 Modern Development**: Built with current best practices and clean architecture
 
 ### 🎓 **Academic Standards**
 - **📋 IEEE Compliance**: Software requirements (IEEE 830-1998) and design (IEEE 1016-2009)
@@ -116,7 +116,7 @@ CoughTest/
 
 ## 📥 Bulk Data Import
 
-Import existing cough audio datasets:
+Import existing audio datasets:
 
 ```bash
 cd backend
@@ -154,7 +154,7 @@ python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Stu
 
 ## 🎯 Research Applications & Use Cases
 
-### 🔬 **For Medical Researchers**
+### 🔬 **For Cough Researchers**
 - **Data Collection**: Systematic cough audio sampling with standardized protocols
 - **Statistical Analysis**: Export to R, Python, SPSS with complete metadata
 - **Quality Assurance**: Automated validation and quality metrics
@@ -169,7 +169,8 @@ python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Stu
 
 ### 👥 **For Research Participants**
 - **Easy Contribution**: Browser-based recording or file upload
-- **Privacy Protection**: Anonymous participation with optional identification
+- **User Accounts**: Optional registration with JWT authentication
+- **Anonymous Option**: Submit recordings without creating an account
 - **Quality Feedback**: Real-time validation and recording quality assessment
 - **Contribution Tracking**: Personal dashboard for registered users
 
@@ -188,7 +189,7 @@ python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Stu
 
 ## 🤝 Contributing
 
-This platform is designed for academic medical research. Contributors help advance respiratory health research by providing cough audio samples.
+This platform is designed for academic cough research. Contributors help advance cough analysis research by providing cough audio samples.
 
 ## 📊 Research Data & Academic Integrity
 
@@ -215,7 +216,7 @@ Research Standards:
 - **Quality Assurance**: IEEE-compliant testing and documentation standards
 - **Data Science**: Complete pipeline from collection to analysis-ready export
 
-⚠️ **Research Integrity Notice**: All data preserved for thesis validation and peer review
+⚠️ **Research Integrity Notice**: All data preserved for academic validation and peer review
 
 ## 🏆 Project Achievements
 
@@ -270,9 +271,9 @@ Research Features:
 
 <div align="center">
 
-**🎓 Academic Research Project | 🏥 Medical Data Collection | 💻 Software Engineering Excellence**
+**🎓 Academic Research Project | 📊 Cough Data Collection | 💻 Software Engineering Excellence**
 
-*Built for advancing medical research in respiratory health analysis*
+*Built for advancing academic research in cough analysis*
 
 [![Research](https://img.shields.io/badge/Research-Validated-success.svg)](docs/RESEARCH_METHODOLOGY.md)
 [![Documentation](https://img.shields.io/badge/Documentation-IEEE_Compliant-blue.svg)](docs/DOCUMENTATION_INDEX.md)

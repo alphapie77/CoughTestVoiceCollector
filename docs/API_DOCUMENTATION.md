@@ -14,7 +14,7 @@
 ### 1.1 User Registration
 **Endpoint**: `POST /auth/register/`
 
-**Description**: Register a new user account for the research platform.
+**Description**: Register a new user account for the research platform (optional - users can also contribute anonymously).
 
 **Request Body**:
 ```json
@@ -96,18 +96,18 @@
 ### 2.1 Upload Recording
 **Endpoint**: `POST /recordings/upload/`
 
-**Description**: Upload a cough audio recording with metadata.
+**Description**: Upload a cough audio recording with metadata. Authentication is optional - anonymous users can submit with an identifier.
 
 **Headers**:
 ```
 Content-Type: multipart/form-data
-Authorization: Bearer <access_token> (optional for anonymous)
+Authorization: Bearer <access_token> (optional - not required for anonymous submissions)
 ```
 
 **Form Data**:
 ```
 audio_file: <audio_file> (required)
-anonymous_name: "Participant001" (optional, for anonymous submissions)
+anonymous_name: "Participant001" (optional identifier for anonymous submissions)
 recording_method: "browser" | "upload" (required)
 ```
 
@@ -208,7 +208,7 @@ ordering: "created_at" | "-created_at" | "duration" (sorting)
 ### 2.4 User's Recordings
 **Endpoint**: `GET /recordings/my-recordings/`
 
-**Description**: Get recordings uploaded by the authenticated user.
+**Description**: Get recordings uploaded by the authenticated user (requires authentication).
 
 **Headers**:
 ```
@@ -236,7 +236,7 @@ Authorization: Bearer <access_token>
 ### 2.5 Delete Recording
 **Endpoint**: `DELETE /recordings/delete/{recording_id}/`
 
-**Description**: Delete a recording (only by the owner).
+**Description**: Delete a recording (only by the owner - requires authentication).
 
 **Headers**:
 ```
@@ -258,7 +258,7 @@ Authorization: Bearer <access_token>
 ### 3.1 Platform Statistics
 **Endpoint**: `GET /recordings/stats/`
 
-**Description**: Get comprehensive platform statistics for research analysis.
+**Description**: Get comprehensive platform statistics for cough audio research analysis.
 
 **Response** (200 OK):
 ```json
@@ -291,7 +291,7 @@ Authorization: Bearer <access_token>
 ### 4.1 CSV Export
 **Endpoint**: `GET /recordings/export-csv/`
 
-**Description**: Export all recording data in CSV format for statistical analysis.
+**Description**: Export all cough recording data in CSV format for statistical analysis.
 
 **Response** (200 OK):
 ```
@@ -305,7 +305,7 @@ Recording ID,User Type,User Name,File Name,File Size (MB),File Format,Duration (
 ### 4.2 HTML Export
 **Endpoint**: `GET /recordings/export-html/`
 
-**Description**: Export data as HTML with embedded audio players for review.
+**Description**: Export cough data as HTML with embedded audio players for review.
 
 **Response** (200 OK):
 ```
@@ -330,7 +330,7 @@ Content-Disposition: attachment; filename="data_20251128_103045.html"
 ### 4.3 ZIP Export
 **Endpoint**: `GET /recordings/export-zip/`
 
-**Description**: Export complete dataset including audio files and CSV metadata.
+**Description**: Export complete cough dataset including audio files and CSV metadata.
 
 **Response** (200 OK):
 ```

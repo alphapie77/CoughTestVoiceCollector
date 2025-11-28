@@ -1,5 +1,5 @@
 # System Design Document
-## CoughTest - Medical Research Data Collection Platform
+## CoughTest - Cough Audio Research Data Collection Platform
 
 ### Document Information
 - **Version**: 1.0

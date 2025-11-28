@@ -1,10 +1,10 @@
 # Testing Strategy and Quality Assurance
-## CoughTest - Medical Research Data Collection Platform
+## CoughTest - Cough Audio Research Data Collection Platform
 
 ### Document Information
 - **Version**: 1.0
 - **Date**: November 2025
-- **Purpose**: Comprehensive testing methodology for research platform validation
+- **Purpose**: Comprehensive testing methodology for cough audio research platform validation
 - **Compliance**: IEEE 829-2008 Software Test Documentation Standard
 
 ---
@@ -182,7 +182,7 @@ Test Cases:
   TC-014: User login/logout
   TC-015: JWT token validation
   TC-016: Password security
-  TC-017: Anonymous submission
+  TC-017: Anonymous submission (no authentication required)
   TC-018: Session management
 
 Expected Results:
@@ -190,7 +190,7 @@ Expected Results:
   - Secure login/logout process
   - Valid JWT token generation
   - Strong password enforcement
-  - Anonymous ID generation
+  - Anonymous identifier handling
   - Proper session handling
 ```
 
@@ -506,7 +506,7 @@ Review Process:
 ### 12.2 Research Quality Standards
 ```yaml
 Research Quality:
-  - Data accuracy: 100%
+  - Cough audio data accuracy: 100%
   - Reproducibility: Verified
   - Academic compliance: Validated
   - Ethical standards: Approved
