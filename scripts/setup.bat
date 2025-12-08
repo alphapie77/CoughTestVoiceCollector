@@ -10,6 +10,11 @@ echo Installing Python dependencies...
 pip install -r requirements.txt
 echo.
 
+echo Creating required directories...
+if not exist "media\cough_recordings" mkdir media\cough_recordings
+if not exist "logs" mkdir logs
+echo.
+
 echo Running database migrations...
 python manage.py migrate
 echo.

@@ -10,6 +10,11 @@ echo "Installing Python dependencies..."
 pip install -r requirements.txt
 echo
 
+echo "Creating required directories..."
+mkdir -p media/cough_recordings
+mkdir -p logs
+echo
+
 echo "Running database migrations..."
 python manage.py migrate
 echo
