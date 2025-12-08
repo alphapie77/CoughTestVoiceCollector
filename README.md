@@ -1,48 +1,51 @@
-# 🎤 CoughTest - Audio Research Data Collection Platform
+# CoughTest: Academic Audio Research Platform
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0.1-green.svg)](https://www.djangoproject.com/)
-[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-purple.svg)](https://getbootstrap.com/)
-[![Research](https://img.shields.io/badge/Research-Academic-orange.svg)](docs/RESEARCH_METHODOLOGY.md)
-[![Documentation](https://img.shields.io/badge/Docs-Complete-brightgreen.svg)](docs/DOCUMENTATION_INDEX.md)
+[![React](https://img.shields.io/badge/React-19.0.0-blue.svg)](https://reactjs.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-purple.svg)](https://getbootstrap.com/)
+[![IEEE](https://img.shields.io/badge/IEEE-Compliant-orange.svg)](docs/DOCUMENTATION_INDEX.md)
 [![License](https://img.shields.io/badge/License-Academic-yellow.svg)](LICENSE)
 
-> **A comprehensive web-based platform for systematic cough audio data collection, designed for academic research and data analysis. This platform serves as both a functional research tool and a demonstration of full-stack software engineering principles.**
+## Overview
 
-**🎓 Academic Project** | **📊 Audio Research** | **💻 Software Engineering** | **🔬 Data Science**
+CoughTest is an enterprise-grade web application designed for systematic collection and analysis of cough audio data in academic research environments. The platform implements IEEE-compliant software engineering standards while providing researchers with robust tools for audio data acquisition, validation, and export.
 
-## 🌟 Research Platform Features
+**Key Domains:** Academic Research • Audio Data Collection • Software Engineering • Data Science
 
-### 🔬 **Research-Focused Capabilities**
-- **🎙️ Standardized Cough Collection**: 10-second browser-based cough recording with quality validation
-- **📊 Comprehensive Metadata**: Technical specifications, user context, and system information
-- **📤 Multi-Format Export**: CSV (statistical analysis), HTML (review), ZIP (complete dataset)
-- **📈 Real-Time Analytics**: Platform statistics and data quality metrics
-- **🔍 Data Validation**: Automated quality checks and research compliance
+## Core Capabilities
 
-### 💻 **Technical Implementation**
-- **🏗️ Full-Stack Architecture**: Django REST API + React SPA
-- **🔐 Optional Authentication**: JWT-based user accounts with anonymous submission support
-- **📁 Multi-Format Support**: WAV, MP3, WebM, OGG, M4A audio files
-- **📱 Cross-Platform**: Responsive design for desktop and mobile
-- **⚡ Performance Optimized**: Caching, pagination, and efficient data handling
-- **🎵 Modern Development**: Built with current best practices and clean architecture
+### Research Features
+- **Standardized Data Collection**: Browser-based 10-second audio recording with automated quality validation
+- **Comprehensive Metadata Capture**: Technical specifications, user context, and system information for each recording
+- **Multi-Format Export**: CSV for statistical analysis, HTML for review, ZIP for complete datasets
+- **Real-Time Analytics**: Platform statistics, data quality metrics, and usage patterns
+- **Automated Validation**: Quality checks ensuring research compliance and data integrity
 
-### 🎓 **Academic Standards**
-- **📋 IEEE Compliance**: Software requirements (IEEE 830-1998) and design (IEEE 1016-2009)
-- **🔬 Research Methodology**: Comprehensive data collection and validation framework
-- **📚 Complete Documentation**: 14 professional documents covering all aspects
-- **✅ Quality Assurance**: Comprehensive testing strategy and validation procedures
+### Technical Architecture
+- **Full-Stack Implementation**: Django REST API backend with React single-page application frontend
+- **Flexible Authentication**: JWT-based user accounts with support for anonymous submissions
+- **Audio Format Support**: WAV, MP3, WebM, OGG, M4A file processing and storage
+- **Responsive Design**: Cross-platform compatibility for desktop and mobile devices
+- **Performance Optimization**: Caching strategies, pagination, and efficient data handling
+- **Modern Development Practices**: Clean architecture, modular design, and comprehensive error handling
 
-## 🚀 Quick Start
+### Academic Compliance
+- **IEEE Standards**: Full compliance with IEEE 830-1998 (Requirements), IEEE 1016-2009 (Design), and IEEE 829-2008 (Testing)
+- **Research Methodology**: Systematic data collection framework with validation procedures
+- **Professional Documentation**: 14 comprehensive documents covering all system aspects
+- **Quality Assurance**: Complete testing strategy with validation and verification procedures
 
-### Prerequisites
-- Python 3.9+
-- Node.js 18+
-- Git
+## Getting Started
 
-### Installation
+### System Requirements
+- Python 3.9 or higher
+- Node.js 18.0 or higher
+- Git version control
+- 2GB available disk space
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+
+### Installation Instructions
 
 **Windows:**
 ```cmd
@@ -61,27 +64,31 @@ chmod +x scripts/*.sh
 ./scripts/start_servers.sh
 ```
 
-### Access Points
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000/api
-- **Admin Panel**: http://localhost:8000/admin (admin/admin123)
+### Application Access
+- **Frontend Application**: http://localhost:3000
+- **REST API Endpoint**: http://localhost:8000/api
+- **Administrative Panel**: http://localhost:8000/admin
+  - Default credentials: `admin` / `admin123` (change in production)
 
-## 📊 Research Data Collection
+## Data Collection Framework
 
-### Metadata Collected
-- **Audio Technical**: Duration, sample rate, bit rate, channels, file size
-- **User Information**: Username or anonymous identifier
-- **Recording Details**: Method (browser/upload), timestamp, file format
-- **System Information**: IP address, user agent (for research purposes)
+### Metadata Schema
+Each recording captures comprehensive metadata for research analysis:
 
-### CSV Export Format
-```csv
+- **Audio Technical Specifications**: Duration, sample rate, bit rate, channel configuration, file size
+- **User Attribution**: Authenticated username or anonymous identifier
+- **Recording Context**: Collection method (browser/upload), timestamp, file format
+- **System Telemetry**: IP address, user agent (for research purposes only)
+
+### Export Data Structure
+CSV exports include the following fields for statistical analysis:
+```
 Recording ID, User Type, User Name, File Name, File Size (MB),
 File Format, Duration (seconds), Recording Method, Created At,
 Sample Rate, Bit Rate, Channels, IP Address, User Agent
 ```
 
-## 🏗️ Project Structure
+## Project Architecture
 
 ```
 CoughTest/
@@ -105,7 +112,7 @@ CoughTest/
 └── README.md               # This file
 ```
 
-## 🔧 Available Scripts
+## Development Scripts
 
 | Script | Windows | macOS/Linux | Description |
 |--------|---------|-------------|-------------|
@@ -114,169 +121,170 @@ CoughTest/
 | Build | `scripts\build_production.bat` | Manual commands | Build for production |
 | Test | `scripts\test_application.bat` | Manual commands | Test application |
 
-## 📥 Bulk Data Import
+## Bulk Data Import
 
-Import existing audio datasets:
+The platform supports importing existing audio datasets through a Django management command:
 
 ```bash
 cd backend
 python manage.py import_cough_data "path/to/audio/files" --anonymous-prefix "Study2024"
 ```
 
-**Supported formats**: WAV, MP3, WebM, M4A, OGG
+**Supported Audio Formats**: WAV, MP3, WebM, M4A, OGG
 
-## 🌐 Cross-Platform Compatibility
+Refer to the [Bulk Import Guide](docs/BULK_IMPORT_GUIDE.md) for detailed instructions and best practices.
 
-- **✅ Website**: Works on all modern browsers and devices
-- **✅ Development**: Windows, macOS, Linux support
-- **✅ Database**: SQLite (included) or PostgreSQL/MySQL
-- **✅ Deployment**: Cloud platforms, self-hosted, Docker
+## Platform Compatibility
 
-## 📚 Comprehensive Documentation Suite
+- **Web Browsers**: Chrome, Firefox, Safari, Edge (latest versions)
+- **Operating Systems**: Windows 10/11, macOS 10.15+, Linux (Ubuntu 20.04+)
+- **Database Systems**: SQLite (development), PostgreSQL, MySQL (production)
+- **Deployment Options**: AWS, Azure, Google Cloud, self-hosted servers, Docker containers
 
-### 🎓 **Academic Documentation**
-- **[📋 Software Requirements Specification](docs/SOFTWARE_REQUIREMENTS.md)** - IEEE 830-1998 compliant
-- **[🏗️ System Design Document](docs/SYSTEM_DESIGN.md)** - IEEE 1016-2009 compliant  
-- **[🔬 Research Methodology](docs/RESEARCH_METHODOLOGY.md)** - Academic framework and validation
-- **[🔌 API Documentation](docs/API_DOCUMENTATION.md)** - Complete REST API reference
+## Documentation
 
-### 👥 **User & Operations**
-- **[👤 User Manual](docs/USER_MANUAL.md)** - Comprehensive platform guide
-- **[🚀 Deployment Guide](docs/DEPLOYMENT_GUIDE.md)** - Production deployment
-- **[🖥️ Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md)** - Windows-specific setup
-- **[🌐 Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md)** - Multi-OS compatibility
+Comprehensive documentation suite covering all aspects of the platform:
 
-### 🔧 **Technical & Testing**
-- **[✅ Testing Strategy](docs/TESTING_STRATEGY.md)** - IEEE 829-2008 compliant
-- **[📊 Test Results](docs/TEST_RESULTS.md)** - Current validation status
-- **[📥 Bulk Import Guide](docs/BULK_IMPORT_GUIDE.md)** - Dataset import procedures
-- **[📖 Documentation Index](docs/DOCUMENTATION_INDEX.md)** - Complete navigation guide
+### Academic & Technical Standards
+- [Software Requirements Specification](docs/SOFTWARE_REQUIREMENTS.md) - IEEE 830-1998 compliant
+- [System Design Document](docs/SYSTEM_DESIGN.md) - IEEE 1016-2009 compliant  
+- [Research Methodology](docs/RESEARCH_METHODOLOGY.md) - Academic framework and validation procedures
+- [API Documentation](docs/API_DOCUMENTATION.md) - Complete REST API reference
 
-## 🎯 Research Applications & Use Cases
+### User & Operations Guides
+- [User Manual](docs/USER_MANUAL.md) - Comprehensive platform usage guide
+- [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) - Production deployment procedures
+- [Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md) - Windows-specific installation
+- [Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md) - Multi-OS compatibility information
 
-### 🔬 **For Cough Researchers**
-- **Data Collection**: Systematic cough audio sampling with standardized protocols
-- **Statistical Analysis**: Export to R, Python, SPSS with complete metadata
-- **Quality Assurance**: Automated validation and quality metrics
-- **Longitudinal Studies**: Track contributions over time with comprehensive audit trails
-- **Multi-Site Research**: Standardized collection across different locations
+### Testing & Quality Assurance
+- [Testing Strategy](docs/TESTING_STRATEGY.md) - IEEE 829-2008 compliant test documentation
+- [Test Results](docs/TEST_RESULTS.md) - Current validation and verification status
+- [Bulk Import Guide](docs/BULK_IMPORT_GUIDE.md) - Dataset import procedures
+- [Documentation Index](docs/DOCUMENTATION_INDEX.md) - Complete documentation navigation
 
-### 🎓 **For Academic Validation**
-- **Thesis Research**: Complete platform demonstrating software engineering principles
-- **Peer Review**: IEEE-compliant documentation ready for academic review
-- **Reproducible Research**: Full methodology documentation and data export capabilities
-- **Educational Resource**: Example of professional full-stack development
+## Use Cases
 
-### 👥 **For Research Participants**
-- **Easy Contribution**: Browser-based recording or file upload
-- **User Accounts**: Optional registration with JWT authentication
-- **Anonymous Option**: Submit recordings without creating an account
+### Research Applications
+- **Data Collection**: Systematic audio sampling with standardized protocols and quality controls
+- **Statistical Analysis**: Export capabilities for R, Python, SPSS, and other analysis tools
+- **Quality Assurance**: Automated validation ensuring data integrity and research compliance
+- **Longitudinal Studies**: Comprehensive audit trails for tracking contributions over time
+- **Multi-Site Research**: Standardized collection protocols across distributed research locations
+
+### Academic Validation
+- **Thesis Research**: Complete platform demonstrating professional software engineering principles
+- **Peer Review**: IEEE-compliant documentation suitable for academic review and publication
+- **Reproducible Research**: Full methodology documentation enabling research replication
+- **Educational Resource**: Reference implementation of modern full-stack development practices
+
+### Participant Experience
+- **Streamlined Contribution**: Browser-based recording or file upload with minimal friction
+- **Flexible Authentication**: Optional user accounts with JWT security or anonymous submission
 - **Quality Feedback**: Real-time validation and recording quality assessment
-- **Contribution Tracking**: Personal dashboard for registered users
+- **Contribution Tracking**: Personal dashboard for registered users to monitor their submissions
 
-### 💻 **For Software Engineers**
-- **Architecture Reference**: Modern full-stack implementation example
-- **API Integration**: RESTful API with comprehensive documentation
-- **Quality Standards**: IEEE-compliant requirements and design documentation
-- **Testing Framework**: Complete testing strategy and automation examples
+### Technical Integration
+- **Architecture Reference**: Modern full-stack implementation with clean separation of concerns
+- **API Integration**: RESTful API with comprehensive documentation and examples
+- **Quality Standards**: IEEE-compliant requirements, design, and testing documentation
+- **Testing Framework**: Complete testing strategy with unit, integration, and system tests
 
-## 🔒 Privacy & Security
+## Security & Privacy
 
-- **Anonymous Options**: No personal information required
-- **Secure Storage**: Audio files with unique identifiers
-- **JWT Authentication**: Token-based security
-- **Research Metadata**: IP/user agent for academic purposes only
+- **Anonymous Submissions**: Platform supports data collection without personal information requirements
+- **Secure Storage**: Audio files stored with UUID identifiers, isolated from user data
+- **JWT Authentication**: Industry-standard token-based authentication for registered users
+- **Research Metadata**: IP addresses and user agents collected solely for academic research purposes
+- **Data Protection**: Compliance with research ethics and data protection best practices
 
-## 🤝 Contributing
+## Contributing
 
-This platform is designed for academic cough research. Contributors help advance cough analysis research by providing cough audio samples.
+This platform serves as an academic research tool for cough audio analysis. Contributions in the form of audio samples help advance scientific research and machine learning applications in audio analysis.
 
-## 📊 Research Data & Academic Integrity
+For technical contributions, please refer to the [System Design Document](docs/SYSTEM_DESIGN.md) and [Testing Strategy](docs/TESTING_STRATEGY.md).
 
-### 🔬 **Research Dataset**
-This repository contains **real research data** collected for academic validation:
+## Research Data & Academic Integrity
 
-```yaml
-Data Components:
-  Database: backend/db.sqlite3 (metadata, user data, system logs)
-  Audio Files: backend/media/cough_recordings/ (actual research samples)
-  Documentation: Complete methodology and validation procedures
-  Export Tools: Multi-format data export for statistical analysis
+### Dataset Information
+This repository contains authentic research data collected for academic validation purposes:
 
-Research Standards:
-  Data Integrity: 100% preserved for academic validation
-  Reproducibility: Complete methodology documentation
-  Quality Assurance: Comprehensive validation procedures
-  Ethical Compliance: Privacy protection and consent management
-```
+**Data Components:**
+- Database: `backend/db.sqlite3` (metadata, user information, system logs)
+- Audio Files: `backend/media/cough_recordings/` (research audio samples)
+- Documentation: Complete methodology and validation procedures
+- Export Tools: Multi-format data export capabilities for statistical analysis
 
-### 🎓 **Academic Contributions**
-- **Software Engineering**: Demonstrates professional development practices
-- **Research Methodology**: Systematic data collection and validation framework  
+**Research Standards:**
+- Data Integrity: Complete preservation for academic validation and peer review
+- Reproducibility: Comprehensive methodology documentation enabling research replication
+- Quality Assurance: Systematic validation procedures ensuring data reliability
+- Ethical Compliance: Privacy protection and informed consent management
+
+### Academic Contributions
+- **Software Engineering**: Professional development practices and architectural patterns
+- **Research Methodology**: Systematic data collection and validation framework
 - **Quality Assurance**: IEEE-compliant testing and documentation standards
-- **Data Science**: Complete pipeline from collection to analysis-ready export
+- **Data Science**: End-to-end pipeline from collection to analysis-ready export
 
-⚠️ **Research Integrity Notice**: All data preserved for academic validation and peer review
+**Research Integrity Notice**: All data is preserved in its original form for academic validation, peer review, and reproducibility verification.
 
-## 🏆 Project Achievements
+## Technical Specifications
 
-### 🎓 **Academic Excellence**
-```yaml
-Standards Compliance:
-  ✅ IEEE 830-1998 (Software Requirements Specification)
-  ✅ IEEE 1016-2009 (Software Design Descriptions)  
-  ✅ IEEE 829-2008 (Software Test Documentation)
-  ✅ Academic research methodology standards
+### Standards Compliance
+- IEEE 830-1998: Software Requirements Specification
+- IEEE 1016-2009: Software Design Descriptions
+- IEEE 829-2008: Software Test Documentation
+- Academic research methodology standards
 
-Documentation Quality:
-  ✅ 14 comprehensive documents (3,200+ lines)
-  ✅ Multi-audience approach (engineers, researchers, users)
-  ✅ Complete technical specifications
-  ✅ Research validation procedures
-```
+### Documentation Metrics
+- 14 comprehensive technical documents
+- 3,200+ lines of professional documentation
+- Multi-audience approach (engineers, researchers, end-users)
+- Complete technical specifications and validation procedures
 
-### 💻 **Technical Excellence**
-```yaml
-Software Quality:
-  ✅ Full-stack web application (Django + React)
-  ✅ RESTful API with comprehensive documentation
-  ✅ Responsive design with cross-platform support
-  ✅ Comprehensive testing strategy and validation
-  ✅ Vibe coding approach with modern development practices
+### Software Quality Attributes
+- Full-stack web application architecture (Django REST + React SPA)
+- RESTful API with comprehensive endpoint documentation
+- Responsive design with cross-platform browser support
+- Comprehensive testing strategy with automated validation
+- Modern development practices and clean code architecture
 
-Research Features:
-  ✅ Standardized data collection protocols
-  ✅ Multi-format export capabilities (CSV, HTML, ZIP)
-  ✅ Real-time analytics and quality metrics
-  ✅ Bulk import tools for existing datasets
-```
+### Research Capabilities
+- Standardized data collection protocols with quality validation
+- Multi-format export (CSV, HTML, ZIP) for various analysis tools
+- Real-time analytics dashboard with quality metrics
+- Bulk import utilities for existing audio datasets
+- Automated metadata extraction and validation
 
-## 📞 Contact & Support
+## Support & Resources
 
-### 🎓 **Academic Inquiries**
-- **Research Methodology**: See [Research Methodology](docs/RESEARCH_METHODOLOGY.md)
-- **Technical Implementation**: See [System Design](docs/SYSTEM_DESIGN.md)
-- **Documentation Suite**: See [Documentation Index](docs/DOCUMENTATION_INDEX.md)
+### Academic Inquiries
+- Research Methodology: [Research Methodology Document](docs/RESEARCH_METHODOLOGY.md)
+- Technical Implementation: [System Design Document](docs/SYSTEM_DESIGN.md)
+- Complete Documentation: [Documentation Index](docs/DOCUMENTATION_INDEX.md)
 
-### 💻 **Technical Support**
-- **Setup Issues**: See [Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md) or [Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md)
-- **API Integration**: See [API Documentation](docs/API_DOCUMENTATION.md)
-- **Testing & Validation**: See [Testing Strategy](docs/TESTING_STRATEGY.md)
+### Technical Support
+- Installation Issues: [Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md) | [Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md)
+- API Integration: [API Documentation](docs/API_DOCUMENTATION.md)
+- Testing & Validation: [Testing Strategy](docs/TESTING_STRATEGY.md)
 
-## 📄 License
+## License
 
-**Academic Research License** - Created for thesis research and medical data collection purposes.
+This software is released under an Academic Research License. The platform was developed for thesis research and audio data collection purposes. See [LICENSE](LICENSE) for complete terms and conditions.
 
 ---
 
 <div align="center">
 
-**🎓 Academic Research Project | 📊 Cough Data Collection | 💻 Software Engineering Excellence**
+### Academic Research Platform for Cough Audio Analysis
 
-*Built for advancing academic research in cough analysis*
+*Advancing scientific research through systematic audio data collection and analysis*
 
-[![Research](https://img.shields.io/badge/Research-Validated-success.svg)](docs/RESEARCH_METHODOLOGY.md)
-[![Documentation](https://img.shields.io/badge/Documentation-IEEE_Compliant-blue.svg)](docs/DOCUMENTATION_INDEX.md)
-[![Quality](https://img.shields.io/badge/Quality-Professional-brightgreen.svg)](docs/TESTING_STRATEGY.md)
+[![Research Validated](https://img.shields.io/badge/Research-Validated-success.svg)](docs/RESEARCH_METHODOLOGY.md)
+[![IEEE Compliant](https://img.shields.io/badge/Documentation-IEEE_Compliant-blue.svg)](docs/DOCUMENTATION_INDEX.md)
+[![Professional Quality](https://img.shields.io/badge/Quality-Professional-brightgreen.svg)](docs/TESTING_STRATEGY.md)
+
+**[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)**
 
 </div>
