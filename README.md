@@ -1,4 +1,6 @@
-# CoughTest: Academic Audio Research Platform
+# CoughTestVoiceCollector: Academic Audio Research Platform
+
+<div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0.1-green.svg)](https://www.djangoproject.com/)
@@ -6,12 +8,118 @@
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-purple.svg)](https://getbootstrap.com/)
 [![IEEE](https://img.shields.io/badge/IEEE-Compliant-orange.svg)](docs/DOCUMENTATION_INDEX.md)
 [![License](https://img.shields.io/badge/License-Academic-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](CHANGELOG.md)
+
+**[Quick Start](#getting-started)** • **[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Contributing](#contributing)**
+
+</div>
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features at a Glance](#features-at-a-glance)
+- [Features Showcase](#features-showcase)
+- [Core Capabilities](#core-capabilities)
+- [Getting Started](#getting-started)
+- [Data Collection Framework](#data-collection-framework)
+- [Project Architecture](#project-architecture)
+- [Development Scripts](#development-scripts)
+- [Platform Compatibility](#platform-compatibility)
+- [Documentation](#documentation)
+- [Use Cases](#use-cases)
+- [Security & Privacy](#security--privacy)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Citation](#citation)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+---
 
 ## Overview
 
-CoughTest is an enterprise-grade web application designed for systematic collection and analysis of cough audio data in academic research environments. The platform implements IEEE-compliant software engineering standards while providing researchers with robust tools for audio data acquisition, validation, and export.
+CoughTestVoiceCollector is an enterprise-grade web application designed for systematic collection and analysis of cough audio data in academic research environments. The platform implements IEEE-compliant software engineering standards while providing researchers with robust tools for audio data acquisition, validation, and export.
 
 **Key Domains:** Academic Research • Audio Data Collection • Software Engineering • Data Science
+
+---
+
+## ✨ Features at a Glance
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎙️ Audio Collection
+- Browser-based 10-second recording
+- Multi-format file upload support
+- Bulk import capabilities
+- Real-time quality validation
+
+</td>
+<td width="50%">
+
+### 📊 Data Management
+- Comprehensive metadata capture
+- Multi-format export (CSV/HTML/ZIP)
+- Real-time analytics dashboard
+- Advanced search and filtering
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🔒 Security & Privacy
+- Anonymous submission support
+- JWT authentication
+- Secure file storage
+- Research ethics compliance
+
+</td>
+<td width="50%">
+
+### 📚 Academic Standards
+- IEEE-compliant documentation
+- Reproducible research framework
+- Complete testing strategy
+- Professional code quality
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎬 Features Showcase
+
+### Platform Interface
+
+#### Home Page
+![Home Page](docs/screenshots/home.png)
+*Landing page with quick access to recording, browsing, and analytics features*
+
+#### Recording Interface
+![Recording Interface](docs/screenshots/recording.png)
+*Intuitive browser-based audio capture with real-time feedback and quality validation*
+
+#### Analytics Dashboard
+![Analytics Dashboard](docs/screenshots/analytics.png)
+*Comprehensive statistics showing total recordings, users, data quality metrics, and usage patterns*
+
+#### Data Management
+![Browse Recordings](docs/screenshots/recordings.png)
+*Browse, filter, search, and export recordings with advanced data management tools*
+
+#### Admin Panel
+![Admin Panel](docs/screenshots/admin.png)
+*Django admin interface for comprehensive data management and system configuration*
+
+---
 
 ## Core Capabilities
 
@@ -198,13 +306,13 @@ Comprehensive documentation suite covering all aspects of the platform:
 - **Research Metadata**: IP addresses and user agents collected solely for academic research purposes
 - **Data Protection**: Compliance with research ethics and data protection best practices
 
-## Contributing
+## 🤝 Contributing
 
 This platform serves as an academic research tool for cough audio analysis. Contributions in the form of audio samples help advance scientific research and machine learning applications in audio analysis.
 
 For technical contributions, please refer to the [System Design Document](docs/SYSTEM_DESIGN.md) and [Testing Strategy](docs/TESTING_STRATEGY.md).
 
-## Research Data & Academic Integrity
+## 📊 Research Data & Academic Integrity
 
 ### Dataset Information
 This repository contains authentic research data collected for academic validation purposes:
@@ -229,7 +337,7 @@ This repository contains authentic research data collected for academic validati
 
 **Research Integrity Notice**: All data is preserved in its original form for academic validation, peer review, and reproducibility verification.
 
-## Technical Specifications
+## 🔬 Technical Specifications
 
 ### Standards Compliance
 - IEEE 830-1998: Software Requirements Specification
@@ -257,7 +365,7 @@ This repository contains authentic research data collected for academic validati
 - Bulk import utilities for existing audio datasets
 - Automated metadata extraction and validation
 
-## Support & Resources
+## 📞 Support & Resources
 
 ### Academic Inquiries
 - Research Methodology: [Research Methodology Document](docs/RESEARCH_METHODOLOGY.md)
@@ -269,22 +377,219 @@ This repository contains authentic research data collected for academic validati
 - API Integration: [API Documentation](docs/API_DOCUMENTATION.md)
 - Testing & Validation: [Testing Strategy](docs/TESTING_STRATEGY.md)
 
-## License
+## 🔧 Troubleshooting
 
-This software is released under an Academic Research License. The platform was developed for thesis research and audio data collection purposes. See [LICENSE](LICENSE) for complete terms and conditions.
+### Common Issues
+
+**Problem: Recording upload fails**
+```bash
+# Solution: Ensure media directories exist
+cd backend
+mkdir media\cough_recordings  # Windows
+mkdir -p media/cough_recordings  # Linux/macOS
+```
+
+**Problem: Cannot fetch recordings**
+```bash
+# Solution: Check if backend server is running
+cd backend
+python manage.py runserver
+```
+
+**Problem: Frontend not connecting to backend**
+- Verify backend is running on `http://localhost:8000`
+- Check CORS settings in `backend/coughtest_backend/settings.py`
+- Ensure frontend `.env` has correct `REACT_APP_API_URL`
+
+**Problem: Database migration errors**
+```bash
+cd backend
+python manage.py migrate --run-syncdb
+```
+
+For more issues, see [Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md) or [Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md).
+
+---
+
+## ❓ FAQ
+
+**Q: Can I use this for commercial purposes?**  
+A: This is released under an Academic Research License. Contact the author for commercial licensing.
+
+**Q: How do I contribute audio samples?**  
+A: Simply visit the platform, click "Record Cough", and follow the instructions. No account required!
+
+**Q: Is my data secure and anonymous?**  
+A: Yes! The platform supports fully anonymous submissions with secure UUID-based file storage.
+
+**Q: What audio formats are supported?**  
+A: WAV, MP3, WebM, OGG, and M4A formats are fully supported.
+
+**Q: Can I export data for analysis?**  
+A: Yes! Export in CSV (for statistical analysis), HTML (for review), or ZIP (complete dataset).
+
+**Q: How do I cite this platform in my research?**  
+A: See the [Citation](#citation) section below.
+
+---
+
+## 🗺️ Roadmap
+
+### Version 1.0.0 (Current) ✅
+- ✅ Browser-based audio recording
+- ✅ Multi-format file upload
+- ✅ Real-time analytics dashboard
+- ✅ Multi-format data export
+- ✅ IEEE-compliant documentation
+
+### Version 1.1.0 (Planned)
+- 🔄 Advanced audio analysis features
+- 🔄 Machine learning integration
+- 🔄 Enhanced visualization tools
+- 🔄 Mobile application support
+
+### Version 2.0.0 (Future)
+- 📋 Multi-language support
+- 📋 Cloud deployment templates
+- 📋 Advanced collaboration features
+- 📋 API rate limiting dashboard
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
+
+---
+
+## 🤝 Contributing
+
+### For Research Participants
+Contribute audio samples to advance scientific research:
+1. Visit the platform at `http://localhost:3000`
+2. Click "Record Cough" or "Upload File"
+3. Follow the on-screen instructions
+4. Submit your recording
+
+### For Developers
+We welcome technical contributions! Please follow these steps:
+
+1. **Fork the repository**
+   ```bash
+   git clone https://github.com/alphapie77/CoughTestVoiceCollector.git
+   ```
+
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make your changes**
+   - Follow the existing code style
+   - Add tests for new features
+   - Update documentation as needed
+
+4. **Test your changes**
+   ```bash
+   cd backend
+   python manage.py test
+   ```
+
+5. **Submit a pull request**
+   - Provide a clear description of changes
+   - Reference any related issues
+   - Ensure all tests pass
+
+### Development Guidelines
+- Follow [PEP 8](https://pep8.org/) for Python code
+- Use [ESLint](https://eslint.org/) for JavaScript code
+- Write meaningful commit messages
+- Add comments for complex logic
+- Update documentation for new features
+
+For detailed guidelines, see [System Design Document](docs/SYSTEM_DESIGN.md) and [Testing Strategy](docs/TESTING_STRATEGY.md).
+
+---
+
+## 📖 Citation
+
+If you use this platform in your research, please cite:
+
+```bibtex
+@software{coughtestvoicecollector2025,
+  author = {alphapie77},
+  title = {CoughTestVoiceCollector: Academic Audio Research Platform},
+  year = {2025},
+  publisher = {GitHub},
+  url = {https://github.com/alphapie77/CoughTestVoiceCollector},
+  version = {1.0.0}
+}
+```
+
+**APA Format:**
+```
+alphapie77. (2025). CoughTestVoiceCollector: Academic Audio Research Platform 
+(Version 1.0.0) [Computer software]. GitHub. 
+https://github.com/alphapie77/CoughTestVoiceCollector
+```
+
+---
+
+## 📄 License
+
+This software is released under an **Academic Research License**. The platform was developed for thesis research and audio data collection purposes.
+
+**Key Points:**
+- ✅ Free for academic and research use
+- ✅ Modification and distribution allowed with attribution
+- ✅ Commercial use requires separate licensing
+- ✅ No warranty provided
+
+See [LICENSE](LICENSE) for complete terms and conditions.
+
+---
+
+## 🙏 Acknowledgments
+
+### Technologies & Frameworks
+- **Django** - High-level Python web framework
+- **React** - JavaScript library for building user interfaces
+- **Bootstrap** - CSS framework for responsive design
+- **Django REST Framework** - Powerful toolkit for building Web APIs
+
+### Standards & Compliance
+- **IEEE 830-1998** - Software Requirements Specification
+- **IEEE 1016-2009** - Software Design Descriptions
+- **IEEE 829-2008** - Software Test Documentation
+
+### Special Thanks
+- Academic advisors and reviewers
+- Research participants who contributed audio samples
+- Open-source community for excellent tools and libraries
+
+---
+
+## 📞 Contact & Support
+
+### Project Maintainer
+- **GitHub**: [@alphapie77](https://github.com/alphapie77)
+- **Repository**: [CoughTestVoiceCollector](https://github.com/alphapie77/CoughTestVoiceCollector)
+
+### Get Help
+- 📚 **Documentation**: [Complete Documentation Index](docs/DOCUMENTATION_INDEX.md)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/alphapie77/CoughTestVoiceCollector/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/alphapie77/CoughTestVoiceCollector/discussions)
+- 📧 **Support**: [Create an issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues/new)
 
 ---
 
 <div align="center">
 
-### Academic Research Platform for Cough Audio Analysis
+### ⭐ Academic Research Platform for Cough Audio Analysis
 
 *Advancing scientific research through systematic audio data collection and analysis*
 
 [![Research Validated](https://img.shields.io/badge/Research-Validated-success.svg)](docs/RESEARCH_METHODOLOGY.md)
 [![IEEE Compliant](https://img.shields.io/badge/Documentation-IEEE_Compliant-blue.svg)](docs/DOCUMENTATION_INDEX.md)
 [![Professional Quality](https://img.shields.io/badge/Quality-Professional-brightgreen.svg)](docs/TESTING_STRATEGY.md)
+[![GitHub Stars](https://img.shields.io/github/stars/alphapie77/CoughTestVoiceCollector?style=social)](https://github.com/alphapie77/CoughTestVoiceCollector/stargazers)
 
-**[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)**
+**[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** • **[Report Issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues)**
 
 </div>
