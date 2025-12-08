@@ -49,16 +49,16 @@ CoughTest is an enterprise-grade web application designed for systematic collect
 
 **Windows:**
 ```cmd
-git clone <repository-url>
-cd CoughTest
+git clone https://github.com/alphapie77/CoughTestVoiceCollector.git
+cd CoughTestVoiceCollector
 scripts\setup.bat
 scripts\start_servers.bat
 ```
 
 **macOS/Linux:**
 ```bash
-git clone <repository-url>
-cd CoughTest
+git clone https://github.com/alphapie77/CoughTestVoiceCollector.git
+cd CoughTestVoiceCollector
 chmod +x scripts/*.sh
 ./scripts/setup.sh
 ./scripts/start_servers.sh
@@ -91,7 +91,7 @@ Sample Rate, Bit Rate, Channels, IP Address, User Agent
 ## Project Architecture
 
 ```
-CoughTest/
+CoughTestVoiceCollector/
 ├── 📁 backend/              # Django REST API
 │   ├── accounts/            # User authentication
 │   ├── recordings/          # Audio recording management
