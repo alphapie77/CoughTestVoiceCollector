@@ -36,6 +36,20 @@ const ViewRecordings = () => {
     debouncedSearch(searchTerm);
   }, [searchTerm, debouncedSearch]);
 
+  // Listen for new recordings and refresh automatically
+  useEffect(() => {
+    const handleRecordingUploaded = () => {
+      console.log('New recording detected, refreshing list...');
+      fetchRecordings();
+    };
+    
+    window.addEventListener('recordingUploaded', handleRecordingUploaded);
+    
+    return () => {
+      window.removeEventListener('recordingUploaded', handleRecordingUploaded);
+    };
+  }, []);
+
   const showModalDialog = (type, title, message, onConfirm = null) => {
     setModalConfig({ type, title, message, onConfirm });
     setShowModal(true);
@@ -67,6 +81,7 @@ const ViewRecordings = () => {
     try {
       const params = {
         page: currentPage,
+        _t: Date.now(), // Cache-busting parameter
         ...Object.fromEntries(
           Object.entries(filters).filter(([_, value]) => value !== '')
         ),

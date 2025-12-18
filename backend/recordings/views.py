@@ -57,8 +57,10 @@ class CoughRecordingCreateView(generics.CreateAPIView):
                 user_agent=client_info['user_agent']
             )
             
-            # Clear stats cache when new recording is added
+            # Clear caches when new recording is added
             cache.delete('recording_stats')
+            cache.delete('recordings_list')
+            cache.clear()  # Clear all cache to ensure fresh data
             
             # Log the action
             log_user_action(
@@ -449,9 +451,11 @@ def bulk_upload_recordings(request):
                 'error': str(e)
             })
     
-    # Clear stats cache if any files were successfully uploaded
+    # Clear all caches if any files were successfully uploaded
     if results:
         cache.delete('recording_stats')
+        cache.delete('recordings_list')
+        cache.clear()  # Ensure fresh data
     
     # Prepare response
     response_data = {

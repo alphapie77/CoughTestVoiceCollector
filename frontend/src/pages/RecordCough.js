@@ -249,6 +249,20 @@ const RecordCough = () => {
       resetRecording();
       setAnonymousName('');
       
+      // Force refresh of recordings list by clearing browser cache
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => {
+            caches.delete(name);
+          });
+        });
+      }
+      
+      // Trigger a custom event to notify other components
+      window.dispatchEvent(new CustomEvent('recordingUploaded', {
+        detail: { timestamp: Date.now() }
+      }));
+      
     } catch (error) {
       console.error('Upload error:', error);
       
