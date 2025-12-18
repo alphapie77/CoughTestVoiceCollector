@@ -266,6 +266,7 @@ const ViewRecordings = () => {
                       </div>
                       <audio 
                         controls 
+                        preload="metadata"
                         className="modern-audio-player"
                         onLoadedMetadata={(e) => {
                           const actualDuration = e.target.duration;
