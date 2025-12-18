@@ -5,7 +5,7 @@ import { debounce } from 'lodash';
 
 const ViewRecordings = () => {
   const [recordings, setRecordings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     search: '',
     recording_method: '',
@@ -29,7 +29,13 @@ const ViewRecordings = () => {
   );
 
   useEffect(() => {
-    fetchRecordings();
+    // Show loading immediately and fetch data
+    setLoading(true);
+    const timer = setTimeout(() => {
+      fetchRecordings();
+    }, 100); // Small delay to show loading state
+    
+    return () => clearTimeout(timer);
   }, [currentPage, filters]);
 
   useEffect(() => {
@@ -206,9 +212,22 @@ const ViewRecordings = () => {
       <Row>
         <Col>
           {loading ? (
-            <div className="text-center p-5">
-              <div className="spinner-border text-primary" style={{width: '3rem', height: '3rem'}} />
-              <p className="mt-3">Loading recordings...</p>
+            <div className="recordings-skeleton">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="skeleton-card">
+                  <div className="skeleton-header">
+                    <div className="skeleton-line skeleton-user"></div>
+                    <div className="skeleton-line skeleton-badge"></div>
+                  </div>
+                  <div className="skeleton-line skeleton-filename"></div>
+                  <div className="skeleton-specs">
+                    <div className="skeleton-line skeleton-spec"></div>
+                    <div className="skeleton-line skeleton-spec"></div>
+                    <div className="skeleton-line skeleton-spec"></div>
+                  </div>
+                  <div className="skeleton-line skeleton-audio"></div>
+                </div>
+              ))}
             </div>
           ) : recordings.length === 0 ? (
             <div className="text-center p-5">

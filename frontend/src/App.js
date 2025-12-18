@@ -7,18 +7,23 @@ import ScrollToTop from './components/ScrollToTop';
 import { checkBrowserSupport } from './utils/helpers';
 import './App.css';
 
-// Lazy load pages for better performance
-const Home = React.lazy(() => import('./pages/Home'));
-const RecordCough = React.lazy(() => import('./pages/RecordCough'));
+// Import critical pages directly for faster loading
+import Home from './pages/Home';
+import RecordCough from './pages/RecordCough';
+
+// Lazy load less critical pages
 const ViewRecordings = React.lazy(() => import('./pages/ViewRecordings'));
 const Statistics = React.lazy(() => import('./pages/Statistics'));
 const About = React.lazy(() => import('./pages/About'));
 
-// Loading component
+// Fast loading component
 const LoadingSpinner = () => (
-  <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
-    <div className="spinner-border text-primary" role="status">
-      <span className="visually-hidden">Loading...</span>
+  <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '30vh' }}>
+    <div className="text-center">
+      <div className="spinner-border text-primary" style={{width: '2rem', height: '2rem'}} role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+      <p className="mt-2 text-muted">Loading page...</p>
     </div>
   </div>
 );

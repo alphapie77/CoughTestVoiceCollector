@@ -118,7 +118,10 @@ export const recordingsAPI = {
   },
   
   list: (params) => {
-    return apiWithRetry(() => api.get('/recordings/list/', { params }));
+    return apiWithRetry(() => api.get('/recordings/list/', { 
+      params,
+      timeout: 10000 // Faster timeout for list requests
+    }));
   },
   
   detail: (recordingId) => {

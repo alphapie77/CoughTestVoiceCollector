@@ -1,4 +1,4 @@
-# CoughTestVoiceCollector: Enterprise Audio Research Platform
+# CoughTestVoiceCollector: Academic Audio Research Platform
 
 <div align="center">
 
@@ -6,14 +6,11 @@
 [![Django](https://img.shields.io/badge/Django-5.0.1-green.svg)](https://www.djangoproject.com/)
 [![React](https://img.shields.io/badge/React-19.0.0-blue.svg)](https://reactjs.org/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-purple.svg)](https://getbootstrap.com/)
-[![Performance](https://img.shields.io/badge/Performance-Optimized-success.svg)](#performance-features)
-[![Mobile](https://img.shields.io/badge/Mobile-Responsive-blue.svg)](#mobile-optimization)
 [![IEEE](https://img.shields.io/badge/IEEE-Compliant-orange.svg)](docs/DOCUMENTATION_INDEX.md)
 [![License](https://img.shields.io/badge/License-Academic-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen.svg)](CHANGELOG.md)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg)](https://cough-test-voice-collector.vercel.app/)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](CHANGELOG.md)
 
-**[🚀 Live Demo](https://cough-test-voice-collector.vercel.app/)** • **[📖 Documentation](docs/DOCUMENTATION_INDEX.md)** • **[🔧 API Reference](docs/API_DOCUMENTATION.md)** • **[🤝 Contributing](#contributing)**
+**[Quick Start](#getting-started)** • **[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Contributing](#contributing)**
 
 </div>
 
@@ -22,7 +19,6 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
-- [Performance Features](#performance-features)
 - [Features at a Glance](#features-at-a-glance)
 - [Features Showcase](#features-showcase)
 - [Core Capabilities](#core-capabilities)
@@ -46,55 +42,9 @@
 
 ## Overview
 
-CoughTestVoiceCollector is a production-ready, enterprise-grade web application designed for systematic collection and analysis of cough audio data in academic research environments. Built with modern web technologies and optimized for performance, the platform implements IEEE-compliant software engineering standards while providing researchers with robust, scalable tools for audio data acquisition, validation, and export.
+CoughTestVoiceCollector is an enterprise-grade web application designed for systematic collection and analysis of cough audio data in academic research environments. The platform implements IEEE-compliant software engineering standards while providing researchers with robust tools for audio data acquisition, validation, and export.
 
-**Key Domains:** Academic Research • Audio Data Collection • Software Engineering • Data Science • Performance Engineering
-
-### 🏆 Production Highlights
-- **Live Deployment**: Fully operational on Vercel + PythonAnywhere
-- **Performance Optimized**: Sub-second page loads with intelligent caching
-- **Mobile First**: Responsive design with 480px breakpoint optimization
-- **Real-time Updates**: Instant data refresh with cache invalidation
-- **Enterprise Ready**: Scalable architecture with comprehensive error handling
-
----
-
-## 🌐 Application Access
-
-### **🚀 Production Deployment (Ready to Use)**
-- **Live Application**: https://cough-test-voice-collector.vercel.app/
-- **Backend API**: https://shksabbir7.pythonanywhere.com/api/
-- **Admin Panel**: https://shksabbir7.pythonanywhere.com/admin/
-
-### **💻 Local Development**
-- **Frontend Application**: http://localhost:3000
-- **REST API Endpoint**: http://localhost:8000/api
-- **Administrative Panel**: http://localhost:8000/admin
-  - Default credentials: `admin` / `admin123` (change in production)
-
----
-
-## Performance Features
-
-### 🚀 **Speed Optimizations**
-- **Critical Path Loading**: Home and Record pages preloaded for instant access
-- **Skeleton Loaders**: Animated placeholders during data fetching
-- **Smart Caching**: Multi-layer cache invalidation with real-time updates
-- **API Optimization**: 10s timeout for list requests, optimized queries
-- **Bundle Splitting**: Lazy loading for non-critical components
-
-### 📱 **Mobile Optimization**
-- **Responsive Breakpoints**: 480px optimized for consistent mobile experience
-- **Touch-Friendly UI**: 44px minimum touch targets for accessibility
-- **Auto-Close Navigation**: Mobile navbar closes automatically after selection
-- **Optimized Forms**: Mobile-first form design with proper input types
-- **Performance Scaling**: Reduced animations and effects on mobile devices
-
-### 🔄 **Real-Time Features**
-- **Instant Updates**: New recordings appear immediately without page refresh
-- **Event-Driven Refresh**: Cross-component communication for data synchronization
-- **Cache Busting**: Automatic browser cache invalidation after uploads
-- **Live Analytics**: Real-time statistics with 5-minute cache refresh
+**Key Domains:** Academic Research • Audio Data Collection • Software Engineering • Data Science
 
 ---
 
@@ -222,12 +172,18 @@ chmod +x scripts/*.sh
 ./scripts/start_servers.sh
 ```
 
-### Quick Setup
+### Application Access
 
-**Try it now (No installation required):**
-- Visit: https://cough-test-voice-collector.vercel.app/
+**Production Deployment:**
+- **Live Application**: https://cough-test-voice-collector.vercel.app/
+- **Backend API**: https://shksabbir7.pythonanywhere.com/api/
+- **Admin Panel**: https://shksabbir7.pythonanywhere.com/admin/
 
-**For local development:**
+**Local Development:**
+- **Frontend Application**: http://localhost:3000
+- **REST API Endpoint**: http://localhost:8000/api
+- **Administrative Panel**: http://localhost:8000/admin
+  - Default credentials: `admin` / `admin123` (change in production)
 
 ## Data Collection Framework
 
@@ -357,7 +313,13 @@ Comprehensive documentation suite covering all aspects of the platform:
 - **Research Metadata**: IP addresses and user agents collected solely for academic research purposes
 - **Data Protection**: Compliance with research ethics and data protection best practices
 
-## 📈 Research Data & Academic Integrity
+## 🤝 Contributing
+
+This platform serves as an academic research tool for cough audio analysis. Contributions in the form of audio samples help advance scientific research and machine learning applications in audio analysis.
+
+For technical contributions, please refer to the [System Design Document](docs/SYSTEM_DESIGN.md) and [Testing Strategy](docs/TESTING_STRATEGY.md).
+
+## 📊 Research Data & Academic Integrity
 
 ### Dataset Information
 This repository contains authentic research data collected for academic validation purposes:
@@ -382,7 +344,7 @@ This repository contains authentic research data collected for academic validati
 
 **Research Integrity Notice**: All data is preserved in its original form for academic validation, peer review, and reproducibility verification.
 
-## 🔧 Technical Specifications
+## 🔬 Technical Specifications
 
 ### Standards Compliance
 - IEEE 830-1998: Software Requirements Specification
@@ -422,7 +384,7 @@ This repository contains authentic research data collected for academic validati
 - API Integration: [API Documentation](docs/API_DOCUMENTATION.md)
 - Testing & Validation: [Testing Strategy](docs/TESTING_STRATEGY.md)
 
-## 🛠️ Troubleshooting
+## 🔧 Troubleshooting
 
 ### Production Platform Issues
 
@@ -435,9 +397,6 @@ This repository contains authentic research data collected for academic validati
 
 **Problem: Page refresh shows 404**
 - Solution: This has been resolved with proper URL rewrite rules for client-side routing.
-
-**Problem: New recordings don't appear immediately**
-- Solution: This has been fixed with cache invalidation. New recordings now appear instantly.
 
 ### Local Development Issues
 
@@ -498,7 +457,7 @@ A: See the [Citation](#citation) section below.
 
 ## 🗺️ Roadmap
 
-### Version 2.0.0 (Current) ✅
+### Version 1.0.0 (Current) ✅
 - ✅ Browser-based audio recording
 - ✅ Multi-format file upload with bulk support
 - ✅ Real-time analytics dashboard
@@ -506,17 +465,17 @@ A: See the [Citation](#citation) section below.
 - ✅ IEEE-compliant documentation
 - ✅ Production deployment on Vercel + PythonAnywhere
 - ✅ Mobile-responsive design with professional UX
-- ✅ Performance optimizations with caching
-- ✅ Real-time updates with cache invalidation
-- ✅ Skeleton loaders for better UX
+- ✅ Bulk upload with timeout handling
+- ✅ Cross-origin request support (CORS)
+- ✅ Client-side routing with proper URL handling
 
-### Version 2.1.0 (Planned)
+### Version 1.1.0 (Planned)
 - 🔄 Advanced audio analysis features
 - 🔄 Machine learning integration
 - 🔄 Enhanced visualization tools
 - 🔄 Mobile application support
 
-### Version 3.0.0 (Future)
+### Version 2.0.0 (Future)
 - 📋 Multi-language support
 - 📋 Cloud deployment templates
 - 📋 Advanced collaboration features
@@ -588,18 +547,18 @@ If you use this platform in your research, please cite:
 ```bibtex
 @software{coughtestvoicecollector2025,
   author = {alphapie77},
-  title = {CoughTestVoiceCollector: Enterprise Audio Research Platform},
+  title = {CoughTestVoiceCollector: Academic Audio Research Platform},
   year = {2025},
   publisher = {GitHub},
   url = {https://github.com/alphapie77/CoughTestVoiceCollector},
-  version = {2.0.0}
+  version = {1.0.0}
 }
 ```
 
 **APA Format:**
 ```
-alphapie77. (2025). CoughTestVoiceCollector: Enterprise Audio Research Platform 
-(Version 2.0.0) [Computer software]. GitHub. 
+alphapie77. (2025). CoughTestVoiceCollector: Academic Audio Research Platform 
+(Version 1.0.0) [Computer software]. GitHub. 
 https://github.com/alphapie77/CoughTestVoiceCollector
 ```
 
@@ -649,13 +608,13 @@ See [LICENSE](LICENSE) for complete terms and conditions.
 - 📚 **Documentation**: [Complete Documentation Index](docs/DOCUMENTATION_INDEX.md)
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/alphapie77/CoughTestVoiceCollector/issues)
 - 💡 **Feature Requests**: [GitHub Discussions](https://github.com/alphapie77/CoughTestVoiceCollector/discussions)
-- 🛠️ **Support**: [Create an issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues/new)
+- 📧 **Support**: [Create an issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues/new)
 
 ---
 
 <div align="center">
 
-### 🎓 Academic Research Platform for Cough Audio Analysis
+### ⭐ Academic Research Platform for Cough Audio Analysis
 
 *Advancing scientific research through systematic audio data collection and analysis*
 
@@ -664,6 +623,6 @@ See [LICENSE](LICENSE) for complete terms and conditions.
 [![Professional Quality](https://img.shields.io/badge/Quality-Professional-brightgreen.svg)](docs/TESTING_STRATEGY.md)
 [![GitHub Stars](https://img.shields.io/github/stars/alphapie77/CoughTestVoiceCollector?style=social)](https://github.com/alphapie77/CoughTestVoiceCollector/stargazers)
 
-**[🚀 Live Demo](https://cough-test-voice-collector.vercel.app/)** • **[📖 Documentation](docs/DOCUMENTATION_INDEX.md)** • **[🔧 API Reference](docs/API_DOCUMENTATION.md)** • **[🐛 Report Issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues)**
+**[Documentation](docs/DOCUMENTATION_INDEX.md)** • **[API Reference](docs/API_DOCUMENTATION.md)** • **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** • **[Report Issue](https://github.com/alphapie77/CoughTestVoiceCollector/issues)**
 
 </div>
