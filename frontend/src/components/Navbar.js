@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <BootstrapNavbar expand="lg" className={`navbar-advanced ${scrolled ? 'scrolled' : ''}`} fixed="top">
+    <BootstrapNavbar expand="lg" expanded={expanded} className={`navbar-advanced ${scrolled ? 'scrolled' : ''}`} fixed="top">
       <Container>
         <BootstrapNavbar.Brand as={Link} to="/" className="brand-advanced">
           <div className="logo-container">
@@ -28,18 +29,18 @@ const Navbar = () => {
           </div>
         </BootstrapNavbar.Brand>
         
-        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggler-advanced" />
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggler-advanced" onClick={() => setExpanded(!expanded)} />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
-            <NavLink to="/" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`}>Home</NavLink>
-            <NavLink to="/record" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`}>Record</NavLink>
-            <NavLink to="/recordings" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`}>Browse</NavLink>
-            <NavLink to="/statistics" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`}>Analytics</NavLink>
-            <NavLink to="/about" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`}>About</NavLink>
+            <NavLink to="/" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`} onClick={() => setExpanded(false)}>Home</NavLink>
+            <NavLink to="/record" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`} onClick={() => setExpanded(false)}>Record</NavLink>
+            <NavLink to="/recordings" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`} onClick={() => setExpanded(false)}>Browse</NavLink>
+            <NavLink to="/statistics" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`} onClick={() => setExpanded(false)}>Analytics</NavLink>
+            <NavLink to="/about" className={({ isActive }) => `nav-link-advanced ${isActive ? 'active' : ''}`} onClick={() => setExpanded(false)}>About</NavLink>
           </Nav>
           
           <Nav>
-            <Button as={Link} to="/record" className="cta-button-nav">
+            <Button as={Link} to="/record" className="cta-button-nav" onClick={() => setExpanded(false)}>
               <span className="cta-icon">🎙️</span>
               <span>Start Recording</span>
             </Button>
