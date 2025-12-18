@@ -191,34 +191,58 @@ const RecordCough = () => {
           formData.append('audio_file', uploadFile);
         }
         formData.append('recording_method', 'upload');
+        
+        // Add progress tracking for bulk uploads
+        if (Array.isArray(uploadFile) && uploadFile.length > 1) {
+          console.log(`Starting bulk upload of ${uploadFile.length} files`);
+        }
       }
 
       if (anonymousName.trim()) {
         formData.append('anonymous_name', anonymousName.trim());
       }
 
-      const response = Array.isArray(uploadFile) && uploadFile.length > 1 
-        ? await recordingsAPI.bulkUpload(formData)
-        : await recordingsAPI.upload(formData);
+      let response;
+      let isBulkUpload = Array.isArray(uploadFile) && uploadFile.length > 1;
       
-      if (Array.isArray(uploadFile) && uploadFile.length > 1) {
+      try {
+        response = isBulkUpload 
+          ? await recordingsAPI.bulkUpload(formData)
+          : await recordingsAPI.upload(formData);
+      } catch (uploadError) {
+        // Check if it's a timeout but files might still be uploaded
+        if (uploadError.code === 'ECONNABORTED' || uploadError.message?.includes('timeout')) {
+          showModalDialog('warning', '⏱️ Upload Timeout', 
+            `The upload process timed out, but your files may still be processing.\n\nPlease check the Browse page in a few moments to see if your recordings were uploaded successfully.`);
+          
+          // Reset form anyway since files might have been uploaded
+          resetRecording();
+          setAnonymousName('');
+          return;
+        }
+        throw uploadError; // Re-throw other errors
+      }
+      
+      if (isBulkUpload) {
         // Bulk upload response
-        const { summary, warnings } = response;
-        let message = `Successfully uploaded ${summary.successful_uploads}/${summary.total_files} files!`;
+        const responseData = response.data || response;
+        const { summary, warnings } = responseData;
+        let message = `Successfully uploaded ${summary?.successful_uploads || 0}/${summary?.total_files || uploadFile.length} files!`;
         
         if (warnings && warnings.length > 0) {
           message += `\n\n⚠️ ${warnings.length} file(s) have duration concerns for research quality.`;
         }
         
-        if (summary.errors > 0) {
+        if (summary?.errors > 0) {
           message += `\n\n❌ ${summary.errors} file(s) failed to upload.`;
         }
         
         showModalDialog('success', '✅ Bulk Upload Complete', message);
       } else {
         // Single file response
+        const responseData = response.data || response;
         showModalDialog('success', '✅ Upload Successful', 
-          `Your recording has been uploaded successfully!\n\nRecording ID: ${response.data?.recording_id || 'Generated'}\n\nThank you for contributing to our research.`);
+          `Your recording has been uploaded successfully!\n\nRecording ID: ${responseData?.recording_id || 'Generated'}\n\nThank you for contributing to our research.`);
       }
       
       // Reset form
@@ -226,8 +250,20 @@ const RecordCough = () => {
       setAnonymousName('');
       
     } catch (error) {
-      showModalDialog('error', '❌ Upload Failed', 
-        error.response?.data?.detail || 'Upload failed. Please check your connection and try again.');
+      console.error('Upload error:', error);
+      
+      // Handle different types of errors
+      let errorMessage = 'Upload failed. Please check your connection and try again.';
+      
+      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        errorMessage = 'Upload timed out. Your files may still be processing. Please check the Browse page.';
+      } else if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      showModalDialog('error', '❌ Upload Failed', errorMessage);
     } finally {
       setUploading(false);
     }

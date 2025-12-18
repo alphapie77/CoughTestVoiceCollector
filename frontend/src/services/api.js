@@ -112,7 +112,7 @@ export const recordingsAPI = {
           'Content-Type': 'multipart/form-data',
         },
         onUploadProgress: onProgress,
-        timeout: 120000, // 2 minutes for bulk uploads
+        timeout: 300000, // 5 minutes for bulk uploads
       })
     );
   },
