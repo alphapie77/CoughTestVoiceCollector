@@ -5,52 +5,76 @@ import { Link } from 'react-router-dom';
 const About = () => {
   return (
     <div style={{ marginTop: '80px' }}>
-      {/* About Hero */}
-      <section className="about-hero py-5">
+      {/* Modern Hero Section */}
+      <section className="hero-advanced">
+        <div className="hero-background">
+          <div className="hero-particles"></div>
+          <div className="hero-gradient"></div>
+        </div>
         <Container>
-          <Row className="justify-content-center text-center">
-            <Col lg={8}>
-              <h1 className="display-4 mb-4">🔬 RespiTrack Research</h1>
-              <p className="lead">
-                A dedicated research platform for collecting anonymous audio 
-                data to advance analysis and academic research.
-              </p>
-            </Col>
-          </Row>
+          <div className="hero-content-advanced text-center">
+            <div className="hero-badge">
+              <span className="badge-icon">🔬</span>
+              <span>Academic Research Platform</span>
+            </div>
+            
+            <div className="hero-title-advanced">
+              <h1 className="title-gradient">RespiTrack</h1>
+              <p className="title-subtitle">AI Research Initiative</p>
+            </div>
+            
+            <p className="hero-description-advanced">
+              A dedicated research platform for collecting anonymous audio data to advance 
+              machine learning analysis and academic research in computational acoustics.
+            </p>
+            
+            <div className="hero-stats-mini">
+              <div className="stat-mini">
+                <div className="stat-number">🎵</div>
+                <div className="stat-label">Research Grade</div>
+              </div>
+              <div className="stat-mini">
+                <div className="stat-number">🔒</div>
+                <div className="stat-label">Anonymous</div>
+              </div>
+              <div className="stat-mini">
+                <div className="stat-number">🎓</div>
+                <div className="stat-label">Academic</div>
+              </div>
+            </div>
+          </div>
         </Container>
       </section>
 
       {/* Mission Section */}
-      <section className="py-5 bg-light">
+      <section className="py-5">
         <Container>
-          <Row className="align-items-center">
+          <Row className="align-items-center mb-5">
             <Col lg={6}>
               <h2 className="section-title">🎯 Research Mission</h2>
               <p className="section-text">
-                RespiTrack is building a comprehensive anonymous database of audio sounds 
-                for research and academic studies. Our platform enables researchers worldwide 
-                to access high-quality audio data for developing analysis algorithms and 
-                understanding audio patterns.
+                RespiTrack is building a comprehensive anonymous database of cough audio 
+                for machine learning research and academic studies. Our platform enables 
+                researchers worldwide to access high-quality audio data for developing 
+                AI analysis algorithms and understanding respiratory patterns.
               </p>
               <p className="section-text">
                 This research contributes to thesis projects, peer-reviewed publications, and 
-                academic studies that advance audio analysis and improve research outcomes 
-                through data-driven insights.
+                academic studies that advance audio analysis and improve healthcare outcomes 
+                through data-driven AI insights.
               </p>
             </Col>
             <Col lg={6}>
-              <div className="mission-stats">
-                <div className="stat-item">
-                  <div className="stat-number">🎵</div>
-                  <div className="stat-text">Research-grade audio data</div>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">🤖</span>
+                  </div>
                 </div>
-                <div className="stat-item">
-                  <div className="stat-number">🎓</div>
-                  <div className="stat-text">Academic research support</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">📊</div>
-                  <div className="stat-text">Data-driven research insights</div>
+                <div className="impact-content">
+                  <h4>AI-Powered Research</h4>
+                  <p>Contributing to the development of machine learning models that can analyze 
+                  respiratory patterns and support medical research through anonymous audio data.</p>
                 </div>
               </div>
             </Col>
@@ -58,119 +82,150 @@ const About = () => {
         </Container>
       </section>
 
-      {/* How It Helps */}
-      <section className="py-5">
+      {/* Research Applications */}
+      <section className="research-impact-section py-5">
         <Container>
           <Row className="justify-content-center mb-5">
             <Col lg={8} className="text-center">
               <h2 className="section-title">📊 Research Applications</h2>
               <p className="section-subtitle">
-                Your data contribution supports various research initiatives and academic studies
+                Your anonymous contributions support cutting-edge research initiatives
               </p>
             </Col>
           </Row>
 
           <Row className="g-4">
             <Col lg={4} md={6}>
-              <Card className="help-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="help-icon">🤖</div>
-                  <Card.Title>Analysis Research</Card.Title>
-                  <Card.Text>
-                    Supporting research into automated analysis tools and machine learning 
-                    algorithms for audio pattern detection and analysis.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">🤖</span>
+                  </div>
+                </div>
+                <div className="impact-content">
+                  <h4>Machine Learning</h4>
+                  <p>Training AI models for automated respiratory pattern analysis and 
+                  audio classification algorithms in medical research.</p>
+                </div>
+              </div>
             </Col>
             <Col lg={4} md={6}>
-              <Card className="help-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="help-icon">📊</div>
-                  <Card.Title>Data Studies</Card.Title>
-                  <Card.Text>
-                    Enabling research into audio sound patterns and 
-                    their correlation with various data characteristics and features.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">📊</span>
+                  </div>
+                </div>
+                <div className="impact-content">
+                  <h4>Data Science</h4>
+                  <p>Enabling research into audio signal processing and statistical 
+                  analysis of respiratory sound characteristics.</p>
+                </div>
+              </div>
             </Col>
             <Col lg={4} md={6}>
-              <Card className="help-card h-100">
-                <Card.Body className="text-center p-4">
-                  <div className="help-icon">🔬</div>
-                  <Card.Title>Academic Research</Card.Title>
-                  <Card.Text>
-                    Providing data for thesis projects, dissertations, and peer-reviewed 
-                    research publications in audio analysis and computational acoustics.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="impact-showcase">
+                <div className="impact-visual">
+                  <div className="impact-circle">
+                    <span className="impact-emoji">🔬</span>
+                  </div>
+                </div>
+                <div className="impact-content">
+                  <h4>Academic Research</h4>
+                  <p>Supporting thesis projects, dissertations, and peer-reviewed 
+                  publications in computational acoustics and audio analysis.</p>
+                </div>
+              </div>
             </Col>
           </Row>
         </Container>
       </section>
 
       {/* Privacy Section */}
-      <section className="py-5 bg-light">
+      <section className="impact-section py-5">
         <Container>
-          <Row className="justify-content-center">
-            <Col lg={8}>
-              <Card className="privacy-card">
-                <Card.Body className="p-5">
-                  <h3 className="text-center mb-4">🔐 Privacy & Security</h3>
-                  <Row>
-                    <Col md={6}>
-                      <h5>✅ What We Collect:</h5>
-                      <ul>
-                        <li>10-second cough audio recordings</li>
-                        <li>Audio technical metadata (duration, format)</li>
-                        <li>Anonymous timestamp information</li>
-                        <li>Recording method (browser/upload)</li>
-                      </ul>
-                    </Col>
-                    <Col md={6}>
-                      <h5>❌ What We DON'T Collect:</h5>
-                      <ul>
-                        <li>Personal identification information</li>
-                        <li>Personal history or health data</li>
-                        <li>Location or demographic data</li>
-                        <li>Any personally identifiable content</li>
-                      </ul>
-                    </Col>
-                  </Row>
-                  <div className="text-center mt-4">
-                    <p className="mb-0">
-                      <strong>All data is used exclusively for research purposes.</strong>
-                    </p>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          <div className="impact-header text-center mb-5">
+            <h2 className="impact-title">🔐 Privacy & Security</h2>
+            <p className="impact-description">
+              Your privacy is our priority. We maintain the highest standards of data protection.
+            </p>
+          </div>
+          
+          <div className="impact-grid">
+            <div className="impact-card privacy">
+              <div className="impact-icon">✅</div>
+              <h3 className="impact-card-title">What We Collect</h3>
+              <div className="impact-card-text">
+                <ul style={{textAlign: 'left', paddingLeft: '1.5rem'}}>
+                  <li>10-second cough audio recordings</li>
+                  <li>Audio technical metadata (duration, format)</li>
+                  <li>Anonymous timestamp information</li>
+                  <li>Recording method (browser/upload)</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="impact-card quality">
+              <div className="impact-icon">❌</div>
+              <h3 className="impact-card-title">What We DON'T Collect</h3>
+              <div className="impact-card-text">
+                <ul style={{textAlign: 'left', paddingLeft: '1.5rem'}}>
+                  <li>Personal identification information</li>
+                  <li>Medical history or health data</li>
+                  <li>Location or demographic data</li>
+                  <li>Any personally identifiable content</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="impact-card research">
+              <div className="impact-icon">🔒</div>
+              <h3 className="impact-card-title">Data Protection</h3>
+              <div className="impact-card-text">
+                All data is anonymized, encrypted, and used exclusively for academic research purposes. 
+                We follow strict ethical guidelines and data protection regulations.
+              </div>
+              <div className="impact-metric">100% Anonymous</div>
+            </div>
+          </div>
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-5">
+      {/* Final CTA Section */}
+      <section className="final-cta-section py-5">
         <Container>
-          <Row className="justify-content-center text-center">
-            <Col lg={8}>
-              <h2 className="mb-4">Support Research</h2>
-              <p className="lead mb-4">
-                Contribute to groundbreaking research with a simple 10-second recording. 
-                Your anonymous data helps researchers develop better solutions.
-              </p>
-              <Button 
-                as={Link} 
-                to="/record" 
-                size="lg" 
-                className="btn-primary-custom"
-              >
-                🎤 Contribute Now
-              </Button>
-            </Col>
-          </Row>
+          <div className="final-cta-card">
+            <h2 className="cta-title">Support AI Research</h2>
+            <p className="cta-description">
+              Contribute to groundbreaking machine learning research with a simple 10-second recording. 
+              Your anonymous data helps researchers develop better AI solutions for healthcare.
+            </p>
+            
+            <Button 
+              as={Link} 
+              to="/record" 
+              className="btn-cta-primary pulse-animation"
+            >
+              <span className="cta-btn-icon">🎤</span>
+              <span>Contribute Now</span>
+              <span className="cta-btn-arrow">→</span>
+            </Button>
+            
+            <div className="cta-assurance">
+              <div className="assurance-item">
+                <span>🔒</span>
+                <span>100% Anonymous</span>
+              </div>
+              <div className="assurance-item">
+                <span>⚡</span>
+                <span>10 Seconds Only</span>
+              </div>
+              <div className="assurance-item">
+                <span>🎓</span>
+                <span>Academic Research</span>
+              </div>
+            </div>
+          </div>
         </Container>
       </section>
     </div>
