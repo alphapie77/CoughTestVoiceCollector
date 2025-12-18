@@ -2522,11 +2522,260 @@
 
 /* Responsive Design */
 
-/* Extra Small Devices (phones, 576px and down) */
+/* Mobile-first responsive scaling */
 @media (max-width: 575.98px) {
+  /* Global mobile scaling */
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 0.9rem;
+  }
+  
+  /* Container adjustments */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Logo scaling */
+  .logo-icon {
+    font-size: 1.8rem;
+  }
+  
+  .logo-main {
+    font-size: 1.2rem;
+  }
+  
+  .logo-sub {
+    font-size: 0.6rem;
+  }
+  
+  /* Navigation scaling */
+  .nav-link-advanced {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem !important;
+    min-width: 60px;
+  }
+  
+  .cta-button-nav {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Hero section scaling */
+  .title-gradient {
+    font-size: 2rem;
+  }
+  
+  .title-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .hero-description-advanced {
+    font-size: 0.9rem;
+  }
+  
+  /* Button scaling */
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Card scaling */
+  .card {
+    border-radius: 12px;
+  }
+  
+  .card-body {
+    padding: 1.2rem;
+  }
+  
+  /* Recording button scaling */
+  .recording-button {
+    width: 100px;
+    height: 100px;
+    font-size: 1.8rem;
+  }
+  
+  /* Form scaling */
+  .form-control-custom {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  
+  /* Stats scaling */
+  .stats-number {
+    font-size: 2rem;
+  }
+  
+  .metric-number {
+    font-size: 1.8rem;
+  }
+  
+  /* Section titles scaling */
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  /* Feature icons scaling */
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+  
+  .help-icon {
+    font-size: 2.5rem;
+  }
+  
+  /* Modal scaling */
+  .modal-icon-modern {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .modal-title-modern {
+    font-size: 1.2rem;
+  }
+  
+  .modal-message-modern {
+    font-size: 0.95rem;
+  }
+  
+  /* Analytics scaling */
+  .analytics-title {
+    font-size: 2rem;
+  }
+  
+  .analytics-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  /* Recording card scaling */
+  .recording-card {
+    padding: 1.2rem;
+  }
+  
+  .recording-user {
+    font-size: 1rem;
+  }
+  
+  .recording-date {
+    font-size: 0.75rem;
+  }
+  
+  .filename-text {
+    font-size: 0.8rem;
+  }
+  
+  .spec-value {
+    font-size: 0.8rem;
+  }
+  
+  /* Upload area scaling */
+  .upload-area {
+    padding: 2rem 1rem;
+  }
+  
+  /* Progress bar scaling */
+  .progress-custom {
+    height: 8px;
+  }
+  
+  /* Badge scaling */
+  .recording-method-badge {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  
+  /* Audio player scaling */
+  .modern-audio-player {
+    height: 35px;
+  }
+  
+  /* Pagination scaling */
+  .page-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Export button scaling */
+  .export-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Impact section scaling */
+  .impact-title {
+    font-size: 1.8rem;
+  }
+  
+  .impact-description {
+    font-size: 0.95rem;
+  }
+  
+  .impact-icon {
+    font-size: 2.5rem;
+  }
+  
+  /* Step card scaling */
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .step-icon {
+    font-size: 2rem;
+  }
+  
+  .step-title {
+    font-size: 1.1rem;
+  }
+  
+  /* CTA scaling */
+  .cta-title {
+    font-size: 1.8rem;
+  }
+  
+  .cta-description {
+    font-size: 0.95rem;
+  }
+  
+  /* Method card scaling */
+  .method-icon {
+    font-size: 2rem;
+  }
+  
+  .method-content h6 {
+    font-size: 0.95rem;
+  }
+  
+  .method-content p {
+    font-size: 0.8rem;
+  }
+  
+  /* Record page scaling */
+  .record-title {
+    font-size: 1.8rem;
+  }
+  
+  .record-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .record-icon-large {
+    font-size: 2.5rem;
+  }
   /* Focused Hero Responsive */
   .hero-title-focused {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .hero-subtitle-focused {
