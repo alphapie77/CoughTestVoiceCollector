@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card, Table, Form, Button, Pagination, Modal } from 'react-bootstrap';
 import { recordingsAPI } from '../services/api';
+import { debounce } from 'lodash';
 
 const ViewRecordings = () => {
   const [recordings, setRecordings] = useState([]);
@@ -16,10 +17,24 @@ const ViewRecordings = () => {
   const [modalConfig, setModalConfig] = useState({ type: '', title: '', message: '', onConfirm: null });
   const [audioDurations, setAudioDurations] = useState({});
   const [deletingId, setDeletingId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce((searchValue) => {
+      setFilters(prev => ({ ...prev, search: searchValue }));
+      setCurrentPage(1);
+    }, 500),
+    []
+  );
 
   useEffect(() => {
     fetchRecordings();
   }, [currentPage, filters]);
+
+  useEffect(() => {
+    debouncedSearch(searchTerm);
+  }, [searchTerm, debouncedSearch]);
 
   const showModalDialog = (type, title, message, onConfirm = null) => {
     setModalConfig({ type, title, message, onConfirm });
@@ -72,14 +87,21 @@ const ViewRecordings = () => {
   };
 
   const handleFilterChange = (e) => {
-    setFilters({
-      ...filters,
-      [e.target.name]: e.target.value,
-    });
-    setCurrentPage(1);
+    const { name, value } = e.target;
+    
+    if (name === 'search') {
+      setSearchTerm(value);
+    } else {
+      setFilters({
+        ...filters,
+        [name]: value,
+      });
+      setCurrentPage(1);
+    }
   };
 
   const clearFilters = () => {
+    setSearchTerm('');
     setFilters({
       search: '',
       recording_method: '',
@@ -113,7 +135,7 @@ const ViewRecordings = () => {
                   <Form.Control
                     type="text"
                     name="search"
-                    value={filters.search}
+                    value={searchTerm}
                     onChange={handleFilterChange}
                     placeholder="Search by username or filename"
                     className="form-control-custom"

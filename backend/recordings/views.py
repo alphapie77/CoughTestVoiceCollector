@@ -57,6 +57,9 @@ class CoughRecordingCreateView(generics.CreateAPIView):
                 user_agent=client_info['user_agent']
             )
             
+            # Clear stats cache when new recording is added
+            cache.delete('recording_stats')
+            
             # Log the action
             log_user_action(
                 user=self.request.user if self.request.user.is_authenticated else None,
@@ -76,14 +79,17 @@ class CoughRecordingCreateView(generics.CreateAPIView):
 
 
 class CoughRecordingListView(generics.ListAPIView):
-    """List all cough recordings with filtering"""
-    queryset = CoughRecording.objects.all()
+    """List all cough recordings with filtering and optimized queries"""
     serializer_class = CoughRecordingListSerializer
     permission_classes = [permissions.AllowAny]
     filterset_fields = ['recording_method', 'file_format', 'user']
     search_fields = ['user__username', 'anonymous_name', 'file_name']
     ordering_fields = ['created_at', 'duration', 'file_size']
     ordering = ['-created_at']
+    
+    def get_queryset(self):
+        """Optimized queryset with select_related for better performance"""
+        return CoughRecording.objects.select_related('user').all()
 
 
 class CoughRecordingDetailView(generics.RetrieveAPIView):
@@ -107,6 +113,14 @@ class UserRecordingsView(generics.ListAPIView):
 @permission_classes([permissions.AllowAny])
 def recording_stats(request):
     """Get comprehensive statistics about recordings with caching"""
+    # Try to get cached stats first
+    cache_key = 'recording_stats'
+    cached_stats = cache.get(cache_key)
+    
+    if cached_stats:
+        logger.info("Returning cached statistics")
+        return Response(cached_stats)
+    
     logger.info("Generating fresh statistics")
     
     total_recordings = CoughRecording.objects.count()
@@ -149,7 +163,12 @@ def recording_stats(request):
     }
     
     serializer = CoughRecordingStatsSerializer(stats_data)
-    return Response(serializer.data)
+    response_data = serializer.data
+    
+    # Cache for 5 minutes
+    cache.set(cache_key, response_data, 300)
+    
+    return Response(response_data)
 
 
 @api_view(['GET'])
@@ -429,6 +448,10 @@ def bulk_upload_recordings(request):
                 'file_name': audio_file.name,
                 'error': str(e)
             })
+    
+    # Clear stats cache if any files were successfully uploaded
+    if results:
+        cache.delete('recording_stats')
     
     # Prepare response
     response_data = {
