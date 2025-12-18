@@ -198,10 +198,7 @@ const RecordCough = () => {
       }
 
       const response = Array.isArray(uploadFile) && uploadFile.length > 1 
-        ? await fetch('http://localhost:8000/api/recordings/bulk-upload/', {
-            method: 'POST',
-            body: formData
-          }).then(res => res.json())
+        ? await recordingsAPI.bulkUpload(formData)
         : await recordingsAPI.upload(formData);
       
       if (Array.isArray(uploadFile) && uploadFile.length > 1) {

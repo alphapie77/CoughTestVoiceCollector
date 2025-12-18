@@ -105,6 +105,18 @@ export const recordingsAPI = {
     );
   },
   
+  bulkUpload: (formData, onProgress) => {
+    return apiWithRetry(() => 
+      api.post('/recordings/bulk-upload/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: onProgress,
+        timeout: 120000, // 2 minutes for bulk uploads
+      })
+    );
+  },
+  
   list: (params) => {
     return apiWithRetry(() => api.get('/recordings/list/', { params }));
   },

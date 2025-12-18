@@ -56,8 +56,8 @@ const Statistics = () => {
 
   const handleExportHTML = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/recordings/export-html/');
-      const blob = await response.blob();
+      const response = await recordingsAPI.exportHTML();
+      const blob = response.data;
       
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -79,8 +79,8 @@ const Statistics = () => {
 
   const handleExportZIP = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/recordings/export-zip/');
-      const blob = await response.blob();
+      const response = await recordingsAPI.exportZIP();
+      const blob = response.data;
       
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');

@@ -21,10 +21,12 @@ from django.conf.urls.static import static
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+@csrf_exempt
 def api_root(request):
     """API root endpoint with available endpoints"""
     return Response({
@@ -54,10 +56,12 @@ def api_root(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api_root, name='api-root'),
+    path('api/health/', lambda request: Response({'status': 'ok'}), name='health-check'),
     path('api/auth/', include('accounts.urls')),
     path('api/recordings/', include('recordings.urls')),
 ]
 
-# Serve media files during development
-if settings.DEBUG:
+# Serve media files during development and production (for PythonAnywhere)
+if settings.DEBUG or not settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
