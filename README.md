@@ -173,6 +173,13 @@ chmod +x scripts/*.sh
 ```
 
 ### Application Access
+
+**Production Deployment:**
+- **Live Application**: https://cough-test-voice-collector.vercel.app/
+- **Backend API**: https://shksabbir7.pythonanywhere.com/api/
+- **Admin Panel**: https://shksabbir7.pythonanywhere.com/admin/
+
+**Local Development:**
 - **Frontend Application**: http://localhost:3000
 - **REST API Endpoint**: http://localhost:8000/api
 - **Administrative Panel**: http://localhost:8000/admin
@@ -379,7 +386,19 @@ This repository contains authentic research data collected for academic validati
 
 ## 🔧 Troubleshooting
 
-### Common Issues
+### Production Platform Issues
+
+**Problem: Upload timeout on bulk files**
+- Solution: Files are likely still processing. Check the Browse page after a few minutes.
+- The platform handles large uploads but may show timeout messages.
+
+**Problem: Mobile navbar doesn't close**
+- Solution: This has been fixed. The mobile menu now closes automatically when clicking navigation links.
+
+**Problem: Page refresh shows 404**
+- Solution: This has been resolved with proper URL rewrite rules for client-side routing.
+
+### Local Development Issues
 
 **Problem: Recording upload fails**
 ```bash
@@ -406,6 +425,9 @@ python manage.py runserver
 cd backend
 python manage.py migrate --run-syncdb
 ```
+
+**Problem: Development and production look different**
+- Solution: Mobile responsive breakpoint has been adjusted to 480px for consistency.
 
 For more issues, see [Windows Setup Guide](docs/WINDOWS_SETUP_GUIDE.md) or [Cross-Platform Guide](docs/CROSS_PLATFORM_GUIDE.md).
 
@@ -437,10 +459,15 @@ A: See the [Citation](#citation) section below.
 
 ### Version 1.0.0 (Current) ✅
 - ✅ Browser-based audio recording
-- ✅ Multi-format file upload
+- ✅ Multi-format file upload with bulk support
 - ✅ Real-time analytics dashboard
-- ✅ Multi-format data export
+- ✅ Multi-format data export (CSV, HTML, ZIP)
 - ✅ IEEE-compliant documentation
+- ✅ Production deployment on Vercel + PythonAnywhere
+- ✅ Mobile-responsive design with professional UX
+- ✅ Bulk upload with timeout handling
+- ✅ Cross-origin request support (CORS)
+- ✅ Client-side routing with proper URL handling
 
 ### Version 1.1.0 (Planned)
 - 🔄 Advanced audio analysis features
@@ -462,10 +489,16 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ### For Research Participants
 Contribute audio samples to advance scientific research:
-1. Visit the platform at `http://localhost:3000`
+
+**Production Platform:**
+1. Visit https://cough-test-voice-collector.vercel.app/
 2. Click "Record Cough" or "Upload File"
 3. Follow the on-screen instructions
 4. Submit your recording
+
+**Local Development:**
+1. Visit the platform at `http://localhost:3000`
+2. Follow the same steps as above
 
 ### For Developers
 We welcome technical contributions! Please follow these steps:
