@@ -38,7 +38,7 @@ const Home = () => {
                   Contribute to Scientific Research
                 </h1>
                 <p className="hero-subtitle-focused">
-                  Your 10-second anonymous cough recording helps researchers develop 
+                  Your brief anonymous cough recording helps researchers develop 
                   AI analysis tools for academic studies and data research.
                 </p>
                 <div className="hero-cta-focused">
@@ -48,7 +48,7 @@ const Home = () => {
                     className="btn-cta-focused"
                     size="lg"
                   >
-                    🎙️ Record Now - Takes 30 Seconds
+                    🎙️ Record Now - Fast & Easy
                   </Button>
                   <div className="cta-benefits">
                     <span>🔒 100% Anonymous</span>
@@ -265,7 +265,7 @@ const Home = () => {
                   </div>
                   <div className="cta-assurance">
                     <span className="assurance-item">🔒 100% Anonymous</span>
-                    <span className="assurance-item">⚡ Takes 30 Seconds</span>
+                    <span className="assurance-item">⚡ Fast & Easy</span>
                     <span className="assurance-item">📊 Research Impact</span>
                   </div>
                 </div>
