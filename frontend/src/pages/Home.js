@@ -38,7 +38,7 @@ const Home = () => {
                   Contribute to Scientific Research
                 </h1>
                 <p className="hero-subtitle-focused">
-                  Your brief anonymous cough recording helps researchers develop 
+                  Your 10-second anonymous cough recording helps researchers develop 
                   AI analysis tools for academic studies and data research.
                 </p>
                 <div className="hero-cta-focused">
